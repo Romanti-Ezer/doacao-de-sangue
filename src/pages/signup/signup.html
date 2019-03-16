@@ -6,6 +6,8 @@
 
 <ion-content>
 
+	<img src="../../assets/imgs/logoApp.png" alt="My Blood" class="logo">
+
 	<form (ngSubmit)="signup()" [formGroup]="form">
 		<ion-list inset>
 
@@ -18,8 +20,9 @@
 			</div>
 
 			<ion-item [ngClass]="{ invalid: passwordErrors.hasError('*', ['touched']) }">
-				<ion-input type="password" placeholder="Password" formControlName="password"></ion-input>
+				<ion-input type="password" placeholder="Senha" formControlName="password"></ion-input>
 			</ion-item>
+			<p class="tip">Dica: escolha uma senha fácil de lembrar, mas que só faça sentido para você.</p>
 
 			<div ngxErrors="password" #passwordErrors="ngxErrors">
 				<div [ngxError]="['minlength', 'required']" [when]="['touched']">Precisa ter ao menos 6 caracteres</div>
@@ -29,15 +32,14 @@
 		<div padding-horizontal>
 			<div class="form-error">{{signupError}}</div>
 
-			<button ion-button full type="submit" [disabled]="!form.valid">Cadastre-se</button>
-    </div>
-    
-    <ion-list>
+			<button ion-button full type="submit" [disabled]="!form.valid">Cadastre-se <ion-icon name="log-in"></ion-icon></button>
+	</div>
+		
+		<ion-list class="c-login-footer">
 
-      <button ion-button icon-left block clear (click)="login()">
-        <ion-icon name="log-in"></ion-icon>
-        Entrar
-      </button>
-    </ion-list>
+				<p class="c-login-footer__p">Já tem uma conta? <a (click)="login()" class="c-login-footer__link">faça login</a></p>
+				
+		</ion-list>
+
 	</form>
 </ion-content>

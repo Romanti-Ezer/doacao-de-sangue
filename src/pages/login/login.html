@@ -8,6 +8,9 @@
 </ion-header>
 
 <ion-content>
+
+	<img src="../../assets/imgs/logoApp.png" alt="My Blood" class="logo">
+
 	<form (ngSubmit)="login()" [formGroup]="loginForm">
 		<ion-list inset>
 
@@ -20,7 +23,7 @@
 			</div>
 
 			<ion-item [ngClass]="{ invalid: passwordErrors.hasError('*', ['touched']) }">
-				<ion-input type="password" placeholder="Password" formControlName="password"></ion-input>
+				<ion-input type="password" placeholder="Senha" formControlName="password"></ion-input>
 			</ion-item>
 
 			<div ngxErrors="password" #passwordErrors="ngxErrors">
@@ -31,7 +34,7 @@
 		<div padding-horizontal>
 			<div class="form-error">{{loginError}}</div>
 
-			<button ion-button full type="submit" [disabled]="!loginForm.valid">Entrar</button>
+			<button ion-button full type="submit" [disabled]="!loginForm.valid">Entrar <ion-icon name="log-in"></ion-icon></button>
 			<!-- <div class="login-footer">
 				<p>
 					<a href="#">Esqueceu a senha?</a>
@@ -39,17 +42,16 @@
 				</p>
 			</div> -->
 
-			<ion-list>
+			<ion-list class="c-login-footer">
 
 				<!-- <button ion-button icon-left block clear (click)="loginWithGoogle()">
 					<ion-icon name="logo-google"></ion-icon>
 					Log in com Google
 				</button> -->
 
-				<button ion-button icon-left block clear (click)="signup()">
-					<ion-icon name="person-add"></ion-icon>
-					Cadastre-se
-				</button>
+				<p class="c-login-footer__p">Não tem uma conta? <a (click)="signup()" class="c-login-footer__link">cadastre-se</a></p>
+				<p class="c-login-footer__p"><a href="#" class="c-login-footer__link">Esqueci minha senha</a></p>
+				
 			</ion-list>
 		</div>
 	</form>
