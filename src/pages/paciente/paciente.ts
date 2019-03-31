@@ -2,12 +2,12 @@ import { Component } from "@angular/core";
 import { NavController, NavParams } from 'ionic-angular';
 
 @Component({
-    selector:'page-doador', //seletor utilizado
-    templateUrl:'doador.html' // template
+    selector:'page-paciente', //seletor utilizado
+    templateUrl:'paciente.html' // template
 
 })
 
-export class CadastroDoadorPage{
+export class CadastroPacientePage{
     constructor(public navCtrl: NavController, public navParams: NavParams){
         
     }

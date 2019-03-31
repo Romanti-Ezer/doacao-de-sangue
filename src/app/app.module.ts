@@ -16,7 +16,8 @@ import { LoginPage } from '../pages/login/login';
 import { SignupPage } from '../pages/signup/signup';
 import { TestePage } from '../pages/teste/teste';
 import { SobrePage } from '../pages/sobre/sobre';
-import { CadastroDoadorPage } from '../pages/doador/doador';
+import { CadastroPacientePage } from '../pages/paciente/paciente';
+
 
 
 @NgModule({
@@ -27,7 +28,7 @@ import { CadastroDoadorPage } from '../pages/doador/doador';
     SignupPage,
     TestePage,
     SobrePage,
-    CadastroDoadorPage
+    CadastroPacientePage
   ],
   imports: [
     BrowserModule,
@@ -51,7 +52,7 @@ import { CadastroDoadorPage } from '../pages/doador/doador';
     SignupPage,
     TestePage,
     SobrePage,
-    CadastroDoadorPage
+    CadastroPacientePage
   ],
   providers: [
     StatusBar,
