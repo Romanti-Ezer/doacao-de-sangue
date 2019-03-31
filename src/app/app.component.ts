@@ -10,6 +10,7 @@ import { AuthService } from '../services/auth.service';
 
 import { TestePage } from '../pages/teste/teste';
 import { SobrePage } from '../pages/sobre/sobre';
+import { CadastroDoadorPage } from '../pages/doador/doador';
 
 
 
@@ -22,7 +23,8 @@ export class MyApp {
 
   public pages = [
     { titulo: 'TestePage', component: TestePage, icone: 'logo-freebsd-devil'},
-    { titulo: 'SobrePage', component: SobrePage, icone: 'log-out'}
+    { titulo: 'SobrePage', component: SobrePage, icone: 'log-out'},
+    { titulo: 'DoadorPage', component: CadastroDoadorPage, icone: 'logo-freebsd-devil'}
   ]
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, private auth: AuthService) {

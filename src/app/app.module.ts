@@ -16,6 +16,7 @@ import { LoginPage } from '../pages/login/login';
 import { SignupPage } from '../pages/signup/signup';
 import { TestePage } from '../pages/teste/teste';
 import { SobrePage } from '../pages/sobre/sobre';
+import { CadastroDoadorPage } from '../pages/doador/doador';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { SobrePage } from '../pages/sobre/sobre';
     LoginPage,
     SignupPage,
     TestePage,
-    SobrePage
+    SobrePage,
+    CadastroDoadorPage
   ],
   imports: [
     BrowserModule,
@@ -48,7 +50,8 @@ import { SobrePage } from '../pages/sobre/sobre';
     LoginPage,
     SignupPage,
     TestePage,
-    SobrePage
+    SobrePage,
+    CadastroDoadorPage
   ],
   providers: [
     StatusBar,
