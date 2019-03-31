@@ -1,11 +1,14 @@
 <ion-header>
-  <ion-navbar>
-    <ion-title>
-      Doação de Sangue
-    </ion-title>
-  </ion-navbar>
+  	<ion-navbar>
+    	<button ion-button menuToggle>
+			<ion-icon name="menu"></ion-icon>
+		</button>
+		<ion-title>My Blood</ion-title>
+  	</ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  Seja bem-vindo, você está logado.
+	 <p>Seja bem-vindo, você está logado.</p>
+	 <button ion-item (click)="logout()">Sair
+      </button> <!-- Faltou eu verificar se esse botão está fazendo o logout ou só trocando a tela-->
 </ion-content>

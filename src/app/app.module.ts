@@ -14,13 +14,18 @@ import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { LoginPage } from '../pages/login/login';
 import { SignupPage } from '../pages/signup/signup';
+import { TestePage } from '../pages/teste/teste';
+import { SobrePage } from '../pages/sobre/sobre';
+
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
     LoginPage,
-    SignupPage
+    SignupPage,
+    TestePage,
+    SobrePage
   ],
   imports: [
     BrowserModule,
@@ -41,7 +46,9 @@ import { SignupPage } from '../pages/signup/signup';
     MyApp,
     HomePage,
     LoginPage,
-    SignupPage
+    SignupPage,
+    TestePage,
+    SobrePage
   ],
   providers: [
     StatusBar,
@@ -51,4 +58,6 @@ import { SignupPage } from '../pages/signup/signup';
     AuthService
   ]
 })
+
 export class AppModule {}
+
