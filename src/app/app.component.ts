@@ -41,7 +41,12 @@ export class MyApp {
       this.nav.push(component);
     }
     
-    
+    logout() {
+      // Se retornar true (que deu certo o logout, volta para o login)
+      if (this.auth.signOut()) {
+        this.nav.setRoot(LoginPage);
+      }
+    }
     
   }
 

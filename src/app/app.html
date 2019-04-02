@@ -6,7 +6,7 @@
       (click)="goToPage(page.component);">
         <ion-icon [name]="page.icone" item-left></ion-icon>
       {{page.titulo}}</button>
-      <button ion-item (click)="logout()">Sair <!-- Aqui eu não consegui fazer ele funcionar por enquanto -->
+      <button ion-item menuToggle (click)="logout()">Sair
       </button>
     </ion-list>
   </ion-content>
