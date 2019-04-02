@@ -6,19 +6,26 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 
+// Firebase Auth
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AuthService } from '../services/auth.service';
 
+// Firestone
+import { AngularFirestoreModule } from 'angularfire2/firestore';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+
+// Pages and Components
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { LoginPage } from '../pages/login/login';
 import { SignupPage } from '../pages/signup/signup';
-import { TestePage } from '../pages/teste/teste';
-import { SobrePage } from '../pages/sobre/sobre';
-import { CadastroPacientePage } from '../pages/paciente/paciente';
+import { PublicarCampanhaPage } from '../pages/publicar-campanha/publicar-campanha';
+import { VisualizarCampanhasPage } from '../pages/visualizar-campanhas/visualizar-campanhas';
+import { MinhasDoacoesPage } from '../pages/minhas-doacoes/minhas-doacoes';
+import { GuiaInformativoPage } from '../pages/guia-informativo/guia-informativo';
 
-
+import { credentials } from './config';
 
 @NgModule({
   declarations: [
@@ -26,23 +33,19 @@ import { CadastroPacientePage } from '../pages/paciente/paciente';
     HomePage,
     LoginPage,
     SignupPage,
-    TestePage,
-    SobrePage,
-    CadastroPacientePage
+    PublicarCampanhaPage,
+    VisualizarCampanhasPage,
+    MinhasDoacoesPage,
+    GuiaInformativoPage
   ],
   imports: [
     BrowserModule,
     FormsModule,    
     NgxErrorsModule,
     IonicModule.forRoot(MyApp),
-    AngularFireModule.initializeApp({
-      apiKey: "AIzaSyC4JCpke6gEZh1Sy0tMiAnigevPOYy02Wg",
-      authDomain: "doacao-de-sangue-10147.firebaseapp.com",
-      databaseURL: "https://doacao-de-sangue-10147.firebaseio.com",
-      projectId: "doacao-de-sangue-10147",
-      storageBucket: "doacao-de-sangue-10147.appspot.com",
-      messagingSenderId: "26782982541"
-    })
+    AngularFireModule.initializeApp(credentials.firebase),
+    AngularFirestoreModule.enablePersistence(),
+    AngularFireDatabaseModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -50,9 +53,10 @@ import { CadastroPacientePage } from '../pages/paciente/paciente';
     HomePage,
     LoginPage,
     SignupPage,
-    TestePage,
-    SobrePage,
-    CadastroPacientePage
+    PublicarCampanhaPage,
+    VisualizarCampanhasPage,
+    MinhasDoacoesPage,
+    GuiaInformativoPage
   ],
   providers: [
     StatusBar,
