@@ -62,7 +62,7 @@ export class PublicarCampanhaPage {
     console.log('ionViewDidLoad PublicarCampanhaPage');
   }
 
-  cadastrar(){
+  cadastro(){
     console.log("hello wooorld");
   }
 
