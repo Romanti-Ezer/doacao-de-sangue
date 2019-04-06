@@ -21,7 +21,7 @@ export class MyApp {
 
   public pages = [
     { titulo: 'Início', component: HomePage, icone: 'home'},
-    { titulo: 'Publicar Campanha', component: PublicarCampanhaPage, icone: 'send'},
+    { titulo: 'Publicar Campanha', component: PublicarCampanhaPage, icone: 'person-add'},
     { titulo: 'Visualizar Campanhas', component: VisualizarCampanhasPage, icone: 'eye'},
     { titulo: 'Minha Doações', component: MinhasDoacoesPage, icone: 'water'},
     { titulo: 'Guia Informativo', component: GuiaInformativoPage, icone: 'help-circle'},
