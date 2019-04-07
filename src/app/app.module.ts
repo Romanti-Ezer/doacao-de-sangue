@@ -26,6 +26,7 @@ import { MinhasDoacoesPage } from '../pages/minhas-doacoes/minhas-doacoes';
 import { GuiaInformativoPage } from '../pages/guia-informativo/guia-informativo';
 
 import { credentials } from './config';
+import { MinhaContaPage } from '../pages/minha-conta/minha-conta';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { credentials } from './config';
     PublicarCampanhaPage,
     VisualizarCampanhasPage,
     MinhasDoacoesPage,
-    GuiaInformativoPage
+    GuiaInformativoPage,
+    MinhaContaPage
   ],
   imports: [
     BrowserModule,
@@ -56,7 +58,8 @@ import { credentials } from './config';
     PublicarCampanhaPage,
     VisualizarCampanhasPage,
     MinhasDoacoesPage,
-    GuiaInformativoPage
+    GuiaInformativoPage,
+    MinhaContaPage
   ],
   providers: [
     StatusBar,

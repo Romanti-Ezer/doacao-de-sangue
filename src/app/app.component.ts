@@ -11,6 +11,7 @@ import { MinhasDoacoesPage } from '../pages/minhas-doacoes/minhas-doacoes';
 import { GuiaInformativoPage } from '../pages/guia-informativo/guia-informativo';
 
 import { AuthService } from '../services/auth.service';
+import { MinhaContaPage } from '../pages/minha-conta/minha-conta';
 
 @Component({
   templateUrl: 'app.html'
@@ -23,8 +24,9 @@ export class MyApp {
     { titulo: 'Início', component: HomePage, icone: 'home'},
     { titulo: 'Publicar Campanha', component: PublicarCampanhaPage, icone: 'person-add'},
     { titulo: 'Visualizar Campanhas', component: VisualizarCampanhasPage, icone: 'eye'},
-    { titulo: 'Minha Doações', component: MinhasDoacoesPage, icone: 'water'},
+    { titulo: 'Minhas Doações', component: MinhasDoacoesPage, icone: 'water'},
     { titulo: 'Guia Informativo', component: GuiaInformativoPage, icone: 'help-circle'},
+    { titulo: 'Minha Conta', component: MinhaContaPage, icone: 'person'},
   ]
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, private auth: AuthService) {
