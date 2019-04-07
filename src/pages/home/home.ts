@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, MenuController } from 'ionic-angular';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { LoginPage } from '../login/login';
 
@@ -11,8 +11,8 @@ import { LoginPage } from '../login/login';
 export class HomePage {
 
   constructor(public navCtrl: NavController,
-    private auth: AngularFireAuth) {
-
+    private auth: AngularFireAuth, public menuCtrl:MenuController) {
+      this.menuCtrl.enable(true);
   }
   
   logout() {

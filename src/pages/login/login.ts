@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, MenuController } from 'ionic-angular';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { HomePage } from '../home/home';
@@ -24,9 +24,10 @@ export class LoginPage {
   constructor(
     private navCtrl: NavController,
 		private auth: AuthService,
-    fb: FormBuilder
+    fb: FormBuilder,
+    public menuCtrl:MenuController
   ) {
-
+    this.menuCtrl.enable(false)
     this.loginForm = fb.group({
 			email: ['', Validators.compose([Validators.required, Validators.email])],
 			password: ['', Validators.compose([Validators.required, Validators.minLength(6)])]
