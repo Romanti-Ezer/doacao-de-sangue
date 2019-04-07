@@ -66,4 +66,15 @@ export class PublicarCampanhaPage {
     console.log("hello wooorld");
   }
 
+
+   habilitar(){
+    document.getElementById('divHidden').hidden=false
+  }﻿﻿;
 }
+        
+
+
+
+
+
+

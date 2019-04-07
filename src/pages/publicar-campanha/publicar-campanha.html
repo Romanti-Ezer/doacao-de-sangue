@@ -42,7 +42,7 @@
     <div> <!-- eu sou paciente-->
         <div class="descricoes">Eu sou o paciente</div>
 
-        <ion-list radio-group>
+        <ion-list radio-group id="radioValor">
           <ion-item>
             <ion-label>Sim</ion-label>
             <ion-radio value="true"></ion-radio>
@@ -50,12 +50,12 @@
 
           <ion-item>
             <ion-label>Nao</ion-label>
-            <ion-radio value="false"></ion-radio>  
+            <ion-radio value="false"  (click)="habilitar()"></ion-radio>  
           </ion-item>
         </ion-list>
     </div>
 
-    <div> <!-- indicando paciente -->
+    <div id="divHidden" hidden="true"> <!-- indicando paciente -->
         <div class="descricoes">Quero indicar um paciente</div>
         <ion-list radio-group>
           <ion-item>
@@ -89,8 +89,8 @@
           </ion-item>
 
           <ion-item>
-            <ion-input class="umcampo" name="endHemocentroCidade" type="text" placeholder="Cidade"></ion-input>
-            <ion-input name="endHemocentroUF" type="text" placeholder="UF"></ion-input>
+            <ion-input class="umcampo"  name="endHemocentroCidade" type="text" placeholder="Cidade"></ion-input>
+            <ion-input name="endHemocentroUF" minlength="2" maxlength="2" type="text" placeholder="UF"></ion-input>
           </ion-item>
     </ion-list>
     </div>
@@ -134,28 +134,28 @@
     </ion-list>
   </div>
 
-  <div> <!-- grau de emergencia-->
-  <div class="descricoes">Grau de emergencia</div>
-  <ion-item>
-      <ion-range >
-        <ion-icon range-left small name="water"></ion-icon>
-        <ion-icon range-right name="water"></ion-icon>
-      </ion-range>
-  </ion-item>
-</div>
 
 <div> <!--data-->
   <div class="descricoes">Data limite</div>
 <ion-item>
-    <ion-label>Date</ion-label>
+    <ion-label>Data</ion-label>
     <ion-datetime name="dataLimite" display-format="MMMM YYYY" min="2019" max="2040-10-31"></ion-datetime>
+  </ion-item>
+</div>
+
+
+<!-- observacao-->
+<div>
+    <div class="descricoes">Observação</div>
+<ion-item>
+    <ion-textarea rows="2" cols="20"></ion-textarea>
   </ion-item>
 </div>
 
 <!-- botao -->
 <button ion-button full type="submit">Cadastrar <ion-icon name="person-add"></ion-icon></button>
     
- 
+
 
 
 </form>
