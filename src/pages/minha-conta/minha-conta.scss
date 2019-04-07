@@ -2,12 +2,11 @@ page-minha-conta {
     .logo {
         display: block;
         width: auto;
-        max-width: 40%;
+        max-width: 20%;
         margin: 2em auto;
         @media screen and (min-width: 769px) {
-            max-width: 160px;
-        }
-    }
+            max-width: 220px;
+        }}
 
     form {
         max-width: 550px;
