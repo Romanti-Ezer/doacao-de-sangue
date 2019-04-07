@@ -42,7 +42,7 @@
     <div> <!-- eu sou paciente-->
         <div class="descricoes">Eu sou o paciente</div>
 
-        <ion-list radio-group>
+        <ion-list radio-group id="radioValor">
           <ion-item>
             <ion-label>Sim</ion-label>
             <ion-radio value="true"></ion-radio>
@@ -50,12 +50,12 @@
 
           <ion-item>
             <ion-label>Nao</ion-label>
-            <ion-radio value="false"></ion-radio>  
+            <ion-radio value="false"  (click)="habilitar()"></ion-radio>  
           </ion-item>
         </ion-list>
     </div>
 
-    <div> <!-- indicando paciente -->
+    <div id="divHidden" hidden="true"> <!-- indicando paciente -->
         <div class="descricoes">Quero indicar um paciente</div>
         <ion-list radio-group>
           <ion-item>
