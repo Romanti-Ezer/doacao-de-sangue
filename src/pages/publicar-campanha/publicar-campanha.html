@@ -134,28 +134,28 @@
     </ion-list>
   </div>
 
-  <div> <!-- grau de emergencia-->
-  <div class="descricoes">Grau de emergencia</div>
-  <ion-item>
-      <ion-range >
-        <ion-icon range-left small name="water"></ion-icon>
-        <ion-icon range-right name="water"></ion-icon>
-      </ion-range>
-  </ion-item>
-</div>
 
 <div> <!--data-->
   <div class="descricoes">Data limite</div>
 <ion-item>
-    <ion-label>Date</ion-label>
+    <ion-label>Data</ion-label>
     <ion-datetime name="dataLimite" display-format="MMMM YYYY" min="2019" max="2040-10-31"></ion-datetime>
+  </ion-item>
+</div>
+
+
+<!-- observacao-->
+<div>
+    <div class="descricoes">Observação</div>
+<ion-item>
+    <ion-textarea rows="2" cols="20"></ion-textarea>
   </ion-item>
 </div>
 
 <!-- botao -->
 <button ion-button full type="submit">Cadastrar <ion-icon name="person-add"></ion-icon></button>
     
- 
+
 
 
 </form>

@@ -17,6 +17,8 @@
       Campanhas
     </ion-list-header>
     <ion-item  *ngFor="let campanha of campanhas | async">
+      <p>{{campanha.endHemocentroUF}}</p>
+      <p>{{campanha.endHemocentroCidade}}</p>
       <p>{{ campanha.dataLimite }}</p>
       <p>{{ campanha.divulgadorPrecisa }}</p>
       <p>{{ campanha.emailDivulgador }}</p>
