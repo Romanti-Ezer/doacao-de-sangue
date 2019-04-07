@@ -7,7 +7,7 @@ import AuthProvider = firebase.auth.AuthProvider;
 @Injectable()
 export class AuthService {
 	private user: firebase.User;
-  auth: any;
+	private auth: any;
 
 	constructor(public afAuth: AngularFireAuth) {
 		afAuth.authState.subscribe(user => {
@@ -15,18 +15,20 @@ export class AuthService {
 		});
 	}
 
-	signInWithEmail(credentials) {
+	public signInWithEmail(credentials) {
 		console.log('Sign in with email');
-		return this.afAuth.auth.signInWithEmailAndPassword(credentials.email,
-            credentials.password);
+		return this.afAuth.auth.signInWithEmailAndPassword(credentials.email, credentials.password);
 	}
 
-    signUp(credentials) {
-        return this.afAuth.auth.createUserWithEmailAndPassword(credentials.email, credentials.password);
+	public signUp(credentials) {
+		return this.afAuth.auth.createUserWithEmailAndPassword(credentials.email, credentials.password);
 	}
 	
-	signOut(): Promise<void> {
+	public signOut(): Promise<void> {
 		return this.afAuth.auth.signOut();
 	}
 	
+	public getUserData() {
+		return this.user;
+	}
 }

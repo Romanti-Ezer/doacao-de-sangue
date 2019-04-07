@@ -4,7 +4,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HomePage } from '../home/home';
 
 import { AuthService } from '../../services/auth.service';
+import { FirestoneService } from '../../services/firestone.service';
 import { LoginPage } from '../login/login';
+import { from } from 'rxjs';
 
 /**
  * Generated class for the SignupPage page.
@@ -22,7 +24,7 @@ export class SignupPage {
   signupError: string;
 	form: FormGroup;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, fb: FormBuilder, private auth: AuthService) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, fb: FormBuilder, private auth: AuthService, public firestone: FirestoneService) {
     this.form = fb.group({
 			email: ['', Validators.compose([Validators.required, Validators.email])],
 			password: ['', Validators.compose([Validators.required, Validators.minLength(6)])]
@@ -33,19 +35,22 @@ export class SignupPage {
     console.log('ionViewDidLoad SignupPage');
   }
 
-  signup() {
+  public signup() {
 		let data = this.form.value;
 		let credentials = {
 			email: data.email,
 			password: data.password
 		};
 		this.auth.signUp(credentials).then(
-			() => this.navCtrl.setRoot(HomePage),
+			(response) => {
+        this.navCtrl.setRoot(HomePage);
+        this.firestone.registerUser(response.user.uid,'', credentials.email);
+      },
 			error => this.signupError = error.message
-		);
+    );
   }
 
-  login(){
+  public login(){
     this.navCtrl.setRoot(LoginPage);
   }
 

@@ -27,6 +27,7 @@ import { GuiaInformativoPage } from '../pages/guia-informativo/guia-informativo'
 
 import { credentials } from './config';
 import { MinhaContaPage } from '../pages/minha-conta/minha-conta';
+import { FirestoneService } from '../services/firestone.service';
 
 @NgModule({
   declarations: [
@@ -66,7 +67,8 @@ import { MinhaContaPage } from '../pages/minha-conta/minha-conta';
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     AngularFireAuth,
-    AuthService
+    AuthService,
+    FirestoneService
   ]
 })
 
