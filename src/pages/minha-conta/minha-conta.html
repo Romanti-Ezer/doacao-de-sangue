@@ -14,39 +14,51 @@
   
   <img src="../../assets/imgs/logoApp.png" alt="My Blood" class="logo">
 
-	<form (ngSubmit)="atualizarCadastro()" *ngFor="let user of dados | async">
+	<form (ngSubmit)="atualizarCadastro($event)" *ngFor="let user of dados | async">
 		<ion-list inset>
 
+      <!-- Doc ID -->
+			<ion-item hidden>
+				<ion-input type="text" [(ngModel)]="user.id" name="userDocId"></ion-input>
+      </ion-item>
+
+      <!-- Nome -->
 			<ion-item>
-				<!-- <ion-input type="text" placeholder="Nome" formControlName="nome"></ion-input> -->
 				<ion-input type="text" placeholder="Nome" [(ngModel)]="user.userNome" name="userNome"></ion-input>
       </ion-item>
       
+      <!-- E-mail -->
 			<ion-item>
-				<!-- <ion-input type="text" placeholder="E-mail" formControlName="email"></ion-input> -->
-				<ion-input type="text" placeholder="E-mail" [(ngModel)]="user.userEmail" name="userEmail"></ion-input>
+				<ion-input type="text" placeholder="E-mail" disabled [(ngModel)]="user.userEmail" name="userEmail"></ion-input>
       </ion-item>
       
+      <!-- Telefone -->
 			<ion-item>
-				<!-- <ion-input type="tel" placeholder="Telefone" formControlName="telefone"></ion-input> -->
 				<ion-input type="tel" placeholder="Telefone" [(ngModel)]="user.userTel" name="userTel"></ion-input>
       </ion-item>
       
+      <!-- CEP -->
       <ion-item> 
-        <ion-input name="endCEP"type="number" placeholder="CEP" [(ngModel)]="user.userCEP" name="userCEP"></ion-input>
+        <ion-input type="number" placeholder="CEP" [(ngModel)]="user.userCEP" name="userCEP"></ion-input>
       </ion-item>
 
+      <!-- Endereço -->
       <ion-item>
+        <!-- Endereço -->
         <ion-input class="umcampo"name="end" type="text" placeholder="Endereço" [(ngModel)]="user.userEnd" name="userEnd"></ion-input>
+        <!-- Número -->
         <ion-input type="number" placeholder="Numero" [(ngModel)]="user.userEndNum" name="userEndNum"></ion-input>
       </ion-item>
 
       <ion-item>
+        <!-- Cidade -->
         <ion-input class="umcampo" name="endCidade" type="text" placeholder="Cidade" [(ngModel)]="user.userCidade" name="userCidade"></ion-input>
-        <ion-input name="endUF" type="text" placeholder="UF" [(ngModel)]="user.userUF" name="userUF"></ion-input>
+        <!-- UF -->
+        <ion-input type="text" placeholder="UF" [(ngModel)]="user.userUF" name="userUF"></ion-input>
       </ion-item>
 
-      <ion-list radio-group [(ngModel)]="user.userSangue" name="userSangue">
+      <!-- Tipo de Sangue -->
+      <ion-list radio-group [(ngModel)]="user.userSangue" name="userSangue" (ionChange)="setSangue($event)">
         <h3 class="subtitle">Tipo de sangue</h3>
         <ion-item>
             <ion-label>AB+</ion-label>
@@ -66,10 +78,9 @@
         </ion-item>
       </ion-list>
 
-      <button ion-button full type="submit">Atualizar <ion-icon name="person"></ion-icon></button>
-
 		</ion-list>
 
+    <!-- Salvar -->
     <button ion-button full type="submit">Salvar <ion-icon name="checkmark"></ion-icon></button>
 	</form>
 

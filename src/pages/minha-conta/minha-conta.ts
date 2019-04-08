@@ -3,9 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { FirestoneService } from '../../services/firestone.service';
-import { User } from '../../services/firestone.service';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators/map';
+
 /**
  * Generated class for the MinhaContaPage page.
  *
@@ -19,10 +17,13 @@ import { map } from 'rxjs/operators/map';
 @Component({
   selector: 'page-minha-conta',
   templateUrl: 'minha-conta.html',
+  providers: [ FirestoneService ]
 })
 export class MinhaContaPage {
 
+  userSangue: string;
   dados: any;
+  contaForm: FormGroup;
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
@@ -38,7 +39,23 @@ export class MinhaContaPage {
     console.log('ionViewDidLoad MinhaContaPage');
   }
 
-  public atualizarCadastro() {
-    // this.firestone.updateUserData(this.contaData);
+  public setSangue(value) {
+    this.userSangue = value;
+  }
+
+  public atualizarCadastro(event) {
+    console.log(event.target);
+    console.log('this.userSangue: \'', this.userSangue + '\'');
+    this.firestone.updateUserData(  
+      event.target.userDocId.value,
+      event.target.userNome.value,
+      event.target.userTel.value,
+      event.target.userCEP.value,
+      event.target.userEnd.value,
+      event.target.userEndNum.value,
+      event.target.userCidade.value,
+      event.target.userUF.value,
+      this.userSangue
+    );
   }
 }
