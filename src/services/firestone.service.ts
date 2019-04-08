@@ -82,6 +82,8 @@ export class FirestoneService {
                 });
             });
             console.log("currentuserid: ", this.afAuth.auth.currentUser.uid);
+        } else {
+            this.usuariosCollectionRef = angularFirestore.collection<User>('usuarios');
         }
 
         // Dados da collection de campanhas
