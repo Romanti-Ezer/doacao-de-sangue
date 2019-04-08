@@ -25911,3 +25911,8 @@ page-signup .c-login-footer__link {
 page-signup ion-icon {
   margin-left: 5px;
 }
+
+p {
+  word-break: break-all;
+  white-space: normal;
+}
