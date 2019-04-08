@@ -42,33 +42,24 @@
     <div> <!-- eu sou paciente-->
         <div class="descricoes">Eu sou o paciente</div>
 
-        <ion-list radio-group id="radioValor">
+        <ion-list radio-group>
           <ion-item>
             <ion-label>Sim</ion-label>
-            <ion-radio value="true"></ion-radio>
+            <ion-radio value="true" (click)="desabilitar()"></ion-radio>
           </ion-item>
 
           <ion-item>
             <ion-label>Nao</ion-label>
-            <ion-radio value="false"  (click)="habilitar()"></ion-radio>  
+            <ion-radio value="false" (click)="habilitar()"></ion-radio>  
           </ion-item>
         </ion-list>
     </div>
 
     <div id="divHidden" hidden="true"> <!-- indicando paciente -->
-        <div class="descricoes">Quero indicar um paciente</div>
-        <ion-list radio-group>
-          <ion-item>
-            <ion-label>Sim</ion-label>  <!-- se sim era pra abrir um input padrao disable-->
-            <ion-radio value="true"></ion-radio>
-          </ion-item>
-
-          <ion-item>
-            <ion-label>Nao</ion-label>
-            <ion-radio value="false"></ion-radio>  
-          </ion-item>
-        </ion-list>
-
+        <div class="descricoes">Indique um paciente</div>
+        <ion-item>
+        <ion-input class="umcampo" name="" maxlength="45" type="text" placeholder="Digite aqui o nome do paciente"></ion-input>
+      </ion-item>
     </div>
 
     <h2 ion-text color="dark" class="h2">Hemocentro</h2>

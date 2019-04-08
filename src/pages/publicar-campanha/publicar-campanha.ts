@@ -70,9 +70,11 @@ export class PublicarCampanhaPage {
    habilitar(){
     document.getElementById('divHidden').hidden=false
   }﻿﻿;
-}
-        
 
+  desabilitar(){
+    document.getElementById('divHidden').hidden = true;
+  };
+}
 
 
 
