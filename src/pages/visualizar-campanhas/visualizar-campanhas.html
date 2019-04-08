@@ -16,50 +16,41 @@
     <ion-list-header>
       <h2>Campanhas</h2>
     </ion-list-header>
-    <ion-item textwrap *ngFor="let campanha of campanhas | async">
+    
+    <ion-card *ngFor="let campanha of campanhas | async">
+        <ion-card-header>
+          Necessita de doação <b>{{campanha.tipoSangue}}</b>
+        </ion-card-header>
+        <ion-card-content>
+            <p><b>Divulgador</b>: {{ campanha.nomeDivulgador }}</p>
+            <p><b>Estado</b>: {{campanha.endHemocentroUF}}</p>
+            <p><b>Cidade</b>: {{campanha.endHemocentroCidade}}</p>
+            <p><b>Tempo limite para a doação</b>: {{ campanha.dataLimite }}</p>
+            <p><b>Divulgador é o paciente</b>: {{ campanha.divulgadorPrecisa }}</p>
+            <p><b>Emai do divulgador</b>: {{ campanha.emailDivulgador }}</p>
+            <p><b>Email do hemocentro</b>: {{ campanha.emailHemocentro }}</p>
+            <p><b>Endereço do divulgador</b>: {{ campanha.endDivulgador }}</p>
+            <p><b>Cep do divulgador</b>: {{ campanha.endDivulgadorCEP }}</p>
+            <p><b>Endereço hemocentro</b>: {{ campanha.endHemocentro }}</p>
+            <p><b>Cep do hemocentro</b>: {{ campanha.endHemocentroCEP }}</p>
+            <!-- <p>{{ campanha.grauUrgencia }}</p> -->
+            <p><b>Observações</b>: {{ campanha.infAdicionais }}</p>
+            <p><b>Nome do hemocentro/hospital</b>: {{ campanha.nomeHemocentro }}</p>
+            <p><b>Nome do paciente</b>: {{ campanha.nomePaciente }}</p>
+            <!--<p>Contato hemocentro: {{ campanha.outroContatoHemocentro }}</p> -->
+            <p><b>Pagina do facebook do hemocentro</b>: {{ campanha.pagFacebookHemocentro }}</p>
+            <p><b>Possui whatsapp</b>: {{ campanha.possuiWhatsapp }}</p>
+            <!--<p>{{ campanha.possuiWhatsapp2 }}</p> -->
+            <p><b>Hemocentro possui site</b>: {{ campanha.siteHemocentro }}</p>
+            <p><b>Telefone do divulgador</b>: {{ campanha.telDivulgador }}</p>
+            <p><b>Telefone secundario do divulgador</b>:{{ campanha.telDivulgador2 }}</p>
+            <p><b>Telefone hemocentro</b>: {{ campanha.telHemocentro }}</p>
+            <p><b>Telefone secundario do hemocentro</b>: {{ campanha.telHemocentro2 }}</p>
+            <p><b>Tipo de doação</b>: {{ campanha.tipoDoacao }}</p>
+            <p><b>Tipo de sangue</b>: {{ campanha.tipoSangue }}</p>
+        </ion-card-content>
+    </ion-card>
 
-
-  
-        <ion-card >
-            <ion-card-header>
-              Necessita de doação {{campanha.tipoSangue}}
-            </ion-card-header>
-            <ion-card-content>
-                
-                <p>Nome do divulgador: {{ campanha.nomeDivulgador }}</p>
-                <p>Estado: {{campanha.endHemocentroUF}}</p>
-                <p>Cidade: {{campanha.endHemocentroCidade}}</p>
-                <p>Tempo limite para a doação: {{ campanha.dataLimite }}</p>
-                <p>Divulgador é o paciente: {{ campanha.divulgadorPrecisa }}</p>
-                <p>Emai do divulgador: {{ campanha.emailDivulgador }}</p>
-                <p>Email do hemocentro: {{ campanha.emailHemocentro }}</p>
-                <p>Endereço do divulgador: {{ campanha.endDivulgador }}</p>
-                <p>Cep do divulgador: {{ campanha.endDivulgadorCEP }}</p>
-                <p>Endereço hemocentro: {{ campanha.endHemocentro }}</p>
-                <p>Cep do hemocentro: {{ campanha.endHemocentroCEP }}</p>
-               <!-- <p>{{ campanha.grauUrgencia }}</p> -->
-                <p>Observacoes: {{ campanha.infAdicionais }}</p>
-                <p>Nome do hemocentro/hospital: {{ campanha.nomeHemocentro }}</p>
-                <p>Nome do paciente: {{ campanha.nomePaciente }}</p>
-                <!--<p>Contato hemocentro: {{ campanha.outroContatoHemocentro }}</p> -->
-                <p>Pagina do facebook do hemocentro: {{ campanha.pagFacebookHemocentro }}</p>
-                <p>Possui whatsapp: {{ campanha.possuiWhatsapp }}</p>
-                <!--<p>{{ campanha.possuiWhatsapp2 }}</p> -->
-                <p>Hemocentro possui site: {{ campanha.siteHemocentro }}</p>
-                <p>Telefone do divulgador: {{ campanha.telDivulgador }}</p>
-                <p>Telefone secundario do divulgador:{{ campanha.telDivulgador2 }}</p>
-                <p>Telefone hemocentro: {{ campanha.telHemocentro }}</p>
-                <p>Telefone secundario do hemocentro: {{ campanha.telHemocentro2 }}</p>
-                <p>Tipo de doação: {{ campanha.tipoDoacao }}</p>
-                <p>Tipo de sangue: {{ campanha.tipoSangue }}</p>
-            </ion-card-content>
-          </ion-card>
-
-
-
-     
-      
-    </ion-item>
   </ion-list>
 
 </ion-content>
