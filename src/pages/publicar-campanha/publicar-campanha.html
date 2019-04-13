@@ -45,17 +45,34 @@
         <ion-list radio-group>
           <ion-item>
             <ion-label>Sim</ion-label>
-            <ion-radio value="true" (click)="desabilitar()"></ion-radio>
+            <ion-radio value="true" (click)="rDesabilitar()"></ion-radio>
           </ion-item>
 
           <ion-item>
             <ion-label>Nao</ion-label>
-            <ion-radio value="false" (click)="habilitar()"></ion-radio>  
+            <ion-radio value="false" (click)="rHabilitar()"></ion-radio>  
           </ion-item>
         </ion-list>
     </div>
 
-    <div id="divHidden" hidden="true"> <!-- indicando paciente -->
+    <div id="divHidden" hidden="false"> <!-- quero indicar um paciente ?-->
+      <div class="descricoes">Quero indicar um paciente</div>
+
+      <ion-list radio-group>
+        <ion-item>
+          <ion-label>Sim</ion-label>
+          <ion-radio value="true" (click)="iHabilitar()"></ion-radio>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Nao</ion-label>
+          <ion-radio value="false" (click)="iDesabilitar()"></ion-radio>  
+        </ion-item>
+      </ion-list>
+  </div>
+
+
+    <div id="nomePacienteIndicado" hidden="false"> <!-- nome do paciente indicado -->
         <div class="descricoes">Indique um paciente</div>
         <ion-item>
         <ion-input class="umcampo" name="" maxlength="45" type="text" placeholder="Digite aqui o nome do paciente"></ion-input>

@@ -67,12 +67,22 @@ export class PublicarCampanhaPage {
   }
 
 
-   habilitar(){
-    document.getElementById('divHidden').hidden=false
-  }﻿﻿;
+   rHabilitar(){ //se nao for o paciente
+    document.getElementById('divHidden').hidden=false;
+  };
 
-  desabilitar(){
+  rDesabilitar(){ //se for o paciente
     document.getElementById('divHidden').hidden = true;
+    document.getElementById('nomePacienteIndicado').hidden=true;
+  };
+
+  iHabilitar(){ //input habilitar nome do paciente indicado
+   document.getElementById('nomePacienteIndicado').hidden=false;
+  };
+
+  iDesabilitar(){ //input desabilitar nome do paciente indicado
+   document.getElementById('nomePacienteIndicado').hidden = true;
+
   };
 }
 
