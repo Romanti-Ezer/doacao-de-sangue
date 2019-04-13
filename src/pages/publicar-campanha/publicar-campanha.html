@@ -14,12 +14,12 @@
   
   <img src="../../assets/imgs/logoApp.png" alt="My Blood" class="imagemLogo">
   
-  <form (ngSubmit)="cadastro()">
+  <form (ngSubmit)="cadastro()" novalidate [formGroup]="validaFormulario">
 
       <h1 ion-text color="dark" class="h1">Publicar Campanha</h1>
     <div>      
 
-        <div class="descricoes">Mostrar meu</div>
+        <div class="descricoes">Mostrar menu</div>
 
       <ion-item>
           <ion-toggle checked="true"></ion-toggle>
@@ -82,24 +82,66 @@
     <h2 ion-text color="dark" class="h2">Hemocentro</h2>
 
     <div> <!--endereço do hospital-->
-    <ion-list>
-        <ion-item>
-          <ion-input name="nomeHemocentro" type="text" placeholder="Nome"></ion-input>
+    <ion-list inset>
+        <ion-item [ngClass]="{ invalid: nomeErrors.hasError('*', ['touched']) }">
+            <ion-input name="nomeHemocentro" type="text" placeholder="Nome"
+            formControlName="nome"></ion-input>
         </ion-item>
 
-        <ion-item> 
-          <ion-input name="endHemocentroCEP"type="number" placeholder="CEP"></ion-input>
+        <div ngxErrors="nome" #nomeErrors="ngxErrors">
+            <div [ngxError]="['maxlength', 'required']" [when]="['touched']">Digite o nome até 15 caracteres
+            </div>
+        </div>
+
+        <ion-item [ngClass]="{ invalid: cepErrors.hasError('*', ['touched']) }"> 
+            <ion-input name="endHemocentroCEP" type="number" placeholder="CEP"
+            formControlName="cep"></ion-input>
         </ion-item>
 
-        <ion-item>
-            <ion-input class="umcampo"name="endHemocentro" type="text" placeholder="Endereço"></ion-input>
-            <ion-input type="number" placeholder="Numero"></ion-input>
-          </ion-item>
+        <div ngxErrors="cep" #cepErrors="ngxErrors">
+            <div [ngxError]="['minlength', 'required']" [when]="['touched']">CEP precisa ter 8 caracteres
+            </div>
+        </div>
 
-          <ion-item>
-            <ion-input class="umcampo"  name="endHemocentroCidade" type="text" placeholder="Cidade"></ion-input>
-            <ion-input name="endHemocentroUF" minlength="2" maxlength="2" type="text" placeholder="UF"></ion-input>
-          </ion-item>
+        <ion-item [ngClass]="{ invalid: enderecoErrors.hasError('*', ['touched']) }">
+            <ion-input class="umcampo"name="endHemocentro" type="text" placeholder="Endereço"
+            formControlName="endereco"></ion-input>
+        </ion-item>
+
+        <div ngxErrors="endereco" #enderecoErrors="ngxErrors">
+            <div [ngxError]="['required']" [when]="['touched']">Preencha com seu endereço
+            </div>
+        </div>
+
+        <ion-item [ngClass]="{ invalid: numeroErrors.hasError('*', ['touched']) }">
+            <ion-input type="number" placeholder="Numero"
+            formControlName="numero"></ion-input>
+        </ion-item>
+
+        <div ngxErrors="numero" #numeroErrors="ngxErrors">
+            <div [ngxError]="['required']" [when]="['touched']">Preencha com seu número
+            </div>
+        </div>
+
+        <ion-item [ngClass]="{ invalid: cidadeErrors.hasError('*', ['touched']) }">
+            <ion-input class="umcampo"  name="endHemocentroCidade" type="text" placeholder="Cidade"
+            formControlName="cidade"></ion-input>
+        </ion-item>
+
+        <div ngxErrors="cidade" #cidadeErrors="ngxErrors">
+            <div [ngxError]="['required']" [when]="['touched']">Preencha com sua cidade
+            </div>
+        </div>
+
+        <ion-item [ngClass]="{ invalid: ufErrors.hasError('*', ['touched']) }">
+            <ion-input name="endHemocentroUF" minlength="2" maxlength="2" type="text" placeholder="UF"
+            formControlName="uf"></ion-input>
+        </ion-item>
+
+        <div ngxErrors="uf" #ufErrors="ngxErrors">
+            <div [ngxError]="['required']" [when]="['touched']">Digite a sigla do seu estado
+            </div>
+        </div>
     </ion-list>
     </div>
           
@@ -108,7 +150,7 @@
 
   <div> <!--tipo de sangue-->
       <div class="descricoes">Tipo de sangue</div>
-    <ion-list radio-group>
+    <ion-list radio-group inset>
         <ion-item>
             <ion-label>AB+</ion-label>
             <ion-radio value="AB+"></ion-radio>
@@ -154,14 +196,20 @@
 
 <!-- observacao-->
 <div>
-    <div class="descricoes">Observação</div>
-<ion-item>
-    <ion-textarea rows="2" cols="20"></ion-textarea>
+    <div class="descricoes">Observações</div>
+<ion-item [ngClass]="{ invalid: obsErrors.hasError('*', ['touched']) }">
+    <ion-textarea rows="2" cols="20"
+    formControlName="obs"></ion-textarea>
   </ion-item>
+    <div ngxErrors="obs" #obsErrors="ngxErrors">
+        <div [ngxError]="['maxlength', 'required']" [when]="['touched']">Este campo não deve ultrapassar 200
+          caracteres
+        </div>
+    </div>
 </div>
 
 <!-- botao -->
-<button ion-button full type="submit">Cadastrar <ion-icon name="person-add"></ion-icon></button>
+<button ion-button full type="submit" [disabled]="!validaFormulario.valid">Cadastrar <ion-icon name="person-add"></ion-icon></button>
     
 
 

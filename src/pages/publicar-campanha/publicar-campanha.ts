@@ -1,3 +1,4 @@
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
@@ -55,9 +56,29 @@ export class PublicarCampanhaPage {
   // campanhasCollectionRef é uma collection de Campanhas -> Coleção de campanhas
   campanhasCollectionRef: AngularFirestoreCollection<Campanha>;
 
-  constructor(public alertCtrl: AlertController, public navCtrl: NavController, public navParams: NavParams, public angularFirestore: AngularFirestore) {
+  // Validação do Formulário
+  validaFormulario: FormGroup;
+
+  constructor(
+    public alertCtrl: AlertController, 
+    public navCtrl: NavController, 
+    public navParams: NavParams, 
+    public angularFirestore: AngularFirestore,
+    public fb: FormBuilder,
+    ) {
     this.campanhasCollectionRef = this.angularFirestore.collection('campanhas'); 
     this.campanhas = this.campanhasCollectionRef.valueChanges();
+    this.validaFormulario = fb.group({
+      nome: ['', Validators.compose([Validators.required, Validators.maxLength(15)])],
+      cep: ['', Validators.compose([Validators.required, Validators.minLength(8), Validators.maxLength(8)])],      
+      endereco: ['', Validators.compose( [Validators.required])],
+      numero: ['', Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(5)])],
+      cidade: ['', Validators.compose([Validators.required,])],
+      uf: ['', Validators.compose([Validators.required, Validators.minLength(2), Validators.maxLength(2)])],
+      obs: ['', Validators.compose([Validators.maxLength(200)])]
+    })
+
+    
   }
 
   ionViewDidLoad() {
@@ -85,7 +106,6 @@ export class PublicarCampanhaPage {
   iDesabilitar(){ //input desabilitar nome do paciente indicado
    document.getElementById('nomePacienteIndicado').hidden = true;
    this.showAlert("Publicação Anonima", "Essa opção é indicada para publicações anonimas");
-   
   };
   
   showAlert(titulo, subtitulo) { // coloquei os 2 parametros para reaproveitar esse alert caso precise
