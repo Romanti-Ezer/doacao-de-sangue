@@ -6,6 +6,8 @@ import { AngularFirestoreCollection } from 'angularfire2/firestore';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Observable } from 'rxjs/Observable';
+import { AlertController } from 'ionic-angular';
+
 
 interface Campanha {
   dataLimite: Date,
@@ -53,7 +55,7 @@ export class PublicarCampanhaPage {
   // campanhasCollectionRef é uma collection de Campanhas -> Coleção de campanhas
   campanhasCollectionRef: AngularFirestoreCollection<Campanha>;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public angularFirestore: AngularFirestore) {
+  constructor(public alertCtrl: AlertController, public navCtrl: NavController, public navParams: NavParams, public angularFirestore: AngularFirestore) {
     this.campanhasCollectionRef = this.angularFirestore.collection('campanhas'); 
     this.campanhas = this.campanhasCollectionRef.valueChanges();
   }
@@ -82,9 +84,20 @@ export class PublicarCampanhaPage {
 
   iDesabilitar(){ //input desabilitar nome do paciente indicado
    document.getElementById('nomePacienteIndicado').hidden = true;
-
+   this.showAlert("Publicação Anonima", "Essa opção é indicada para publicações anonimas");
+   
   };
+  
+  showAlert(titulo, subtitulo) { // coloquei os 2 parametros para reaproveitar esse alert caso precise
+    const alert = this.alertCtrl.create({
+      title: titulo,
+      subTitle: subtitulo,
+      buttons: ['OK']
+    });
+    alert.present();
+  }
 }
+
 
 
 
