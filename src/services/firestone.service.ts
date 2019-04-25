@@ -47,6 +47,7 @@ export interface Campanha {
     telHemocentro2: string,
     tipoDoacao: string,
     tipoSangue: string
+    observacoes: string
 }
 
 @Injectable()

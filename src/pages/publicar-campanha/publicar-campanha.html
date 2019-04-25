@@ -14,29 +14,41 @@
   
   <img src="../../assets/imgs/logoApp.png" alt="My Blood" class="imagemLogo">
   
-  <form (ngSubmit)="cadastro()" novalidate [formGroup]="validaFormulario">
+  <form (ngSubmit)="publicarCampanha($event)" novalidate [formGroup]="validaFormulario">
 
       <h1 ion-text color="dark" class="h1">Publicar Campanha</h1>
     <div>      
 
-        <div class="descricoes">Mostrar menu</div>
+        <div class="descricoes">Mostrar meu</div>
+      
+    <div *ngFor="let user of dados | async">
+        <ion-item *ngIf="user.userNome">
+            <ion-toggle checked="true"></ion-toggle>
+            <ion-label>Nome</ion-label>
+            <ion-input type="text" placeholder="Nome" [(ngModel)]="user.userNome" name="userNome" class="hidden"></ion-input>
+        </ion-item>
+        <ion-item *ngIf="(user.userEmail)">
+            <ion-toggle checked="true"></ion-toggle>
+            <ion-label>Email</ion-label>
+            <ion-input type="text" placeholder="E-mail" disabled [(ngModel)]="user.userEmail" name="userEmail" class="hidden"></ion-input>
+        </ion-item>
+        <ion-item *ngIf="(user.userTel)">
+            <ion-toggle checked="true"></ion-toggle>
+            <ion-label>Telefone</ion-label>
+            <ion-input type="tel" placeholder="Telefone" [(ngModel)]="user.userTel" name="userTel" class="hidden"></ion-input>
+        </ion-item>
+        <ion-item *ngIf=" (user.userCEP) && (user.userEnd) && (user.userEndNum) && (user.userCidade) && (user.userUF)">
+            <ion-toggle checked="false"></ion-toggle>
+            <ion-label>Endereço</ion-label>
 
-      <ion-item>
-          <ion-toggle checked="true"></ion-toggle>
-          <ion-label>Nome</ion-label>
-      </ion-item>
-      <ion-item>
-          <ion-toggle checked="true"></ion-toggle>
-          <ion-label>Email</ion-label>
-      </ion-item>
-      <ion-item>
-          <ion-toggle checked="true"></ion-toggle>
-          <ion-label>Telefone</ion-label>
-      </ion-item>
-      <ion-item>
-          <ion-toggle checked="false"></ion-toggle>
-          <ion-label>Endereço</ion-label>
-      </ion-item>
+            <ion-input class="hidden" type="number" placeholder="CEP" [(ngModel)]="user.userCEP" name="userCEP"></ion-input>
+            <ion-input class="umcampo hidden"name="end" type="text" placeholder="Endereço" [(ngModel)]="user.userEnd" name="userEnd"></ion-input>
+            <ion-input class="hidden" type="number" placeholder="Numero" [(ngModel)]="user.userEndNum" name="userEndNum"></ion-input>
+            <ion-input class="hidden umcampo" name="endCidade" type="text" placeholder="Cidade" [(ngModel)]="user.userCidade" name="userCidade"></ion-input>
+            <ion-input clas="hidden" type="text" placeholder="UF" [(ngModel)]="user.userUF" name="userUF"></ion-input>
+
+        </ion-item>
+        </div>
     </div>
 
     <div> <!-- eu sou paciente-->
