@@ -136,7 +136,7 @@
             <div *ngFor="let user of dados | async">
 
                 <!-- Se o usuário tem o nome cadastrado -->
-                <ion-item *ngIf="user.userNome != ''">
+                <ion-item *ngIf="user.userNome && user.userNome != ''">
                     <ion-toggle [(ngModel)]="mostrarNomeDivulgador" [ngModelOptions]="{standalone: true}" checked></ion-toggle>
                     <ion-label>Nome</ion-label>
 
@@ -145,7 +145,7 @@
                 </ion-item>
 
                 <!-- Se o usuário tem o e-mail cadastrado -->
-                <ion-item *ngIf="user.userEmail != ''">
+                <ion-item *ngIf="user.userEmail && user.userEmail != ''">
                     <ion-toggle [(ngModel)]="mostrarEmailDivulgador" [ngModelOptions]="{standalone: true}" checked></ion-toggle>
                     <ion-label>Email</ion-label>
 
@@ -154,7 +154,7 @@
                 </ion-item>
 
                 <!-- Se o usuário tem o telefone cadastrado -->
-                <ion-item *ngIf="user.userTel != ''">
+                <ion-item *ngIf="user.userTel && user.userTel != ''">
                     <ion-toggle [(ngModel)]="mostrarTelDivulgador" [ngModelOptions]="{standalone: true}" checked></ion-toggle>
                     <ion-label>Telefone</ion-label>
 

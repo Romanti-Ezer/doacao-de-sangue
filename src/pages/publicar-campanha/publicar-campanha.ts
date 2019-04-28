@@ -30,10 +30,10 @@ export class PublicarCampanhaPage {
     dados:any;
 
     // Chaves - Mostrar ou não dados do divulgador
-    mostrarNomeDivulgador : boolean = true;
-    mostrarEmailDivulgador : boolean = true;
-    mostrarTelDivulgador : boolean = true;
-    mostrarEndDivulgador : boolean = true;
+    mostrarNomeDivulgador : boolean = false;
+    mostrarEmailDivulgador : boolean = false;
+    mostrarTelDivulgador : boolean = false;
+    mostrarEndDivulgador : boolean = false;
 
     // Data Limite
     dataLimite : Date = null;
@@ -103,14 +103,14 @@ export class PublicarCampanhaPage {
     }
 
     public publicarCampanha(event) {
-        let nomeDivulgador = this.mostrarNomeDivulgador ? event.target.nomeDivulgador.value : '';
-        let emailDivulgador = this.mostrarEmailDivulgador ? event.target.emailDivulgador.value : '';
-        let telDivulgador = this.mostrarTelDivulgador ? event.target.telDivulgador.value : '';
-        let endDivulgadorCEP = this.mostrarEndDivulgador ? event.target.endDivulgadorCEP.value : '';
-        let endDivulgador = this.mostrarEndDivulgador ? event.target.endDivulgador.value : '';
-        let endDivulgadorNum = this.mostrarEndDivulgador ? event.target.endDivulgadorNum.value : '';
-        let endDivulgadorCidade = this.mostrarEndDivulgador ? event.target.endDivulgadorCidade.value : '';
-        let endDivulgadorUF = this.mostrarEndDivulgador ? event.target.endDivulgadorUF.value : '';
+        let nomeDivulgador = this.mostrarNomeDivulgador ? event.target.nomeDivulgador.value ? event.target.nomeDivulgador.value : '' : '';
+        let emailDivulgador = this.mostrarEmailDivulgador ? event.target.emailDivulgador.value ? event.target.emailDivulgador.value : '' : '';
+        let telDivulgador = this.mostrarTelDivulgador ? event.target.telDivulgador.value ? event.target.telDivulgador.value : '' : '';
+        let endDivulgadorCEP = this.mostrarEndDivulgador ? event.target.endDivulgadorCEP.value ? event.target.endDivulgadorCEP.value : '' : '';
+        let endDivulgador = this.mostrarEndDivulgador ? event.target.endDivulgador.value ? event.target.endDivulgador.value : '' : '';
+        let endDivulgadorNum = this.mostrarEndDivulgador ? event.target.endDivulgadorNum.value ? event.target.endDivulgadorNum.value : '' : '';
+        let endDivulgadorCidade = this.mostrarEndDivulgador ? event.target.endDivulgadorCidade.value ? event.target.endDivulgadorCidade.value : '' : '';
+        let endDivulgadorUF = this.mostrarEndDivulgador ? event.target.endDivulgadorUF.value ? event.target.endDivulgadorUF.value : '' : '';
 
         if(this.firestone.setCampanha(
             this.validaFormulario.value.tipoSangue,
@@ -136,6 +136,7 @@ export class PublicarCampanhaPage {
         )) {
             // Se der certo
             this.showAlert("Sucesso", "Campanha publicada com sucesso!");
+            event.target.reset();
         } else {
             // Se não der certo
             this.showAlert("Erro", "Erro ao publicar campanha :/");
