@@ -14,42 +14,86 @@
 
   <ion-list>
     <ion-list-header>
-      <h2>Campanhas</h2>
+      <h2>Filtro</h2>
     </ion-list-header>
     
+    <!-- filtro de pesquisa-->
+      <section> 
+        <ion-list>
+
+            <ion-item> <!-- nome da cidade-->
+              <ion-label fixed>Cidade</ion-label>
+              <ion-input type="text" value=""></ion-input>
+            </ion-item>   
+            <ion-item> <!-- nome dos estados-->
+                <ion-label>Estado</ion-label>
+                <ion-select [(ngModel)]="Estado">
+                  <ion-option value="AC">Acre</ion-option>
+                  <ion-option value="AL">Alagoas</ion-option>
+                  <ion-option value="AP">Amapá</ion-option>
+                  <ion-option value="AM">Amazonas</ion-option>
+                  <ion-option value="BA">Bahia</ion-option>
+                  <ion-option value="CE">Ceará</ion-option>
+                  <ion-option value="DF">Distrito Federal</ion-option>
+                  <ion-option value="GO">Goiás</ion-option>
+                  <ion-option value="MA">Maranhão</ion-option>
+                  <ion-option value="MT">Mato Grosso</ion-option>
+                  <ion-option value="MS">Mato Grosso do Sul</ion-option>
+                  <ion-option value="MG">Minas Gerais</ion-option>
+                  <ion-option value="PA">Pará</ion-option>
+                  <ion-option value="PB">Paraíba</ion-option>
+                  <ion-option value="PR">Paraná</ion-option>
+                  <ion-option value="PE">Pernambuco</ion-option>
+                  <ion-option value="PI">Piauí</ion-option>
+                  <ion-option value="RJ">Rio de Janeiro</ion-option>
+                  <ion-option value="RN">Rio Grande do Norte</ion-option>
+                  <ion-option value="RS">Rio Grande do Sul</ion-option>
+                  <ion-option value="RO">Rondônia</ion-option>
+                  <ion-option value="RR">Roraima</ion-option>
+                  <ion-option value="SC">Santa Catarina</ion-option>
+                  <ion-option value="SP">Sao Paulo</ion-option>
+                  <ion-option value="SE">Sergipe</ion-option>
+                  <ion-option value="TO">Tocantins</ion-option>
+                </ion-select>
+               </ion-item>    
+          </ion-list>
+         </section>
+         <button ion-button full>Pesquisar<ion-icon name="search"></ion-icon></button>
+         <br><br><br>
+
+     
+
+<h2>Campanhas Disponiveis</h2>
     <ion-card *ngFor="let campanha of campanhas | async">
-        <ion-card-header>
-          Necessita de doação <b>{{campanha.tipoSangue}}</b>
-        </ion-card-header>
-        <ion-card-content>
-            <p><b>Divulgador</b>: {{ campanha.nomeDivulgador }}</p>
-            <p><b>Estado</b>: {{campanha.endHemocentroUF}}</p>
-            <p><b>Cidade</b>: {{campanha.endHemocentroCidade}}</p>
-            <p><b>Tempo limite para a doação</b>: {{ campanha.dataLimite }}</p>
-            <p><b>Divulgador é o paciente</b>: {{ campanha.divulgadorPrecisa }}</p>
-            <p><b>Emai do divulgador</b>: {{ campanha.emailDivulgador }}</p>
-            <p><b>Email do hemocentro</b>: {{ campanha.emailHemocentro }}</p>
-            <p><b>Endereço do divulgador</b>: {{ campanha.endDivulgador }}</p>
-            <p><b>Cep do divulgador</b>: {{ campanha.endDivulgadorCEP }}</p>
-            <p><b>Endereço hemocentro</b>: {{ campanha.endHemocentro }}</p>
-            <p><b>Cep do hemocentro</b>: {{ campanha.endHemocentroCEP }}</p>
-            <!-- <p>{{ campanha.grauUrgencia }}</p> -->
-            <p><b>Observações</b>: {{ campanha.infAdicionais }}</p>
-            <p><b>Nome do hemocentro/hospital</b>: {{ campanha.nomeHemocentro }}</p>
-            <p><b>Nome do paciente</b>: {{ campanha.nomePaciente }}</p>
-            <!--<p>Contato hemocentro: {{ campanha.outroContatoHemocentro }}</p> -->
-            <p><b>Pagina do facebook do hemocentro</b>: {{ campanha.pagFacebookHemocentro }}</p>
-            <p><b>Possui whatsapp</b>: {{ campanha.possuiWhatsapp }}</p>
-            <!--<p>{{ campanha.possuiWhatsapp2 }}</p> -->
-            <p><b>Hemocentro possui site</b>: {{ campanha.siteHemocentro }}</p>
-            <p><b>Telefone do divulgador</b>: {{ campanha.telDivulgador }}</p>
-            <p><b>Telefone secundario do divulgador</b>:{{ campanha.telDivulgador2 }}</p>
-            <p><b>Telefone hemocentro</b>: {{ campanha.telHemocentro }}</p>
-            <p><b>Telefone secundario do hemocentro</b>: {{ campanha.telHemocentro2 }}</p>
-            <p><b>Tipo de doação</b>: {{ campanha.tipoDoacao }}</p>
-            <p><b>Tipo de sangue</b>: {{ campanha.tipoSangue }}</p>
-        </ion-card-content>
-    </ion-card>
+
+        <img src="../../assets/imgs/logoApp.png">
+      
+        <ion-item>
+          <ion-icon name="contact" item-start large></ion-icon>
+          <h2>Sangue: {{ campanha.tipoSangue }} </h2>
+          <p>Paciente: {{ campanha.nomePaciente }}{{ campanha.pacienteIndicado }}</p>
+        </ion-item>
+      
+        <ion-item>
+          <ion-icon name="medkit" item-start large ></ion-icon>
+          <h2>{{ campanha.endHemocentro }}</h2>
+          <p>{{campanha.telHemocentro }}</p>
+        </ion-item>
+      
+        <ion-item hidden="false">
+            <h2>oiii</h2>
+          </ion-item>
+
+        <ion-item>         
+          <button ion-button icon-start clear item-end>
+            <ion-icon name="arrow-dropdown"></ion-icon>
+            Detalhes
+          </button>
+        </ion-item>
+
+
+      
+      </ion-card>
 
   </ion-list>
 
