@@ -1,230 +1,241 @@
-<!--
-  Generated template for the PublicarCampanhaPage page.
-  
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
-  <ion-navbar>
-    <ion-title>Publicar Campanha</ion-title>
-  </ion-navbar>
+    <ion-navbar>
+        <ion-title>Publicar Campanha</ion-title>
+    </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  
-  <img src="../../assets/imgs/logoApp.png" alt="My Blood" class="imagemLogo">
-  
-  <form (ngSubmit)="publicarCampanha($event)" novalidate [formGroup]="validaFormulario">
+<ion-content padding>    
+    <img src="../../assets/imgs/logoApp.png" alt="My Blood" class="imagemLogo">
 
-      <h1 ion-text color="dark" class="h1">Publicar Campanha</h1>
-    <div>      
-
-        <div class="descricoes">Mostrar meu</div>
-      
-    <div *ngFor="let user of dados | async">
-        <ion-item *ngIf="user.userNome">
-            <ion-toggle checked="true"></ion-toggle>
-            <ion-label>Nome</ion-label>
-            <ion-input type="text" placeholder="Nome" [(ngModel)]="user.userNome" name="userNome" class="hidden"></ion-input>
-        </ion-item>
-        <ion-item *ngIf="(user.userEmail)">
-            <ion-toggle checked="true"></ion-toggle>
-            <ion-label>Email</ion-label>
-            <ion-input type="text" placeholder="E-mail" disabled [(ngModel)]="user.userEmail" name="userEmail" class="hidden"></ion-input>
-        </ion-item>
-        <ion-item *ngIf="(user.userTel)">
-            <ion-toggle checked="true"></ion-toggle>
-            <ion-label>Telefone</ion-label>
-            <ion-input type="tel" placeholder="Telefone" [(ngModel)]="user.userTel" name="userTel" class="hidden"></ion-input>
-        </ion-item>
-        <ion-item *ngIf=" (user.userCEP) && (user.userEnd) && (user.userEndNum) && (user.userCidade) && (user.userUF)">
-            <ion-toggle checked="false"></ion-toggle>
-            <ion-label>Endereço</ion-label>
-
-            <ion-input class="hidden" type="number" placeholder="CEP" [(ngModel)]="user.userCEP" name="userCEP"></ion-input>
-            <ion-input class="umcampo hidden"name="end" type="text" placeholder="Endereço" [(ngModel)]="user.userEnd" name="userEnd"></ion-input>
-            <ion-input class="hidden" type="number" placeholder="Numero" [(ngModel)]="user.userEndNum" name="userEndNum"></ion-input>
-            <ion-input class="hidden umcampo" name="endCidade" type="text" placeholder="Cidade" [(ngModel)]="user.userCidade" name="userCidade"></ion-input>
-            <ion-input clas="hidden" type="text" placeholder="UF" [(ngModel)]="user.userUF" name="userUF"></ion-input>
-
-        </ion-item>
-        </div>
-    </div>
-
-    <div> <!-- eu sou paciente-->
-        <div class="descricoes">Eu sou o paciente</div>
-
-        <ion-list radio-group>
-          <ion-item>
-            <ion-label>Sim</ion-label>
-            <ion-radio value="true" (click)="rDesabilitar()"></ion-radio>
-          </ion-item>
-
-          <ion-item>
-            <ion-label>Nao</ion-label>
-            <ion-radio value="false" (click)="rHabilitar()"></ion-radio>  
-          </ion-item>
-        </ion-list>
-    </div>
-
-    <div id="divHidden" hidden="false"> <!-- quero indicar um paciente ?-->
-      <div class="descricoes">Quero indicar um paciente</div>
-
-      <ion-list radio-group>
-        <ion-item>
-          <ion-label>Sim</ion-label>
-          <ion-radio value="true" (click)="iHabilitar()"></ion-radio>
-        </ion-item>
-
-        <ion-item>
-          <ion-label>Nao</ion-label>
-          <ion-radio value="false" (click)="iDesabilitar()"></ion-radio>  
-        </ion-item>
-      </ion-list>
-  </div>
-
-
-    <div id="nomePacienteIndicado" hidden="false"> <!-- nome do paciente indicado -->
-        <div class="descricoes">Indique um paciente</div>
-        <ion-item>
-        <ion-input class="umcampo" name="" maxlength="45" type="text" placeholder="Digite aqui o nome do paciente"></ion-input>
-      </ion-item>
-    </div>
-
-    <h2 ion-text color="dark" class="h2">Hemocentro</h2>
-
-    <div> <!--endereço do hospital-->
-    <ion-list inset>
-        <ion-item [ngClass]="{ invalid: nomeErrors.hasError('*', ['touched']) }">
-            <ion-input name="nomeHemocentro" type="text" placeholder="Nome"
-            formControlName="nome"></ion-input>
-        </ion-item>
-
-        <div ngxErrors="nome" #nomeErrors="ngxErrors">
-            <div [ngxError]="['maxlength', 'required']" [when]="['touched']">Digite o nome até 15 caracteres
-            </div>
-        </div>
-
-        <ion-item [ngClass]="{ invalid: cepErrors.hasError('*', ['touched']) }"> 
-            <ion-input name="endHemocentroCEP" type="number" placeholder="CEP"
-            formControlName="cep"></ion-input>
-        </ion-item>
-
-        <div ngxErrors="cep" #cepErrors="ngxErrors">
-            <div [ngxError]="['minlength', 'required']" [when]="['touched']">CEP precisa ter 8 caracteres
-            </div>
-        </div>
-
-        <ion-item [ngClass]="{ invalid: enderecoErrors.hasError('*', ['touched']) }">
-            <ion-input class="umcampo"name="endHemocentro" type="text" placeholder="Endereço"
-            formControlName="endereco"></ion-input>
-        </ion-item>
-
-        <div ngxErrors="endereco" #enderecoErrors="ngxErrors">
-            <div [ngxError]="['required']" [when]="['touched']">Preencha com seu endereço
-            </div>
-        </div>
-
-        <ion-item [ngClass]="{ invalid: numeroErrors.hasError('*', ['touched']) }">
-            <ion-input type="number" placeholder="Numero"
-            formControlName="numero"></ion-input>
-        </ion-item>
-
-        <div ngxErrors="numero" #numeroErrors="ngxErrors">
-            <div [ngxError]="['required']" [when]="['touched']">Preencha com seu número
-            </div>
-        </div>
-
-        <ion-item [ngClass]="{ invalid: cidadeErrors.hasError('*', ['touched']) }">
-            <ion-input class="umcampo"  name="endHemocentroCidade" type="text" placeholder="Cidade"
-            formControlName="cidade"></ion-input>
-        </ion-item>
-
-        <div ngxErrors="cidade" #cidadeErrors="ngxErrors">
-            <div [ngxError]="['required']" [when]="['touched']">Preencha com sua cidade
-            </div>
-        </div>
-
-        <ion-item [ngClass]="{ invalid: ufErrors.hasError('*', ['touched']) }">
-            <ion-input name="endHemocentroUF" minlength="2" maxlength="2" type="text" placeholder="UF"
-            formControlName="uf"></ion-input>
-        </ion-item>
-
-        <div ngxErrors="uf" #ufErrors="ngxErrors">
-            <div [ngxError]="['required']" [when]="['touched']">Digite a sigla do seu estado
-            </div>
-        </div>
-    </ion-list>
-    </div>
-          
+    <form (ngSubmit)="publicarCampanha($event)" [formGroup]="validaFormulario">
     
-    <h2 ion-text color="dark" class="h2">Campanha</h2>
+        <h2 ion-text color="dark" class="h2">Campanha</h2>
+        
+        <section> <!--tipo de sangue-->
+            <h3 class="descricoes">Tipo de sangue</h3>
+            <ion-list radio-group formControlName="tipoSangue" inset>
+                <ion-item>
+                    <ion-label>AB+</ion-label>
+                    <ion-radio value="AB+"></ion-radio>
+                </ion-item>
+                <ion-item>
+                    <ion-label>AB-</ion-label>
+                    <ion-radio value="AB-"></ion-radio>
+                </ion-item>
+                <ion-item>
+                    <ion-label>O+</ion-label>
+                    <ion-radio value="O+"></ion-radio>
+                </ion-item>
+                <ion-item>
+                    <ion-label>O-</ion-label>
+                    <ion-radio value="O-"></ion-radio>  
+                </ion-item>
+            </ion-list>
+        </section>
+        
+        <section> <!--tipo de doação-->
+            <h3 class="descricoes">Tipo de doação</h3>
+            <ion-list radio-group formControlName="tipoDoacao">
+                <ion-item>
+                    <ion-label>Sangue</ion-label>
+                    <ion-radio value="sangue"></ion-radio>
+                </ion-item>
+                <ion-item>
+                    <ion-label>Plaquetas</ion-label>
+                    <ion-radio value="plaquetas"></ion-radio>
+                </ion-item>
+            </ion-list>
+        </section>
+        
+        
+        <section> <!--data-->
+            <h3 class="descricoes">Data limite</h3>
+            <ion-item>
+                <ion-label>Data</ion-label>
+                <ion-datetime [(ngModel)]="dataLimite" [ngModelOptions]="{standalone: true}" display-format="MMMM YYYY" min="2019" max="2040-10-31"></ion-datetime>
+            </ion-item>
+        </section>
+        
+        <h2 ion-text color="dark" class="h2">Hemocentro</h2>
+        
+        <!-- Dados do Hemocentro -->
+        <section>
+            <ion-list inset>
+                <!-- Nome -->
+                <ion-item [ngClass]="{ invalid: nomeErrors.hasError('*', ['touched']) }">
+                    <ion-input name="nomeHemocentro" type="text" placeholder="Nome"
+                    formControlName="nome"></ion-input>
+                </ion-item>
+        
+                <div ngxErrors="nome" #nomeErrors="ngxErrors">
+                    <div [ngxError]="['maxlength', 'required']" [when]="['touched']">Digite o nome até 15 caracteres
+                    </div>
+                </div>
+                
+                <!-- CEP -->
+                <ion-item [ngClass]="{ invalid: cepErrors.hasError('*', ['touched']) }"> 
+                    <ion-input name="endHemocentroCEP" type="number" placeholder="CEP"
+                    formControlName="cep"></ion-input>
+                </ion-item>
+        
+                <div ngxErrors="cep" #cepErrors="ngxErrors">
+                    <div [ngxError]="['minlength', 'required']" [when]="['touched']">CEP precisa ter 8 caracteres
+                    </div>
+                </div>
+                
+                <!-- Endereço -->
+                <ion-item [ngClass]="{ invalid: enderecoErrors.hasError('*', ['touched']) }">
+                    <ion-input class="umcampo"name="endHemocentro" type="text" placeholder="Endereço"
+                    formControlName="endereco"></ion-input>
+                </ion-item>
+        
+                <div ngxErrors="endereco" #enderecoErrors="ngxErrors">
+                    <div [ngxError]="['required']" [when]="['touched']">Preencha com seu endereço
+                    </div>
+                </div>
+                
+                <!-- Número -->
+                <ion-item [ngClass]="{ invalid: numeroErrors.hasError('*', ['touched']) }">
+                    <ion-input type="number" name="endHemocentroNro" placeholder="Numero"
+                    formControlName="numero"></ion-input>
+                </ion-item>
+        
+                <div ngxErrors="numero" #numeroErrors="ngxErrors">
+                    <div [ngxError]="['required']" [when]="['touched']">Preencha com seu número
+                    </div>
+                </div>
+                
+                <!-- Cidade -->
+                <ion-item [ngClass]="{ invalid: cidadeErrors.hasError('*', ['touched']) }">
+                    <ion-input class="umcampo"  name="endHemocentroCidade" type="text" placeholder="Cidade"
+                    formControlName="cidade"></ion-input>
+                </ion-item>
+        
+                <div ngxErrors="cidade" #cidadeErrors="ngxErrors">
+                    <div [ngxError]="['required']" [when]="['touched']">Preencha com sua cidade
+                    </div>
+                </div>
+            
+                
+                <!-- UF -->
+                <ion-item [ngClass]="{ invalid: ufErrors.hasError('*', ['touched']) }">
+                    <ion-input name="endHemocentroUF" minlength="2" maxlength="2" type="text" placeholder="UF"
+                    formControlName="uf"></ion-input>
+                </ion-item>
+        
+                <div ngxErrors="uf" #ufErrors="ngxErrors">
+                    <div [ngxError]="['required']" [when]="['touched']">Digite a sigla do seu estado
+                    </div>
+                </div>
+            </ion-list>
+        </section>
+        
+        <h1 ion-text color="dark" class="h1">Contato</h1>
+        <section class="section-dados-divulgador">
+            <h3 class="descricoes">Mostrar meu</h3>
+            <div *ngFor="let user of dados | async">
 
-  <div> <!--tipo de sangue-->
-      <div class="descricoes">Tipo de sangue</div>
-    <ion-list radio-group inset>
-        <ion-item>
-            <ion-label>AB+</ion-label>
-            <ion-radio value="AB+"></ion-radio>
-        </ion-item>
-        <ion-item>
-            <ion-label>AB-</ion-label>
-            <ion-radio value="AB-"></ion-radio>
-          </ion-item>
-          <ion-item>
-            <ion-label>O+</ion-label>
-            <ion-radio value="O+"></ion-radio>
-          </ion-item>
-          <ion-item>
-            <ion-label>O-</ion-label>
-            <ion-radio value="O-"></ion-radio>  
-        </ion-item>
-    </ion-list>
-  </div>
+                <!-- Se o usuário tem o nome cadastrado -->
+                <ion-item *ngIf="user.userNome != ''">
+                    <ion-toggle [(ngModel)]="mostrarNomeDivulgador" [ngModelOptions]="{standalone: true}" checked></ion-toggle>
+                    <ion-label>Nome</ion-label>
 
-  <div> <!--tipo de doação-->
-      <div class="descricoes">Tipo de doação</div>
-    <ion-list radio-group>
-        <ion-item>
-            <ion-label>Sangue</ion-label>
-            <ion-radio value="sangue"></ion-radio>
-        </ion-item>
-        <ion-item>
-            <ion-label>Plaquetas</ion-label>
-            <ion-radio value="plaquetas"></ion-radio>
-          </ion-item>
-    </ion-list>
-  </div>
+                    <!-- Oculto visualmente -->
+                    <ion-input type="text" placeholder="Nome" [ngModelOptions]="{standalone: true}" [(ngModel)]="user.userNome" name="nomeDivulgador" class="hidden"></ion-input>
+                </ion-item>
 
+                <!-- Se o usuário tem o e-mail cadastrado -->
+                <ion-item *ngIf="user.userEmail != ''">
+                    <ion-toggle [(ngModel)]="mostrarEmailDivulgador" [ngModelOptions]="{standalone: true}" checked></ion-toggle>
+                    <ion-label>Email</ion-label>
 
-<div> <!--data-->
-  <div class="descricoes">Data limite</div>
-<ion-item>
-    <ion-label>Data</ion-label>
-    <ion-datetime name="dataLimite" display-format="MMMM YYYY" min="2019" max="2040-10-31"></ion-datetime>
-  </ion-item>
-</div>
+                    <!-- Oculto visualmente -->
+                    <ion-input type="text" placeholder="E-mail" disabled [ngModelOptions]="{standalone: true}" [(ngModel)]="user.userEmail" name="emailDivulgador" class="hidden"></ion-input>
+                </ion-item>
 
+                <!-- Se o usuário tem o telefone cadastrado -->
+                <ion-item *ngIf="user.userTel != ''">
+                    <ion-toggle [(ngModel)]="mostrarTelDivulgador" [ngModelOptions]="{standalone: true}" checked></ion-toggle>
+                    <ion-label>Telefone</ion-label>
 
-<!-- observacao-->
-<div>
-    <div class="descricoes">Observações</div>
-<ion-item [ngClass]="{ invalid: obsErrors.hasError('*', ['touched']) }">
-    <ion-textarea rows="2" cols="20"
-    formControlName="obs"></ion-textarea>
-  </ion-item>
-    <div ngxErrors="obs" #obsErrors="ngxErrors">
-        <div [ngxError]="['maxlength', 'required']" [when]="['touched']">Este campo não deve ultrapassar 200
-          caracteres
+                    <!-- Oculto visualmente -->
+                    <ion-input type="tel" placeholder="Telefone" [ngModelOptions]="{standalone: true}" [(ngModel)]="user.userTel" name="telDivulgador" class="hidden"></ion-input>
+                </ion-item>
+
+                <!-- Se o usuário tem o endereço cadastrado -->
+                <ion-item *ngIf="(user.userCEP != '') && (user.userEnd != '') && (user.userEndNum != '') && (user.userCidade != '') && (user.userUF != '')">
+                    <ion-toggle [(ngModel)]="mostrarEndDivulgador" [ngModelOptions]="{standalone: true}" checked></ion-toggle>
+                    <ion-label>Endereço</ion-label>
+                    
+                    <!-- Campos ocultos visualmente, só serão utilizados para pegar o valor na hora de publicar -->
+                    <ion-input class="hidden" type="number" placeholder="CEP" [ngModelOptions]="{standalone: true}" [(ngModel)]="user.userCEP" name="endDivulgadorCEP"></ion-input>
+                    <ion-input class="hidden"name="end" type="text" placeholder="Endereço" [ngModelOptions]="{standalone: true}" [(ngModel)]="user.userEnd" name="endDivulgador"></ion-input>
+                    <ion-input class="hidden" type="number" placeholder="Numero" [ngModelOptions]="{standalone: true}" [(ngModel)]="user.userEndNum" name="endDivulgadorNum"></ion-input>
+                    <ion-input class="hidden" name="endCidade" type="text" placeholder="Cidade" [ngModelOptions]="{standalone: true}" [(ngModel)]="user.userCidade" name="endDivulgadorCidade"></ion-input>
+                    <ion-input clas="hidden" type="text" placeholder="UF" [ngModelOptions]="{standalone: true}" [(ngModel)]="user.userUF" name="endDivulgadorUF"></ion-input>
+                    
+                </ion-item>
+
+            </div>
+        </section>
+        
+        <section> <!-- eu sou paciente-->
+            <h3 class="descricoes">Eu sou o paciente</h3>
+            
+            <ion-list radio-group formControlName="divulgadorPaciente">
+                <ion-item>
+                    <ion-label>Sim</ion-label>
+                    <ion-radio value="true" (click)="rDesabilitar()"></ion-radio>
+                </ion-item>
+                
+                <ion-item>
+                    <ion-label>Nao</ion-label>
+                    <ion-radio value="false" (click)="rHabilitar()"></ion-radio>  
+                </ion-item>
+            </ion-list>
+        </section>
+        
+        <!-- Quero indicar um paciente ?-->
+        <section id="divHidden" hidden="false">
+            <h3 class="descricoes">Quero indicar um paciente</h3>
+            
+            <ion-list radio-group>
+                <ion-item>
+                    <ion-label>Sim</ion-label>
+                    <ion-radio value="true" (click)="iHabilitar()"></ion-radio>
+                </ion-item>
+                
+                <ion-item>
+                    <ion-label>Nao</ion-label>
+                    <ion-radio value="false" (click)="iDesabilitar()"></ion-radio>  
+                </ion-item>
+            </ion-list>
+        </section>
+        
+        <!-- Indique um paciente -->
+        <section id="nomePacienteIndicado" hidden="false">
+            <h3 class="descricoes">Indique um paciente</h3>
+            <ion-item>
+                <ion-input class="umcampo" name="" maxlength="45" type="text" placeholder="Digite aqui o nome do paciente" name="pacienteIndicado"></ion-input>
+            </ion-item>
+        </section>
+
+        <!-- Observações-->
+        <div>
+            <div class="descricoes">Observações</div>
+            <ion-item [ngClass]="{ invalid: obsErrors.hasError('*', ['touched']) }">
+                <ion-textarea rows="2" cols="20"
+                formControlName="obs" name="observacoes"></ion-textarea>
+            </ion-item>
+            <div ngxErrors="obs" #obsErrors="ngxErrors">
+                <div [ngxError]="['maxlength', 'required']" [when]="['touched']">Este campo não deve ultrapassar 200
+                    caracteres
+                </div>
+            </div>
         </div>
-    </div>
-</div>
-
-<!-- botao -->
-<button ion-button full type="submit" [disabled]="!validaFormulario.valid">Cadastrar <ion-icon name="person-add"></ion-icon></button>
-    
-
-
-
-</form>
+        
+        <!-- Botão Publicar -->
+        <button ion-button full type="submit" [disabled]="!validaFormulario.valid">Publicar <ion-icon class="icon" name="heart"></ion-icon></button>
+        
+    </form>
 </ion-content>

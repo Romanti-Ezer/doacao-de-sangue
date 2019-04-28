@@ -1,13 +1,10 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
-import AuthProvider = firebase.auth.AuthProvider;
 
 import { AngularFirestore } from 'angularfire2/firestore';
 import { AngularFirestoreCollection } from 'angularfire2/firestore';
 import { Observable } from 'rxjs/Observable';
-import { map } from 'rxjs/operators';
-import { tokenKey } from '@angular/core/src/view';
 
 export interface User {
     userID: string,
@@ -23,30 +20,29 @@ export interface User {
 }
 
 export interface Campanha {
-    dataLimite: Date,
-    divulgadorPrecisa: boolean,
-    emailDivulgador: string,
-    emailHemocentro: string,
-    endDivulgador: string,
-    endDivulgadorCEP: string,
-    endHemocentro: string,
-    endHemocentroCEP: string,
-    grauUrgencia: string,
-    infAdicionais: string,
-    nomeDivulgador: string,
-    nomeHemocentro: string,
-    nomePaciente: string,
-    outroContatoHemocentro: string,
-    pagFacebookHemocentro: string,
-    possuiWhatsapp: boolean,
-    possuiWhatsapp2: boolean,
-    siteHemocentro: string,
-    telDivulgador: string,
-    telDivulgador2: string,
-    telHemocentro: string,
-    telHemocentro2: string,
+    tipoSangue: string,
     tipoDoacao: string,
-    tipoSangue: string
+    dataLimite: Date,
+
+    nomeHemocentro: string,
+    endHemocentroCEP: string,
+    endHemocentro: string,
+    endHemocentroNro: string,
+    endHemocentroCidade: string,
+    endHemocentroUF: string,
+
+    nomeDivulgador: string,
+    emailDivulgador: string,
+    telDivulgador: string,
+    endDivulgadorCEP: string,
+    endDivulgador: string,
+    endDivulgadorNum: string,
+    endDivulgadorCidade: string,
+    endDivulgadorUF: string,
+
+    divulgadorPaciente: boolean,
+    pacienteIndicado: string,
+    
     observacoes: string
 }
 
@@ -92,23 +88,56 @@ export class FirestoneService {
         this.campanhas = this.campanhasCollectionRef.valueChanges();
     }
     
-    // Método para registrar um usuário na collection 'usuarios' no Firestone
-    public registerUser(id: string, nome: string, email: string, tel: string = '', cep: string = '', end: string = '', nro: string = '', cidade: string = '', uf: string = '', sangue: string = '') {
-        this.usuariosCollectionRef.add({ userID: id, userNome: nome, userEmail: email, userTel: tel, userCEP: cep, userEnd: end, userEndNum: nro, userCidade: cidade, userUF: uf, userSangue: sangue });
-    }
+    //---------------------- User
 
-    // Método para pegar os dados do usuário
+    // Pegar os dados do usuário
     public getUserData() {
         return this.usuario;
     }
+
+    // Registrar um usuário na collection 'usuarios' no Firestone
+    public setUser(id: string, nome: string, email: string, tel: string = '', cep: string = '', end: string = '', nro: string = '', cidade: string = '', uf: string = '', sangue: string = '') {
+        this.usuariosCollectionRef.add({ userID: id, userNome: nome, userEmail: email, userTel: tel, userCEP: cep, userEnd: end, userEndNum: nro, userCidade: cidade, userUF: uf, userSangue: sangue });
+    }
+
+    // Atualizar os dados do usuário
+    public updateUserData(docId, nome, tel, cep, end, nro, cidade, uf, sangue) {
+        this.usuariosCollectionRef.doc(docId).update({ userNome: nome, userTel: tel, userCEP: cep, userEnd: end, userEndNum: nro, userCidade: cidade, userUF: uf, userSangue: sangue });
+    }
+
+    //---------------------- Campanhas
 
     // Pegar campanhas
     public getCampanhas() {
         return this.campanhas;
     }
 
-    // Método para atualizar os dados do usuário
-    public updateUserData(docId, nome, tel, cep, end, nro, cidade, uf, sangue) {
-        this.usuariosCollectionRef.doc(docId).update({ userNome: nome, userTel: tel, userCEP: cep, userEnd: end, userEndNum: nro, userCidade: cidade, userUF: uf, userSangue: sangue });
+    // Registrar um usuário na collection 'usuarios' no Firestone
+    public setCampanha(tipoSangue = '', tipoDoacao = '', dataLimite = null, nomeHemocentro = '', endHemocentroCEP = '', endHemocentro = '', endHemocentroNro = '', endHemocentroCidade = '', endHemocentroUF = '', nomeDivulgador = '', emailDivulgador = '', telDivulgador = '', endDivulgadorCEP = '', endDivulgador = '', endDivulgadorNum = '', endDivulgadorCidade = '', endDivulgadorUF = '', divulgadorPaciente = false, pacienteIndicado = '', observacoes = '') {
+        if (this.campanhasCollectionRef.add({
+            tipoSangue: tipoSangue,
+            tipoDoacao: tipoDoacao,
+            dataLimite: new Date(dataLimite),
+            nomeHemocentro: nomeHemocentro,
+            endHemocentroCEP: endHemocentroCEP,
+            endHemocentro: endHemocentro,
+            endHemocentroNro: endHemocentroNro,
+            endHemocentroCidade: endHemocentroCidade,
+            endHemocentroUF: endHemocentroUF,
+            nomeDivulgador: nomeDivulgador,
+            emailDivulgador: emailDivulgador,
+            telDivulgador: telDivulgador,
+            endDivulgadorCEP: endDivulgadorCEP,
+            endDivulgador: endDivulgador,
+            endDivulgadorNum: endDivulgadorNum,
+            endDivulgadorCidade: endDivulgadorCidade,
+            endDivulgadorUF: endDivulgadorUF,
+            divulgadorPaciente: divulgadorPaciente,
+            pacienteIndicado: pacienteIndicado,
+            observacoes: observacoes
+        })) {
+            return true;
+        }
+        return false;
     }
 }

@@ -44,7 +44,7 @@ export class SignupPage {
 		this.auth.signUp(credentials).then(
 			(response) => {
         this.navCtrl.setRoot(HomePage);
-        this.firestone.registerUser(response.user.uid,'', credentials.email);
+        this.firestone.setUser(response.user.uid,'', credentials.email);
       },
 			error => this.signupError = error.message
     );

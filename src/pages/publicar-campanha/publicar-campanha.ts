@@ -29,9 +29,19 @@ export class PublicarCampanhaPage {
     // Dados do usuário
     dados:any;
 
+    // Chaves - Mostrar ou não dados do divulgador
+    mostrarNomeDivulgador : boolean = true;
+    mostrarEmailDivulgador : boolean = true;
+    mostrarTelDivulgador : boolean = true;
+    mostrarEndDivulgador : boolean = true;
+
+    // Data Limite
+    dataLimite : Date = null;
+
     ionViewWillLeave() {
         this.appCtrl.getRootNav().setRoot(HomePage);
     }
+
 
     constructor(
         public appCtrl: App,
@@ -42,24 +52,26 @@ export class PublicarCampanhaPage {
         public fb: FormBuilder,
         ) {
             this.validaFormulario = fb.group({
+                tipoSangue: ['AB+'],
+                tipoDoacao: ['sangue'],
                 nome: ['', Validators.compose([Validators.required, Validators.maxLength(15)])],
                 cep: ['', Validators.compose([Validators.required, Validators.minLength(8), Validators.maxLength(8)])],      
                 endereco: ['', Validators.compose( [Validators.required])],
                 numero: ['', Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(5)])],
                 cidade: ['', Validators.compose([Validators.required,])],
                 uf: ['', Validators.compose([Validators.required, Validators.minLength(2), Validators.maxLength(2)])],
-                obs: ['', Validators.compose([Validators.maxLength(200)])]
+                obs: ['', Validators.compose([Validators.maxLength(200)])],
+                divulgadorPaciente: [''],
+
             })
+
             this.dados = this.firestone.getUserData();
             
         }
-        
+    
+
     ionViewDidLoad() {
         console.log('ionViewDidLoad PublicarCampanhaPage');
-    }
-    
-    cadastro(){
-        console.log("hello wooorld");
     }
     
     
@@ -91,18 +103,42 @@ export class PublicarCampanhaPage {
     }
 
     public publicarCampanha(event) {
-        // console.log(event.target);
-        // console.log('this.userSangue: \'', this.userSangue + '\'');
-        // this.firestone.updateUserData(  
-        //   event.target.userDocId.value,
-        //   event.target.userNome.value,
-        //   event.target.userTel.value,
-        //   event.target.userCEP.value,
-        //   event.target.userEnd.value,
-        //   event.target.userEndNum.value,
-        //   event.target.userCidade.value,
-        //   event.target.userUF.value,
-        //   this.userSangue
-        // );
-      }
+        let nomeDivulgador = this.mostrarNomeDivulgador ? event.target.nomeDivulgador.value : '';
+        let emailDivulgador = this.mostrarEmailDivulgador ? event.target.emailDivulgador.value : '';
+        let telDivulgador = this.mostrarTelDivulgador ? event.target.telDivulgador.value : '';
+        let endDivulgadorCEP = this.mostrarEndDivulgador ? event.target.endDivulgadorCEP.value : '';
+        let endDivulgador = this.mostrarEndDivulgador ? event.target.endDivulgador.value : '';
+        let endDivulgadorNum = this.mostrarEndDivulgador ? event.target.endDivulgadorNum.value : '';
+        let endDivulgadorCidade = this.mostrarEndDivulgador ? event.target.endDivulgadorCidade.value : '';
+        let endDivulgadorUF = this.mostrarEndDivulgador ? event.target.endDivulgadorUF.value : '';
+
+        if(this.firestone.setCampanha(
+            this.validaFormulario.value.tipoSangue,
+            this.validaFormulario.value.tipoDoacao,
+            this.dataLimite,
+            event.target.nomeHemocentro.value,
+            event.target.endHemocentroCEP.value,
+            event.target.endHemocentro.value,
+            event.target.endHemocentroNro.value,
+            event.target.endHemocentroCidade.value,
+            event.target.endHemocentroUF.value,
+            nomeDivulgador,
+            emailDivulgador,
+            telDivulgador,
+            endDivulgadorCEP,
+            endDivulgador,
+            endDivulgadorNum,
+            endDivulgadorCidade,
+            endDivulgadorUF,
+            this.validaFormulario.value.divulgadorPaciente,
+            event.target.pacienteIndicado.value,
+            event.target.observacoes.value
+        )) {
+            // Se der certo
+            this.showAlert("Sucesso", "Campanha publicada com sucesso!");
+        } else {
+            // Se não der certo
+            this.showAlert("Erro", "Erro ao publicar campanha :/");
+        }
+    }
 }
