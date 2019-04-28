@@ -70,29 +70,85 @@
       
         <ion-item>
           <ion-icon name="contact" item-start large></ion-icon>
-          <h2>Sangue: {{ campanha.tipoSangue }} </h2>
-          <p>Paciente: {{ campanha.nomePaciente }}{{ campanha.pacienteIndicado }}</p>
+          <h1>Sangue:{{ campanha.tipoSangue }} </h1>
+          <p>Paciente:{{ campanha.nomePaciente }}{{ campanha.pacienteIndicado }}</p>
         </ion-item>
       
         <ion-item>
           <ion-icon name="medkit" item-start large ></ion-icon>
-          <h2>{{ campanha.endHemocentro }}</h2>
+          <p>{{campanha.endHemocentro }}<p>
           <p>{{campanha.telHemocentro }}</p>
         </ion-item>
-      
-        <ion-item hidden="false">
-            <h2>oiii</h2>
-          </ion-item>
 
-        <ion-item>         
-          <button ion-button icon-start clear item-end>
-            <ion-icon name="arrow-dropdown"></ion-icon>
-            Detalhes
+        <ion-item>
+          <button ion-button icon-start clear item-end (click)="onButtonClick()">
+           <ion-icon name="information"></ion-icon>
+            Mais informações
           </button>
         </ion-item>
 
 
-      
+        <ion-item *ngIf="buttonClicked">
+            <ion-label color="primary" stacked>Estado do hemocentro</ion-label>
+            <ion-input type="text" disabled="true" value="{{campanha.endHemocentroUF}}"></ion-input>
+        </ion-item>
+        <ion-item *ngIf="buttonClicked">
+            <ion-label color="primary" stacked>Cidade do hemocentro</ion-label>
+            <ion-input type="text" disabled="true" value="{{campanha.endHemocentroCidade}}"></ion-input>
+        </ion-item>
+        <ion-item *ngIf="buttonClicked">
+            <ion-label color="primary" stacked>Email do hemocentro</ion-label>
+            <ion-input type="text" disabled="true" value="{{campanha.emailHemocentro}}"></ion-input>
+        </ion-item>
+        <ion-item *ngIf="buttonClicked">
+            <ion-label color="primary" stacked>Telefone do hemocentro</ion-label>
+            <ion-input type="text" disabled="true" value="{{ campanha.telHemocentro }}"></ion-input>
+        </ion-item>
+        <ion-item *ngIf="buttonClicked">
+            <ion-label color="primary" stacked>Telefone do hemocentro 2</ion-label>
+            <ion-input type="text" disabled="true" value="{{ campanha.telHemocentro2 }}"></ion-input>
+        </ion-item>
+        <ion-item *ngIf="buttonClicked">
+            <ion-label color="primary" stacked>Cep do hemocentro</ion-label>
+            <ion-input type="text" disabled="true" value="{{ campanha.endHemocentroCEP }}"></ion-input>
+        </ion-item>
+        <ion-item *ngIf="buttonClicked">
+            <ion-label color="primary" stacked>Nome do hemocentro/hospital</ion-label>
+            <ion-input type="text" disabled="true" value="{{campanha.nomeHemocentro}}"></ion-input>
+        </ion-item>
+        <ion-item *ngIf="buttonClicked">
+            <ion-label color="primary" stacked>Nome do Paciente</ion-label>
+            <ion-input type="text" disabled="true" value="{{ campanha.nomePaciente}}"></ion-input>
+        </ion-item>
+        <ion-item *ngIf="buttonClicked">
+            <ion-label color="primary" stacked>Urgencia</ion-label>
+            <ion-input type="text" disabled="true" value="{{ campanha.grauUrgencia}}"></ion-input>
+        </ion-item>
+        <ion-item *ngIf="buttonClicked">
+            <ion-label color="primary" stacked>Divulgador é o paciente ? </ion-label>
+            <ion-input type="text" disabled="true" value="{{campanha.divulgadorPrecisa}}"></ion-input>
+        </ion-item>
+        <ion-item *ngIf="buttonClicked">
+            <ion-label color="primary" stacked>Email do divulgador</ion-label>
+            <ion-input type="text" disabled="true" value="{{campanha.emailDivulgador}}"></ion-input>
+        </ion-item>
+        <ion-item *ngIf="buttonClicked">
+            <ion-label color="primary" stacked>Telefone do divulgador</ion-label>
+            <ion-input type="text" disabled="true" value="{{ campanha.telDivulgador}}"></ion-input>
+        </ion-item>
+        <ion-item *ngIf="buttonClicked">
+            <ion-label color="primary" stacked>Telefone2 do divulgador</ion-label>
+            <ion-input type="text" disabled="true" value="{{ campanha.telDivulgador2}}"></ion-input>
+        </ion-item>
+        <ion-item  *ngIf="buttonClicked">
+            <ion-label color="primary" stacked>Observacao</ion-label>
+            <ion-textarea rows="6" cols="20" value="{{ campanha.infAdicionais }}" disabled="true"></ion-textarea>
+        </ion-item>
+
+
+  
+
+
       </ion-card>
 
   </ion-list>

@@ -28,4 +28,11 @@ export class VisualizarCampanhasPage {
     console.log('ionViewDidLoad VisualizarCampanhasPage');
   }
 
+  public buttonClicked: boolean = false; 
+
+  public onButtonClick() {
+
+      this.buttonClicked = !this.buttonClicked;
+  }
+
 }
