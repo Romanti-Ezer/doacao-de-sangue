@@ -52,7 +52,7 @@
             <h3 class="descricoes">Data limite</h3>
             <ion-item>
                 <ion-label>Data</ion-label>
-                <ion-datetime [(ngModel)]="dataLimite" [ngModelOptions]="{standalone: true}" display-format="MMMM YYYY" min="2019" max="2040-10-31"></ion-datetime>
+                <ion-datetime displayFormat="DD/MM/YYYY"[(ngModel)]="dataLimite" [ngModelOptions]="{standalone: true}" min="2019" max="2040-10-31"></ion-datetime>
             </ion-item>
         </section>
         
