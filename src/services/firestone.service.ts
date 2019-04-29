@@ -140,4 +140,8 @@ export class FirestoneService {
         }
         return false;
     }
+
+    public filterCampanha(estado = '', cidade = '') {
+        return this.angularFirestore.collection<Campanha>('campanhas', ref => ref.where('endHemocentroUF', '==', estado).where('endHemocentroCidade', '==', cidade)).valueChanges();
+    }
 }

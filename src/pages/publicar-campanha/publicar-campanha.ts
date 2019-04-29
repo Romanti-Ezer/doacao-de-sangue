@@ -5,7 +5,7 @@ import { FirestoneService } from '../../services/firestone.service';
 import { Campanha } from '../../services/firestone.service';
 
 import { AngularFireAuth } from 'angularfire2/auth';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { AlertController } from 'ionic-angular';
 import { HomePage } from '../home/home';
 
