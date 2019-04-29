@@ -137,9 +137,12 @@ export class PublicarCampanhaPage {
             // Se der certo
             this.showAlert("Sucesso", "Campanha publicada com sucesso!");
             event.target.reset();
+            this.navCtrl.setRoot(HomePage);
         } else {
             // Se não der certo
             this.showAlert("Erro", "Erro ao publicar campanha :/");
         }
     }
 }
+
+
