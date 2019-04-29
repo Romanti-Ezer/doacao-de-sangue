@@ -1,13 +1,68 @@
 page-visualizar-campanhas {
+    .cidade-estado {
+        display: inline-block;
+        width: auto;
+    }
+    .mb-2 {
+        margin-bottom: 2em;
+    }
+    .btn-pesquisar {        
+        border-radius: 5px;
+        background: #FB3332!important;
+        ion-icon {
+            margin-left: 5px;
+        }
+    }
+    
+    h2 {
+        text-align: center;
+        font-family: Roboto, Helvetica, sans-serif;
+    }
 
-}
+    .main-title {
+        margin-bottom: 1.5em;
+        text-align: center;
+    }
+    
+    .card-image {
+        width: 73%;
+        display: block;
+        margin: 1em auto;
+    }
+    .tipo-doacao {
+        text-align: left;
+    }
+    .tipo-sangue {
+        color: #FB3332;
+        font-weight: bolder;
+    }
 
-p {
-    word-break: break-all;
-    white-space: normal;
-}
+    .row-btn {
+        text-align: right;
+    }
+    
 
-h2 {
-    text-align: center;
-    font-family: Roboto, Helvetica, sans-serif;
+    .btn-circle {
+        background: #FB3332;
+        border-radius: 50%;
+        width: 37px!important;
+        height: 37px!important;
+        display: inline-flex!important;
+        align-items: center;
+        justify-content: center;
+        .icon { color: #fff; text-align: center; }
+    }
+
+    ion-card.card {
+        margin-bottom: 3em!important;
+    }
+
+    .info-title {
+        font-size: 1em!important;
+        font-weight: bold;
+    }
+    .info {
+        color: #000!important;
+        font-size: .9em!important;
+    }
 }

@@ -1,156 +1,148 @@
-<!--
-  Generated template for the VisualizarCampanhasPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
-  <ion-navbar>
-    <ion-title>Visualizar Campanhas</ion-title>
-  </ion-navbar>
+    <ion-navbar>
+        <ion-title>Visualizar Campanhas</ion-title>
+    </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-
-  <ion-list>
-    <ion-list-header>
-      <h2>Filtro</h2>
-    </ion-list-header>
     
-    <!-- filtro de pesquisa-->
-      <section> 
-        <ion-list>
-
-            <ion-item> <!-- nome da cidade-->
-              <ion-label fixed>Cidade</ion-label>
-              <ion-input type="text" value=""></ion-input>
-            </ion-item>   
-            <ion-item> <!-- nome dos estados-->
-                <ion-label>Estado</ion-label>
-                <ion-select [(ngModel)]="Estado">
-                  <ion-option value="AC">Acre</ion-option>
-                  <ion-option value="AL">Alagoas</ion-option>
-                  <ion-option value="AP">Amapá</ion-option>
-                  <ion-option value="AM">Amazonas</ion-option>
-                  <ion-option value="BA">Bahia</ion-option>
-                  <ion-option value="CE">Ceará</ion-option>
-                  <ion-option value="DF">Distrito Federal</ion-option>
-                  <ion-option value="GO">Goiás</ion-option>
-                  <ion-option value="MA">Maranhão</ion-option>
-                  <ion-option value="MT">Mato Grosso</ion-option>
-                  <ion-option value="MS">Mato Grosso do Sul</ion-option>
-                  <ion-option value="MG">Minas Gerais</ion-option>
-                  <ion-option value="PA">Pará</ion-option>
-                  <ion-option value="PB">Paraíba</ion-option>
-                  <ion-option value="PR">Paraná</ion-option>
-                  <ion-option value="PE">Pernambuco</ion-option>
-                  <ion-option value="PI">Piauí</ion-option>
-                  <ion-option value="RJ">Rio de Janeiro</ion-option>
-                  <ion-option value="RN">Rio Grande do Norte</ion-option>
-                  <ion-option value="RS">Rio Grande do Sul</ion-option>
-                  <ion-option value="RO">Rondônia</ion-option>
-                  <ion-option value="RR">Roraima</ion-option>
-                  <ion-option value="SC">Santa Catarina</ion-option>
-                  <ion-option value="SP">Sao Paulo</ion-option>
-                  <ion-option value="SE">Sergipe</ion-option>
-                  <ion-option value="TO">Tocantins</ion-option>
-                </ion-select>
-               </ion-item>    
-          </ion-list>
-         </section>
-         <button ion-button full>Pesquisar<ion-icon name="search"></ion-icon></button>
-         <br><br><br>
-
-     
-
-<h2>Campanhas Disponiveis</h2>
-    <ion-card *ngFor="let campanha of campanhas | async">
-
-        <img src="../../assets/imgs/logoApp.png">
-      
-        <ion-item>
-          <ion-icon name="contact" item-start large></ion-icon>
-          <h1>Sangue:{{ campanha.tipoSangue }} </h1>
-          <p>Paciente:{{ campanha.nomePaciente }}{{ campanha.pacienteIndicado }}</p>
-        </ion-item>
-      
-        <ion-item>
-          <ion-icon name="medkit" item-start large ></ion-icon>
-          <p>{{campanha.endHemocentro }}<p>
-          <p>{{campanha.telHemocentro }}</p>
-        </ion-item>
-
-        <ion-item>
-          <button ion-button icon-start clear item-end (click)="onButtonClick()">
-           <ion-icon name="information"></ion-icon>
-            Mais informações
-          </button>
-        </ion-item>
-
-
-        <ion-item *ngIf="buttonClicked">
-            <ion-label color="primary" stacked>Estado do hemocentro</ion-label>
-            <ion-input type="text" disabled="true" value="{{campanha.endHemocentroUF}}"></ion-input>
-        </ion-item>
-        <ion-item *ngIf="buttonClicked">
-            <ion-label color="primary" stacked>Cidade do hemocentro</ion-label>
-            <ion-input type="text" disabled="true" value="{{campanha.endHemocentroCidade}}"></ion-input>
-        </ion-item>
-        <ion-item *ngIf="buttonClicked">
-            <ion-label color="primary" stacked>Email do hemocentro</ion-label>
-            <ion-input type="text" disabled="true" value="{{campanha.emailHemocentro}}"></ion-input>
-        </ion-item>
-        <ion-item *ngIf="buttonClicked">
-            <ion-label color="primary" stacked>Telefone do hemocentro</ion-label>
-            <ion-input type="text" disabled="true" value="{{ campanha.telHemocentro }}"></ion-input>
-        </ion-item>
-        <ion-item *ngIf="buttonClicked">
-            <ion-label color="primary" stacked>Telefone do hemocentro 2</ion-label>
-            <ion-input type="text" disabled="true" value="{{ campanha.telHemocentro2 }}"></ion-input>
-        </ion-item>
-        <ion-item *ngIf="buttonClicked">
-            <ion-label color="primary" stacked>Cep do hemocentro</ion-label>
-            <ion-input type="text" disabled="true" value="{{ campanha.endHemocentroCEP }}"></ion-input>
-        </ion-item>
-        <ion-item *ngIf="buttonClicked">
-            <ion-label color="primary" stacked>Nome do hemocentro/hospital</ion-label>
-            <ion-input type="text" disabled="true" value="{{campanha.nomeHemocentro}}"></ion-input>
-        </ion-item>
-        <ion-item *ngIf="buttonClicked">
-            <ion-label color="primary" stacked>Nome do Paciente</ion-label>
-            <ion-input type="text" disabled="true" value="{{ campanha.nomePaciente}}"></ion-input>
-        </ion-item>
-        <ion-item *ngIf="buttonClicked">
-            <ion-label color="primary" stacked>Urgencia</ion-label>
-            <ion-input type="text" disabled="true" value="{{ campanha.grauUrgencia}}"></ion-input>
-        </ion-item>
-        <ion-item *ngIf="buttonClicked">
-            <ion-label color="primary" stacked>Divulgador é o paciente ? </ion-label>
-            <ion-input type="text" disabled="true" value="{{campanha.divulgadorPrecisa}}"></ion-input>
-        </ion-item>
-        <ion-item *ngIf="buttonClicked">
-            <ion-label color="primary" stacked>Email do divulgador</ion-label>
-            <ion-input type="text" disabled="true" value="{{campanha.emailDivulgador}}"></ion-input>
-        </ion-item>
-        <ion-item *ngIf="buttonClicked">
-            <ion-label color="primary" stacked>Telefone do divulgador</ion-label>
-            <ion-input type="text" disabled="true" value="{{ campanha.telDivulgador}}"></ion-input>
-        </ion-item>
-        <ion-item *ngIf="buttonClicked">
-            <ion-label color="primary" stacked>Telefone2 do divulgador</ion-label>
-            <ion-input type="text" disabled="true" value="{{ campanha.telDivulgador2}}"></ion-input>
-        </ion-item>
-        <ion-item  *ngIf="buttonClicked">
-            <ion-label color="primary" stacked>Observacao</ion-label>
-            <ion-textarea rows="6" cols="20" value="{{ campanha.infAdicionais }}" disabled="true"></ion-textarea>
-        </ion-item>
-
-
-  
-
-
-      </ion-card>
-
-  </ion-list>
-
-</ion-content>
+    <ion-list>
+        <ion-list-header>
+            <h2>Filtro</h2>
+        </ion-list-header>
+        
+        <!-- filtro de pesquisa-->
+        <section> 
+            <ion-list>
+                
+                <ion-item> <!-- nome da cidade-->
+                    <ion-label fixed>Cidade</ion-label>
+                    <ion-input type="text" value=""></ion-input>
+                </ion-item>  
+                <ion-item> <!-- nome dos estados-->
+                    <ion-label>Estado</ion-label>
+                    <ion-select [(ngModel)]="Estado">
+                        <ion-option value="AC">Acre</ion-option>
+                        <ion-option value="AL">Alagoas</ion-option>
+                        <ion-option value="AP">Amapá</ion-option>
+                        <ion-option value="AM">Amazonas</ion-option>
+                        <ion-option value="BA">Bahia</ion-option>
+                        <ion-option value="CE">Ceará</ion-option>
+                        <ion-option value="DF">Distrito Federal</ion-option>
+                        <ion-option value="GO">Goiás</ion-option>
+                        <ion-option value="MA">Maranhão</ion-option>
+                        <ion-option value="MT">Mato Grosso</ion-option>
+                        <ion-option value="MS">Mato Grosso do Sul</ion-option>
+                        <ion-option value="MG">Minas Gerais</ion-option>
+                        <ion-option value="PA">Pará</ion-option>
+                        <ion-option value="PB">Paraíba</ion-option>
+                        <ion-option value="PR">Paraná</ion-option>
+                        <ion-option value="PE">Pernambuco</ion-option>
+                        <ion-option value="PI">Piauí</ion-option>
+                        <ion-option value="RJ">Rio de Janeiro</ion-option>
+                        <ion-option value="RN">Rio Grande do Norte</ion-option>
+                        <ion-option value="RS">Rio Grande do Sul</ion-option>
+                        <ion-option value="RO">Rondônia</ion-option>
+                        <ion-option value="RR">Roraima</ion-option>
+                        <ion-option value="SC">Santa Catarina</ion-option>
+                        <ion-option value="SP">Sao Paulo</ion-option>
+                        <ion-option value="SE">Sergipe</ion-option>
+                        <ion-option value="TO">Tocantins</ion-option>
+                    </ion-select>
+                </ion-item>    
+            </ion-list>
+        </section>
+        <button class="btn-pesquisar" ion-button full>Pesquisar <ion-icon name="search"></ion-icon></button>
+        
+        <h1 class="main-title">Campanhas</h1>
+        
+        <ion-card *ngFor="let campanha of campanhas | async">
+            
+            <img src="../../assets/imgs/logoApp.png" class="card-image">
+            
+            <ion-item>
+                <ion-icon name="contact" item-start large></ion-icon>
+                <h2 class="tipo-doacao">Sangue <span class="tipo-sangue">{{ campanha.tipoSangue }}</span> </h2>
+                <p>Paciente:{{ campanha.nomePaciente }}{{ campanha.pacienteIndicado }}</p>
+            </ion-item>
+            
+            <ion-item>
+                <ion-icon name="medkit" item-start large ></ion-icon>
+                <p>{{campanha.endHemocentro }}<p>
+                    <p>{{campanha.telHemocentro }}</p>
+                </ion-item>
+                
+                <ion-item class="row-btn">
+                    <button ion-button class="btn-circle">
+                        <ion-icon name="heart" class="icon"></ion-icon>
+                    </button>
+                    
+                    <button ion-button (click)="onButtonClick()" class="btn-circle">
+                        <ion-icon name="add-circle" class="icon"></ion-icon>
+                    </button>
+                </ion-item>
+                
+                
+                <ion-item *ngIf="buttonClicked">
+                    <p class="info-title">Estado do hemocentro</p>
+                    <p class="info">{{campanha.endHemocentroUF}}</p>
+                </ion-item>
+                <ion-item *ngIf="buttonClicked">
+                    <p class="info-title">Cidade do hemocentro</p>
+                    <p class="info">{{campanha.endHemocentroCidade}}</p>
+                </ion-item>
+                <ion-item *ngIf="buttonClicked">
+                    <p class="info-title">E-mail do hemocentro</p>
+                    <p class="info">{{campanha.emailHemocentro}}</p>
+                </ion-item>
+                <ion-item *ngIf="buttonClicked">
+                    <p class="info-title">Telefone do hemocentro</p>
+                    <p class="info">{{ campanha.telHemocentro }}</p>
+                </ion-item>
+                <ion-item *ngIf="buttonClicked">
+                    <p class="info-title">Telefone do hemocentro 2</p>
+                    <p class="info">{{ campanha.telHemocentro2 }}</p>
+                </ion-item>
+                <ion-item *ngIf="buttonClicked">
+                    <p class="info-title">CEP do hemocentro</p>
+                    <p class="info">{{ campanha.endHemocentroCEP }}</p>
+                </ion-item>
+                <ion-item *ngIf="buttonClicked">
+                    <p class="info-title">Nome do hemocentro/hospital</p>
+                    <p class="info">{{campanha.nomeHemocentro}}</p>
+                </ion-item>
+                <ion-item *ngIf="buttonClicked">
+                    <p class="info-title">Nome do Paciente</p>
+                    <p class="info">{{ campanha.nomePaciente}}</p>
+                </ion-item>
+                <ion-item *ngIf="buttonClicked">
+                    <p class="info-title">Urgência</p>
+                    <p class="info">{{ campanha.grauUrgencia}}</p>
+                </ion-item>
+                <ion-item *ngIf="buttonClicked">
+                    <p class="info-title">Divulgador é o paciente? </p>
+                    <p class="info">{{campanha.divulgadorPrecisa}}</p>
+                </ion-item>
+                <ion-item *ngIf="buttonClicked">
+                    <p class="info-title">E-mail do divulgador</p>
+                    <p class="info">{{campanha.emailDivulgador}}</p>
+                </ion-item>
+                <ion-item *ngIf="buttonClicked">
+                    <p class="info-title">Telefone do divulgador</p>
+                    <p class="info">{{ campanha.telDivulgador}}</p>
+                </ion-item>
+                <ion-item *ngIf="buttonClicked">
+                    <p class="info-title">Telefone do divulgador 2</p>
+                    <p class="info">{{ campanha.telDivulgador2}}</p>
+                </ion-item>
+                <ion-item  *ngIf="buttonClicked">
+                    <p class="info-title">Observações</p>
+                    <p class="info">{{ campanha.infAdicionais }}</p>
+                </ion-item>
+                
+            </ion-card>
+            
+        </ion-list>
+        
+    </ion-content>
+    
