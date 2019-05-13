@@ -26,6 +26,7 @@
     "@ionic/storage": "2.2.0",
     "@ultimate/ngxerrors": "^1.4.0",
     "angularfire2": "^5.1.1",
+    "api-ai-javascript": "^2.0.0-beta.21",
     "cordova-android": "^7.1.4",
     "cordova-ios": "^4.5.5",
     "cordova-plugin-device": "^2.0.2",

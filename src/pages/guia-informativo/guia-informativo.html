@@ -10,6 +10,44 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content>
 
+    
+  <div *ngIf="isLoading" class="bot-loading-container">
+    <ion-spinner name="dots"></ion-spinner>
+  </div>
+
+  <div *ngFor="let message of messages" class="message-wrapper">
+    <div>
+      
+      <img class="profile-pic" [ngClass]="{'left':message.from==='bot', 'right':message.from==='user'}" src="../../assets/imgs/foto{{message.from}}.png"
+      />
+      <!--  wave-->
+      <div class="chat-bubble" [ngClass]="{'left':message.from==='bot', 'right':message.from==='user', 'slide-left': message.from==='bot', 'slide-right':message.from==='user'}">
+
+        <div class="message" [innerHTML]="message.text" autolinker>
+        </div>
+
+        <div class="message-detail">
+          <span class="bold">{{message.from}} </span>
+          <span class="time">{{message.created | date:'dd.MM hh:MM'}}</span>
+          <!-- <span>{{message.created | date:'dd/MM hh:MM'}}</span> -->
+        </div>
+
+      </div>
+    </div>
+
+    <div class="cf"></div>
+  </div>
 </ion-content>
+
+<ion-footer>
+  <form [formGroup]="messageForm" (submit)="sendMessage(chatBox)" novalidate>
+    <ion-item>
+      <ion-input formControlName="message" [(ngModel)]="chatBox" placeholder="Envie sua mensagem"></ion-input>
+      <button ion-button clear (click)="sendMessage(chatBox)" item-end>
+        <ion-icon class="footer-btn" name="send"></ion-icon>
+      </button>
+    </ion-item>
+  </form>
+</ion-footer>
