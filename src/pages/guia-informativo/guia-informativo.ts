@@ -72,6 +72,26 @@ export class GuiaInformativoPage {
       this.content.scrollToBottom();
     }, 100);
   }
+
+ 
+
+  onload =  this.funcaodoguil(); // quando pagina carregar faz a gambiarra
+
+funcaodoguil() // gambiarra feito por Guilbert kkk
+{
+  
+  this.messages.push({
+    from: 'bot',
+    text: 'Bem vindo sou o SanguinhoBot caso tenha alguma duvida você pode retirá las aqui é facil apenas escreva no campo abaixo, sinta-se à vontade para perguntar :). '
+  })
+
+  this.messages.push({
+    from: 'bot',
+    text: 'Utilzamos a Portaria 158/ 04 de fevereiro 2016 como amparo de nossas respostas.'
+  })
+}
+
+  
 }
 
 
