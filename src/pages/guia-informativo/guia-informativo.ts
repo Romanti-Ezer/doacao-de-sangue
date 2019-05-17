@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, Content, Platform} from 'ionic-angular';
+import { IonicPage, Content, Platform} from 'ionic-angular';
 import { Message } from './models/message';
 import { ApiAiClient } from 'api-ai-javascript';
 import { FormControl, FormBuilder } from '@angular/forms';
@@ -42,7 +42,7 @@ export class GuiaInformativoPage {
     if (!req || req === '') {
       return;
     }
-    this.messages.push({ from: 'user', text: req });
+    this.messages.push({ from: 'Eu', text: req });
     this.isLoading = true;
 
     this.client
@@ -52,7 +52,7 @@ export class GuiaInformativoPage {
         console.log('res');
         console.log(response);
         this.messages.push({
-          from: 'bot',
+          from: 'Sanguinho',
           text: response.result.fulfillment.speech
         });
         this.scrollToBottom();
@@ -81,12 +81,12 @@ funcaodoguil() // gambiarra feito por Guilbert kkk
 {
   
   this.messages.push({
-    from: 'bot',
-    text: 'Bem vindo sou o SanguinhoBot caso tenha alguma duvida você pode retirá las aqui é facil apenas escreva no campo abaixo, sinta-se à vontade para perguntar :). '
+    from: 'Sanguinho',
+    text: 'Bem vindo sou o Sanguinho caso tenha alguma duvida você pode retirá-las aqui é facil apenas escreva no campo abaixo, sinta-se à vontade para perguntar :). '
   })
 
   this.messages.push({
-    from: 'bot',
+    from: 'Sanguinho',
     text: 'Utilzamos a Portaria 158/ 04 de fevereiro 2016 como amparo de nossas respostas.'
   })
 }

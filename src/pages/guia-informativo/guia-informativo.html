@@ -20,10 +20,10 @@
   <div *ngFor="let message of messages" class="message-wrapper">
     <div>
       
-      <img class="profile-pic" [ngClass]="{'left':message.from==='bot', 'right':message.from==='user'}" src="../../assets/imgs/foto{{message.from}}.png"
+      <img class="profile-pic" [ngClass]="{'left':message.from==='Sanguinho', 'right':message.from==='Eu'}" src="../../assets/imgs/foto{{message.from}}.png"
       />
       <!--  wave-->
-      <div class="chat-bubble" [ngClass]="{'left':message.from==='bot', 'right':message.from==='user', 'slide-left': message.from==='bot', 'slide-right':message.from==='user'}">
+      <div class="chat-bubble" [ngClass]="{'left':message.from==='Sanguinho', 'right':message.from==='Eu', 'slide-left': message.from==='Sanguinho', 'slide-right':message.from==='Eu'}">
 
         <div class="message" [innerHTML]="message.text" autolinker>
         </div>
