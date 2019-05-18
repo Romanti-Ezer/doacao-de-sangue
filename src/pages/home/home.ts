@@ -9,14 +9,17 @@ import { LoginPage } from '../login/login';
   templateUrl: 'home.html'
 })
 export class HomePage {
+  
+
+  
 
   constructor(public navCtrl: NavController,
     private auth: AngularFireAuth, public menuCtrl:MenuController) {
       this.menuCtrl.enable(true);
   }
   
-  logout() {
-    this.auth.auth.signOut();
-    this.navCtrl.setRoot(LoginPage);
-  }
+  
+
+
+  
 }
