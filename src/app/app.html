@@ -1,6 +1,11 @@
  <!--<ion-split-pane> Exibe o menu expandido em dispositivos maiores-->
 <ion-menu [content]="content">
-  <ion-content padding>
+    <ion-header>
+    <ion-toolbar color="temanosso">
+      <ion-title>Menu</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
     <ion-list>
       <button ion-item menuClose *ngFor="let page of pages"
       (click)="goToPage(page.component);">
@@ -11,5 +16,6 @@
     </ion-list>
   </ion-content>
 </ion-menu>
+
 <ion-nav [root]="rootPage" main #content swipeBackEnable="false"></ion-nav>
 <!--</ion-split-pane>-->
