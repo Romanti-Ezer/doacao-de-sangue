@@ -1,7 +1,7 @@
  <!--<ion-split-pane> Exibe o menu expandido em dispositivos maiores-->
 <ion-menu [content]="content">
     <ion-header>
-    <ion-toolbar color="temanosso">
+    <ion-toolbar>
       <ion-title>Menu</ion-title>
     </ion-toolbar>
   </ion-header>
@@ -9,7 +9,7 @@
     <ion-list>
       <button ion-item menuClose *ngFor="let page of pages"
       (click)="goToPage(page.component);">
-        <ion-icon [name]="page.icone" item-left></ion-icon>
+        <ion-icon color="danger" [name]="page.icone" item-left></ion-icon>
       {{page.titulo}}</button>
       <button ion-item menuToggle (click)="logout()">Sair
       </button>

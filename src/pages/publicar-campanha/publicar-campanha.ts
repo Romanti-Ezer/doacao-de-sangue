@@ -2,10 +2,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component } from '@angular/core';
 import { App, IonicPage, NavController, NavParams } from 'ionic-angular';
 import { FirestoneService } from '../../services/firestone.service';
-import { Campanha } from '../../services/firestone.service';
 
-import { AngularFireAuth } from 'angularfire2/auth';
-import { Observable } from 'rxjs';
 import { AlertController } from 'ionic-angular';
 import { HomePage } from '../home/home';
 

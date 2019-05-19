@@ -1,13 +1,10 @@
-import { LoginPage } from './../pages/login/login';
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
-import AuthProvider = firebase.auth.AuthProvider;
 
 @Injectable()
 export class AuthService {
 	private user: firebase.User;
-	private auth: any;
 
 	constructor(public afAuth: AngularFireAuth) {
 		afAuth.authState.subscribe(user => {

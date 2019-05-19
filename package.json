@@ -41,10 +41,11 @@
     "rxjs": "^6.0.0",
     "rxjs-compat": "^6.4.0",
     "sw-toolbox": "3.6.0",
+    "tar": "^4.4.8",
     "zone.js": "0.8.29"
   },
   "devDependencies": {
-    "@ionic/app-scripts": "3.2.1",
+    "@ionic/app-scripts": "^3.2.3",
     "typescript": "~2.6.2"
   },
   "description": "An Ionic project",

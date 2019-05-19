@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
-import * as firebase from 'firebase/app';
 
 import { AngularFirestore } from 'angularfire2/firestore';
 import { AngularFirestoreCollection } from 'angularfire2/firestore';
@@ -48,7 +47,6 @@ export interface Campanha {
 
 @Injectable()
 export class FirestoneService {
-	private user: firebase.User;
     auth: any;
     usuarios: Observable<User[]>;
 
@@ -63,9 +61,6 @@ export class FirestoneService {
     campanhasCollectionRef: AngularFirestoreCollection<Campanha>;
 
 	constructor(public afAuth: AngularFireAuth, public angularFirestore: AngularFirestore) {
-		afAuth.authState.subscribe(user => {
-			this.user = user;
-        });
         
         // Assim que o serviço é instânciado, os dados são sincronizados
         // Dados da collection usuarios - trazendo apenas 1, referente ao ID do usuário atual

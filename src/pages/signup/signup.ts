@@ -6,7 +6,6 @@ import { HomePage } from '../home/home';
 import { AuthService } from '../../services/auth.service';
 import { FirestoneService } from '../../services/firestone.service';
 import { LoginPage } from '../login/login';
-import { from } from 'rxjs';
 
 /**
  * Generated class for the SignupPage page.
