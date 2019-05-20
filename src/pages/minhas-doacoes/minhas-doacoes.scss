@@ -1,28 +1,31 @@
 page-minhas-doacoes {
-
     ion-card {
-        border-radius:30px !important;
+        border-radius: 10px!important;
         background: rgb(255, 255, 255) !important;
-        border-top: 3px solid #e63232;
-        border-bottom: 3px solid #e63232;
-
-         
+        margin-bottom: 1.25em!important;
     }
-
-    ion-fab {                
+    .btn-add {                
         position: fixed;
-        bottom: 5px;
-        right: 5px; 
-        
-        
+        bottom: 15px;
+        right: 15px; 
     }
-
+    .btn-delete {
+        float: right;
+        margin: .5em;
+        padding: 0 .5em;
+    }
     .infodiv{
         text-align: center;
+        font-size: 1.175em;
+        margin-bottom: 1.5em;
+        p {
+            margin-top: 5px;
+            margin-bottom: 10px;
+        }
+    }
+    ion-card-content {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
     }
 }
-
-
-
-
- 

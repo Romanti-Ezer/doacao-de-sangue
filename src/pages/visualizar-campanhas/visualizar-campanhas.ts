@@ -19,7 +19,7 @@ import { Campanha } from '../../services/firestone.service';
 export class VisualizarCampanhasPage {
     
     campanhas: Observable<Campanha[]>;
-    estado = null;
+    estado:any = false;
     
     constructor(public navCtrl: NavController, public navParams: NavParams, public firestone: FirestoneService) {
         this.campanhas = this.firestone.getCampanhas();
@@ -31,12 +31,27 @@ export class VisualizarCampanhasPage {
     
     public buttonClicked: boolean = false; 
     
-    public onButtonClick() {
-        
-        this.buttonClicked = !this.buttonClicked;
+    public onButtonClick(event) {
+        let card = this.getClosest(event.target, "js-item-doacao");
+        this.estado = !this.estado;
+        let cardBoxInfo = card.querySelectorAll(".doacao-info")[0];
+
+        if (cardBoxInfo.classList.contains("doacao-info--is-active")) {
+            cardBoxInfo.classList.remove("doacao-info--is-active")
+        } else {
+            cardBoxInfo.classList.add("doacao-info--is-active")
+        }
     }
     
     public filtrarCampanha(event) {
         this.campanhas = this.firestone.filterCampanha(this.estado, event.target.cidade.value);
     }
+
+    getClosest (elem, clazz) {    
+        for ( ; elem && elem !== document; elem = elem.parentNode ) {
+            console.log(elem.classList);
+            if ( elem.classList.contains( clazz ) ) return elem;
+        }
+        return null;
+    };
 }

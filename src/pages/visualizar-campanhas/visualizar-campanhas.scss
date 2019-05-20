@@ -25,9 +25,9 @@ page-visualizar-campanhas {
     }
     
     .card-image {
-        width: 73%;
+        width: 100%;
         display: block;
-        margin: 1em auto;
+        margin: 0 auto 1em;
     }
     .tipo-doacao {
         text-align: left;
@@ -64,5 +64,17 @@ page-visualizar-campanhas {
     .info {
         color: #000!important;
         font-size: .9em!important;
+        margin-bottom: 1em;
+    }
+    .doacao-info {
+        display: none;
+        max-height: 0px;
+        overflow-y: hidden;
+        transition: ease-in-out 400ms max-height;
+        &--is-active {
+            display: block;
+            max-height: 750px;
+            transition: ease-in-out 600ms max-height;
+        }
     }
 }

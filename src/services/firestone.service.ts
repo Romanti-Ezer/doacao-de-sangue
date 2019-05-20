@@ -4,6 +4,8 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { AngularFirestoreCollection } from 'angularfire2/firestore';
 import { Observable } from 'rxjs/Observable';
+import { map } from 'rxjs-compat/operator/map';
+import { pipe } from 'rxjs';
 
 export interface User {
     userID: string,
@@ -45,6 +47,13 @@ export interface Campanha {
     observacoes: string
 }
 
+export interface Doacao {
+    userID: string,
+    nomeHemocentro: string,
+    dataDoacao: Date,
+    tipoDoacao: string
+}
+
 @Injectable()
 export class FirestoneService {
     auth: any;
@@ -60,6 +69,13 @@ export class FirestoneService {
     // campanhasCollectionRef é uma collection de Campanhas -> Coleção de campanhas
     campanhasCollectionRef: AngularFirestoreCollection<Campanha>;
 
+    // Dizendo que campanhas é um Observable da Interface Doacao
+    doacoes: Observable<Doacao[]>;
+    // campanhasCollectionRef é uma collection de Campanhas -> Coleção de campanhas
+    doacoesCollectionRef: AngularFirestoreCollection<Doacao>;
+    
+    docUserId;
+
 	constructor(public afAuth: AngularFireAuth, public angularFirestore: AngularFirestore) {
         
         // Assim que o serviço é instânciado, os dados são sincronizados
@@ -70,10 +86,10 @@ export class FirestoneService {
                 return actions.map(a => {
                     const data = a.payload.doc.data() as User;
                     const id = a.payload.doc.id;
+                    this.docUserId = a.payload.doc.id;
                     return { id, ...data };
                 });
             });
-            console.log("currentuserid: ", this.afAuth.auth.currentUser.uid);
         } else {
             this.usuariosCollectionRef = angularFirestore.collection<User>('usuarios');
         }
@@ -81,6 +97,10 @@ export class FirestoneService {
         // Dados da collection de campanhas
         this.campanhasCollectionRef = this.angularFirestore.collection('campanhas'); 
         this.campanhas = this.campanhasCollectionRef.valueChanges();
+
+        // Doações        
+        this.doacoesCollectionRef = angularFirestore.collection('doacoes', ref => ref.where('userID', '==', this.afAuth.auth.currentUser.uid));
+        this.doacoes = this.doacoesCollectionRef.valueChanges();
     }
     
     //---------------------- User
@@ -98,6 +118,11 @@ export class FirestoneService {
     // Atualizar os dados do usuário
     public updateUserData(docId, nome, tel, cep, end, nro, cidade, uf, sangue) {
         this.usuariosCollectionRef.doc(docId).update({ userNome: nome, userTel: tel, userCEP: cep, userEnd: end, userEndNum: nro, userCidade: cidade, userUF: uf, userSangue: sangue });
+    }
+
+    //---------------------- Doações
+    public getDoacoes() {
+        return this.doacoes;
     }
 
     //---------------------- Campanhas

@@ -1,58 +1,41 @@
 <!--
-  Generated template for the MinhasDoacoesPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
+    Generated template for the MinhasDoacoesPage page.
+    
+    See http://ionicframework.com/docs/components/#navigation for more info on
+    Ionic pages and navigation.
 -->
 <ion-header>
-  <ion-navbar>
-    <ion-title>Minhas Doações</ion-title>
-  </ion-navbar>
+    <ion-navbar>
+        <ion-title>Minhas Doações</ion-title>
+    </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  <div class="infodiv">
-    <div> Voce ja fez <b>x doações</b>. <b>[estado]</b></div>
-    <div>  Voce pode doar novamente em <b>X dias</b></div>
-  </div>
-
-  <ion-card>
-    <ion-card-header>
-      Doação
-    </ion-card-header>
-    <ion-card-content>
-      Doação x - Data xx/mm/yyyy
-      Hospital de ...
-    </ion-card-content>
-  </ion-card>
-
-  <ion-card>
-    <ion-card-header>
-      Retirar romanti
-    </ion-card-header>
-    <ion-card-content>
-      Doação x - Data xx/mm/yyyy
-      Hospital de ...
-    </ion-card-content>
-  </ion-card>
-
-  <ion-card>
-    <ion-card-header>
-      retirar romanti
-    </ion-card-header>
-    <ion-card-content>
-      Doação x - Data xx/mm/yyyy
-      Hospital de ...
-    </ion-card-content>
-  </ion-card>
-
-
-
-  <ion-fab>
-    <button ion-fab color="mybloodmain"><ion-icon name="add"></ion-icon></button> <!-- criei um tema nosso com a cor padrao dos nossos buttons-->
-  </ion-fab>
- 
-  
-
-
+    <div class="infodiv">
+        <p>Você já fez <b>{{ nroDoacoes }} <span>doações</span></b>. <b>Parabéns!</b></p>
+        <p>Você pode doar novamente em <b>{{ diasParaDoar }}<span> dias</span></b></p>
+    </div>
+    
+    <ion-card *ngFor="let doacao of doacoes | async; index as i; let last = last">
+        <span *ngIf="i == 0">{{ resetNroDoacoes() }}</span>
+        {{ increaseNroDoacoes() }}
+        <ion-card-content text-wrap>
+            <div class="text-div">
+                <p><b>Doação de {{ doacao.tipoDoacao }}</b> - {{ getMS(doacao.dataDoacao.seconds) | date }}</p>
+                <p>{{ doacao.nomeHemocentro }}</p>
+            </div>
+            <button ion-button color="danger" class="btn-delete"><ion-icon name="close"></ion-icon></button>
+        </ion-card-content>
+        {{ DifferenceFromToday(last) }}
+    </ion-card>
+    
+    
+    
+    <ion-fab>
+        <button ion-fab color="danger" class="btn-add"><ion-icon name="add"></ion-icon></button>
+    </ion-fab>
+    
+    
+    
+    
 </ion-content>
