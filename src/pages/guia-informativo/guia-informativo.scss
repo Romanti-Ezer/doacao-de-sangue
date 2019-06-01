@@ -10,6 +10,7 @@ page-guia-informativo{
   }
 
 
+  
   .bar-footer 
   {
     overflow: visible !important;
@@ -50,6 +51,7 @@ page-guia-informativo{
   }
     
   
+
   img.profile-pic.right 
   {
     right: 10px;
@@ -126,7 +128,8 @@ page-guia-informativo{
   
   .chat-bubble.left 
   {
-    background-color: #e9576a;
+    background-color: #242222;
+    color: #fff;
     float: left;
     margin-left: 55px;
   }
@@ -134,7 +137,7 @@ page-guia-informativo{
   
   .chat-bubble.left:before 
   {
-    background-color: #e9576a;
+    background-color: #242222;
     left: 10px;
     -webkit-transform: rotate(70deg) skew(5deg);
   }
@@ -142,8 +145,8 @@ page-guia-informativo{
   
   .chat-bubble.right 
   {
-    background-color: #158ffe;
-    color: #fff;
+    background-color: #f38a8a;
+    color: rgb(14, 13, 13);
     float: right;
     margin-right: 55px;
   }
@@ -151,7 +154,7 @@ page-guia-informativo{
   
   .chat-bubble.right:before 
   {
-    background-color: #158ffe;
+    background-color: #f38a8a;
     right: 10px;
     -webkit-transform: rotate(118deg) skew(-5deg);
   }

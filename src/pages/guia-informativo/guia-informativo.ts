@@ -87,7 +87,7 @@ funcaodoguil() // gambiarra feito por Guilbert kkk
 
   this.messages.push({
     from: 'Sanguinho',
-    text: 'Utilzamos a Portaria 158/ 04 de fevereiro 2016 como amparo de nossas respostas.'
+    text: 'Utilizamos a Portaria 158/ 04 de fevereiro 2016 como amparo de nossas respostas.'
   })
 }
 
