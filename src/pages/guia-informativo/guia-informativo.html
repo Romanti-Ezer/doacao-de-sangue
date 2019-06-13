@@ -44,7 +44,7 @@
 <ion-footer>
   <form [formGroup]="messageForm" (submit)="sendMessage(chatBox)" novalidate>
     <ion-item>
-      <ion-input formControlName="message" [(ngModel)]="chatBox" placeholder="Envie sua mensagem"></ion-input>
+      <ion-input class="testedoinput" formControlName="message" [(ngModel)]="chatBox" placeholder="Envie sua mensagem"></ion-input>
       <button ion-button clear (click)="sendMessage(chatBox)" item-end>
         <ion-icon class="footer-btn" name="send" color="danger"></ion-icon>
       </button>

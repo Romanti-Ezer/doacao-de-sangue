@@ -45,15 +45,26 @@ export class GuiaInformativoPage {
     this.messages.push({ from: 'Eu', text: req });
     this.isLoading = true;
 
+
+ 
+
     this.client
       .textRequest(req)
       .then(response => {
         /* do something */
         console.log('res');
-        console.log(response);
+
+       
+        //mais uma gambiarra para trocar todo - por <br>
+        var textResponse = response.result.fulfillment.speech;
+        textResponse = textResponse.replace(/-/g, '<br><br>');
+        
+
+        console.log(textResponse);
+        
         this.messages.push({
           from: 'Sanguinho',
-          text: response.result.fulfillment.speech
+          text: textResponse
         });
         this.scrollToBottom();
         this.isLoading = false;
@@ -73,9 +84,9 @@ export class GuiaInformativoPage {
     }, 100);
   }
 
- 
+  
 
-  onload =  this.funcaodoguil(); // quando pagina carregar faz a gambiarra
+  onload =  this.funcaodoguil(); // quando pagina carregar faz a funcao
 
 funcaodoguil() // gambiarra feito por Guilbert kkk
 {
@@ -91,7 +102,7 @@ funcaodoguil() // gambiarra feito por Guilbert kkk
   })
 }
 
-  
+
 }
 
 
