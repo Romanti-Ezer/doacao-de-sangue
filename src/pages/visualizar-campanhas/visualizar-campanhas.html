@@ -66,7 +66,7 @@
             <ion-item>
                 <ion-icon name="contact" item-start large></ion-icon>
                 <h2 class="tipo-doacao"><span *ngIf="campanha.tipoDoacao == 'sangue'">Sangue</span><span *ngIf="campanha.tipoDoacao == 'plaquetas'">Plaquetas</span> <span class="tipo-sangue">{{ campanha.tipoSangue }}</span> </h2>
-                <p>Paciente: {{ campanha.nomePaciente }}{{ campanha.pacienteIndicado }}</p>
+                <p>Paciente: {{ campanha.nomePaciente }}<span *ngIf="!(campanha.nomePaciente)">{{ campanha.nomeDivulgador }}</span></p>
             </ion-item>
             
             <ion-item>
