@@ -45,7 +45,9 @@ import { FirestoneService } from '../services/firestone.service';
     BrowserModule,
     FormsModule,    
     NgxErrorsModule,
-    IonicModule.forRoot(MyApp),
+    IonicModule.forRoot(MyApp, {
+      backButtonText: '',
+    }),
     AngularFireModule.initializeApp(credentials.firebase),
     AngularFirestoreModule.enablePersistence(),
     AngularFireDatabaseModule

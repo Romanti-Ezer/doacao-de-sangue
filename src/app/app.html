@@ -11,11 +11,11 @@
       (click)="goToPage(page.component);">
         <ion-icon color="danger" [name]="page.icone" item-left></ion-icon>
       {{page.titulo}}</button>
-      <button ion-item menuToggle (click)="logout()">Sair
+      <button ion-item menuToggle (click)="logout()"><ion-icon color="danger" item-left name="md-log-out"></ion-icon>Sair
       </button>
     </ion-list>
   </ion-content>
 </ion-menu>
 
-<ion-nav [root]="rootPage" main #content swipeBackEnable="false"></ion-nav>
+<ion-nav [root]="rootPage" main #content></ion-nav>
 <!--</ion-split-pane>-->
