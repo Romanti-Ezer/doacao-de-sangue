@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { FirestoneService } from '../../services/firestone.service';
+import { AlertController } from 'ionic-angular';
 
 /**
 * Generated class for the MinhaContaPage page.
@@ -20,41 +21,57 @@ import { FirestoneService } from '../../services/firestone.service';
 })
 export class MinhaContaPage {
     
-    userSangue: string;
-    dados: any;
-    contaForm: FormGroup;
+    private userBlood: string;
+    private data: any;
+    private contaForm: FormGroup;
     
     constructor(public navCtrl: NavController,
         public navParams: NavParams,
         public fb: FormBuilder,
+        public alertCtrl: AlertController,
         private firestone: FirestoneService) {
             
-            // Pegando os dados para já mostrar no formulário
-            this.dados = this.firestone.getUserData()
-        }
+            // Get logged user data
+            this.data = this.firestone.getUser()
+    }
         
-        ionViewDidLoad() {
-            console.log('ionViewDidLoad MinhaContaPage');
+    ionViewDidLoad() {
+        console.log('ionViewDidLoad MinhaContaPage');
+    }
+    
+    // Stores user blood type
+    public setBlood(value) {
+        this.userBlood = value;
+    }
+
+    public showAlert(title, subtitle) {
+        const alert = this.alertCtrl.create({
+            title: title,
+            subTitle: subtitle,
+            buttons: ['OK']
+        });
+        alert.present();
+    }
+    
+    // Uses firestone service to update user and shows a message
+    public updateUser(event) {
+        // Uses Firestone service for update logged user data
+        if(this.firestone.updateUser(  
+            event.target.userDocId.value,
+            event.target.userName.value,
+            event.target.userPhone.value,
+            event.target.userCEP.value,
+            event.target.userAddress.value,
+            event.target.userAddressNum.value,
+            event.target.userCity.value,
+            event.target.userState.value,
+            this.userBlood
+        )) {
+            // If user data is updated successfully
+            this.showAlert("Sucesso", "Dados atualizados com sucesso!");
+        } else {
+            // If an error occurs
+            this.showAlert("Erro", "Erro ao atualizar dados :/");
         }
-        
-        public setSangue(value) {
-            this.userSangue = value;
-        }
-        
-        public atualizarCadastro(event) {
-            console.log(event.target);
-            console.log('this.userSangue: \'', this.userSangue + '\'');
-            this.firestone.updateUserData(  
-                event.target.userDocId.value,
-                event.target.userNome.value,
-                event.target.userTel.value,
-                event.target.userCEP.value,
-                event.target.userEnd.value,
-                event.target.userEndNum.value,
-                event.target.userCidade.value,
-                event.target.userUF.value,
-                this.userSangue
-                );
-            }
-        }
-        
+    }
+}

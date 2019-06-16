@@ -2,7 +2,7 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { ChangeDetectorRef } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { FirestoneService } from '../../services/firestone.service';
-import { Doacao } from '../../services/firestone.service';
+import { Donation } from '../../services/firestone.service';
 import { Observable } from 'rxjs';
 
 /**
@@ -19,49 +19,49 @@ import { Observable } from 'rxjs';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MinhasDoacoesPage {
-    doacoes: Observable<Doacao[]>;
-    diasParaDoar =  0;
-    dataMaisRecente = 0;
-    nroDoacoes: number = 0;
-    podeDoar = false;
+    private donations: Observable<Donation[]>;
+    private daysToDonate =  0;
+    private mostRecentDate = 0;
+    private numOfDonations: number = 0;
+    private canDonate = false;
     
     constructor(public navCtrl: NavController, public navParams: NavParams, public firestone: FirestoneService, private cd: ChangeDetectorRef) {
-        this.doacoes = this.firestone.getDoacoes();
-        this.nroDoacoes = 0;
+        this.donations = this.firestone.getDonation();
+        this.numOfDonations = 0;
     }
     
-    ionViewDidLoad() {
+    public ionViewDidLoad() {
         console.log('ionViewDidLoad MinhasDoacoesPage');
     }
-    ngAfterViewInit() {
+    public ngAfterViewInit() {
         this.cd.detectChanges();
     }
 
-    DifferenceFromToday(last) {
+    public DifferenceFromToday(last) {
         if (last) {
             let now = new Date();
             // Considerando que é homem
-            let temp = new Date(this.dataMaisRecente*1000);
-            this.diasParaDoar = 60 - Math.round(( now.getTime() - temp.getTime())/(1000*60*60*24));
-            console.log("Dias para doar: ", this.diasParaDoar);
-            if (this.diasParaDoar > 0) {
-                this.podeDoar = false;
+            let temp = new Date(this.mostRecentDate*1000);
+            this.daysToDonate = 60 - Math.round(( now.getTime() - temp.getTime())/(1000*60*60*24));
+            console.log("Dias para doar: ", this.daysToDonate);
+            if (this.daysToDonate > 0) {
+                this.canDonate = false;
             } else {
-                this.podeDoar = true;
+                this.canDonate = true;
             }
         }
     }
-    getMS(s) {
-        if (!this.dataMaisRecente || s > this.dataMaisRecente) this.dataMaisRecente = s;
+    public getMS(s) {
+        if (!this.mostRecentDate || s > this.mostRecentDate) this.mostRecentDate = s;
         console.log("s: ", s);
-        console.log("this.dataMaisRecente: ", this.dataMaisRecente)
+        console.log("this.mostRecentDate: ", this.mostRecentDate)
         return s*1000;
     }
-    increaseNroDoacoes() {
-        this.nroDoacoes = this.nroDoacoes + 1;
+    public increaseDonationNumber() {
+        this.numOfDonations = this.numOfDonations + 1;
         return '';
     }
-    resetNroDoacoes() {
-        this.nroDoacoes = 0;
+    public resetDonationNumber() {
+        this.numOfDonations = 0;
     }
 }

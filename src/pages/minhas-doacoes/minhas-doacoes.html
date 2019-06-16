@@ -12,30 +12,25 @@
 
 <ion-content padding>
     <div class="infodiv">
-        <p>Você já fez <b>{{ nroDoacoes }} <span>doações</span></b>. <b>Parabéns!</b></p>
-        <p>Você pode doar novamente em <b>{{ diasParaDoar }}<span> dias</span></b></p>
+        <p>Você já fez <b>{{ numOfDonations }} <span>doações</span></b>. <b>Parabéns!</b></p>
+        <p>Você pode doar novamente em <b>{{ daysToDonate }}<span> dias</span></b></p>
     </div>
     
     <ion-card *ngFor="let doacao of doacoes | async; index as i; let last = last">
-        <span *ngIf="i == 0">{{ resetNroDoacoes() }}</span>
-        {{ increaseNroDoacoes() }}
+        <span *ngIf="i == 0">{{ resetDonationNumber() }}</span>
+        {{ increaseDonationNumber() }}
         <ion-card-content text-wrap>
             <div class="text-div">
-                <p><b>Doação de {{ doacao.tipoDoacao }}</b> - {{ getMS(doacao.dataDoacao.seconds) | date }}</p>
-                <p>{{ doacao.nomeHemocentro }}</p>
+                <p><b>Doação de {{ doacao.donatType }}</b> - {{ getMS(doacao.donatDate.seconds) | date }}</p>
+                <p>{{ doacao.donatBloodCenter }}</p>
             </div>
             <button ion-button color="danger" class="btn-delete"><ion-icon name="close"></ion-icon></button>
         </ion-card-content>
         {{ DifferenceFromToday(last) }}
     </ion-card>
-    
-    
-    
+
     <ion-fab>
         <button ion-fab color="danger" class="btn-add"><ion-icon name="add"></ion-icon></button>
     </ion-fab>
-    
-    
-    
     
 </ion-content>

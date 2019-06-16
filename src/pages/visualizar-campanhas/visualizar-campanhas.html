@@ -11,13 +11,13 @@
             <h2>Filtro</h2>
         </ion-list-header>
         
-        <!-- filtro de pesquisa-->
-        <form (ngSubmit)="filtrarCampanha($event)">
+        <!-- Campaign filter-->
+        <form (ngSubmit)="filterCampaign($event)">
             <section> 
                 <ion-list>
                     <ion-item> <!-- nome dos estados-->
                         <ion-label>UF</ion-label>
-                        <ion-select [(ngModel)]="estado" [ngModelOptions]="{standalone: true}">
+                        <ion-select [(ngModel)]="state" [ngModelOptions]="{standalone: true}">
                             <ion-option value="AC">Acre</ion-option>
                             <ion-option value="AL">Alagoas</ion-option>
                             <ion-option value="AP">Amapá</ion-option>
@@ -25,6 +25,7 @@
                             <ion-option value="BA">Bahia</ion-option>
                             <ion-option value="CE">Ceará</ion-option>
                             <ion-option value="DF">Distrito Federal</ion-option>
+                            <ion-option value="ES">Espírito Santo</ion-option>
                             <ion-option value="GO">Goiás</ion-option>
                             <ion-option value="MA">Maranhão</ion-option>
                             <ion-option value="MT">Mato Grosso</ion-option>
@@ -41,7 +42,7 @@
                             <ion-option value="RO">Rondônia</ion-option>
                             <ion-option value="RR">Roraima</ion-option>
                             <ion-option value="SC">Santa Catarina</ion-option>
-                            <ion-option value="SP">Sao Paulo</ion-option>
+                            <ion-option value="SP">São Paulo</ion-option>
                             <ion-option value="SE">Sergipe</ion-option>
                             <ion-option value="TO">Tocantins</ion-option>
                         </ion-select>
@@ -59,20 +60,20 @@
         
         <h1 class="main-title">Campanhas</h1>
         
-        <ion-card *ngFor="let campanha of campanhas | async" class="js-item-doacao">
+        <ion-card *ngFor="let campaign of campaigns | async" class="js-item-doacao">
             
             <img src="../../assets/imgs/mapaplaceholder.jpg" class="card-image">
             
             <ion-item>
                 <ion-icon name="contact" item-start large></ion-icon>
-                <h2 class="tipo-doacao"><span *ngIf="campanha.tipoDoacao == 'sangue'">Sangue</span><span *ngIf="campanha.tipoDoacao == 'plaquetas'">Plaquetas</span> <span class="tipo-sangue">{{ campanha.tipoSangue }}</span> </h2>
-                <p>Paciente: {{ campanha.nomePaciente }}<span *ngIf="!(campanha.nomePaciente)">{{ campanha.nomeDivulgador }}</span></p>
+                <h2 class="tipo-doacao"><span *ngIf="campaign.campDonateType == 'sangue'">Sangue</span><span *ngIf="campaign.campDonateType == 'plaquetas'">Plaquetas</span> <span class="tipo-sangue">{{ campaign.campBloodType }}</span> </h2>
+                <p *ngIf="campaign.campIndicatedPatient || campaign.campPromoterIsPatient">Paciente: {{ campaign.campIndicatedPatient }}<span *ngIf="campaign.campPromoterIsPatient && !(campaign.campIndicatedPatient)">{{ campaign.campPromoterName }}</span></p>
             </ion-item>
             
             <ion-item>
                 <ion-icon name="medkit" item-start large ></ion-icon>
-                <p>{{campanha.endHemocentro }}<p>
-                <p>{{campanha.telHemocentro }}</p>
+                <p>{{ campaign.campBloodCenterAddress }}, {{ campaign.campBloodCenterAddressNum }}<p>
+                <p>{{campaign.campBloodCenterCity }} - {{ campaign.campBloodCenterState }}</p>
             </ion-item>
                 
             <ion-item class="row-btn">
@@ -80,35 +81,35 @@
                     <ion-icon name="heart" class="icon"></ion-icon>
                 </button>
                 
-                <button ion-button (click)="onButtonClick($event)" class="btn-circle">
+                <button ion-button (click)="viewMore($event)" class="btn-circle">
                     <ion-icon name="add-circle" class="icon"></ion-icon>
                 </button>
             </ion-item>
             
             
             <ion-item class="doacao-info" text-wrap>
-                <p class="info-title" *ngIf="campanha.endHemocentroUF">Estado do hemocentro</p>
-                <p class="info" *ngIf="campanha.endHemocentroUF">{{campanha.endHemocentroUF}}</p>
-                <p class="info-title" *ngIf="campanha.endHemocentroCidade">Cidade do hemocentro</p>
-                <p class="info" *ngIf="campanha.endHemocentroCidade">{{campanha.endHemocentroCidade}}</p>
-                <p class="info-title" *ngIf="campanha.emailHemocentro">E-mail do hemocentro</p>
-                <p class="info" *ngIf="campanha.emailHemocentro">{{campanha.emailHemocentro}}</p>
-                <p class="info-title" *ngIf="campanha.telHemocentro">Telefone do hemocentro</p>
-                <p class="info" *ngIf="campanha.telHemocentro">{{ campanha.telHemocentro }}</p>
-                <p class="info-title" *ngIf="campanha.endHemocentroCEP">CEP do hemocentro</p>
-                <p class="info" *ngIf="campanha.endHemocentroCEP">{{ campanha.endHemocentroCEP }}</p>
-                <p class="info-title" *ngIf="campanha.nomeHemocentro">Nome do hemocentro/hospital</p>
-                <p class="info" *ngIf="campanha.nomeHemocentro">{{campanha.nomeHemocentro}}</p>
-                <p class="info-title" *ngIf="campanha.nomePaciente">Nome do Paciente</p>
-                <p class="info" *ngIf="campanha.nomePaciente">{{ campanha.nomePaciente}}</p>
-                <p class="info-title" *ngIf="campanha.divulgadorPrecisa">Divulgador é o paciente? </p>
-                <p class="info" *ngIf="campanha.divulgadorPrecisa">{{campanha.divulgadorPrecisa}}</p>
-                <p class="info-title" *ngIf="campanha.emailDivulgador">E-mail do divulgador</p>
-                <p class="info" *ngIf="campanha.emailDivulgador">{{campanha.emailDivulgador}}</p>
-                <p class="info-title" *ngIf="campanha.telDivulgador">Telefone do divulgador</p>
-                <p class="info" *ngIf="campanha.telDivulgador">{{ campanha.telDivulgador}}</p>
-                <p class="info-title" *ngIf="campanha.observacoes">Observações</p>
-                <p class="info" *ngIf="campanha.observacoes">{{ campanha.observacoes }}</p>
+                <p class="info-title" *ngIf="campaign.emailHemocentro">E-mail do hemocentro</p>
+                <p class="info" *ngIf="campaign.emailHemocentro">{{campaign.emailHemocentro}}</p>
+                <p class="info-title" *ngIf="campaign.telHemocentro">Telefone do hemocentro</p>
+                <p class="info" *ngIf="campaign.telHemocentro">{{ campaign.telHemocentro }}</p>
+                <p class="info-title" *ngIf="campaign.campBloodCenterCEP">CEP do hemocentro</p>
+                <p class="info" *ngIf="campaign.campBloodCenterCEP">{{ campaign.campBloodCenterCEP }}</p>
+                <p class="info-title" *ngIf="campaign.campBloodCenter">Nome do hemocentro/hospital</p>
+                <p class="info" *ngIf="campaign.campBloodCenter">{{campaign.campBloodCenter}}</p>
+                <p class="info-title" *ngIf="campaign.campIndicatedPatient">Nome do Paciente</p>
+                <p class="info" *ngIf="campaign.campIndicatedPatient">{{ campaign.campIndicatedPatient}}</p>
+                <p class="info-title" *ngIf="campaign.campPromoterName">Nome do Divulgador</p>
+                <p class="info" *ngIf="campaign.campPromoterName">{{ campaign.campPromoterName}}</p>
+                <p class="info-title" *ngIf="campaign.campPromoterIsPatient">Divulgador é o paciente? </p>
+                <p class="info" *ngIf="campaign.campPromoterIsPatient">Sim</p>
+                <p class="info-title" *ngIf="campaign.campPromoterEmail">E-mail do divulgador</p>
+                <p class="info" *ngIf="campaign.campPromoterEmail">{{campaign.campPromoterEmail}}</p>
+                <p class="info-title" *ngIf="campaign.campPromoterPhone">Telefone do divulgador</p>
+                <p class="info" *ngIf="campaign.campPromoterPhone">{{ campaign.campPromoterPhone}}</p>
+                <p class="info-title" *ngIf="campaign.campPromoterPhone">Endereço do divulgador</p>
+                <p class="info" *ngIf="campaign.campPromoterAddress">{{ campaign.campPromoterAddress}}<span *ngIf="campaign.campPromoterAddressNum">, {{ campaign.campPromoterAddressNum }}</span><span *ngIf="campaign.campPromoterCity"> - {{ campaign.campPromoterCity }}</span><span *ngIf="campaign.campPromoterState"> - {{ campaign.campPromoterState }}</span></p>
+                <p class="info-title" *ngIf="campaign.campObservations">Observações</p>
+                <p class="info" *ngIf="campaign.campObservations">{{ campaign.campObservations }}</p>
             </ion-item>
             
         </ion-card>
@@ -116,4 +117,3 @@
     </ion-list>
     
 </ion-content>
-    

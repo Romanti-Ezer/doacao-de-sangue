@@ -6,31 +6,37 @@
 
 <ion-content>
 
-	<img src="../../assets/imgs/logoApp.png" alt="My Blood" class="logo">
+	<img src="../../assets/imgs/logoApp.png" alt="My Blood" class="logo"/>
 
 	<form (ngSubmit)="login()" [formGroup]="loginForm">
 		<ion-list inset>
 
+            <!-- Email -->
 			<ion-item [ngClass]="{ invalid: emailErrors.hasError('*', ['touched', 'dirty']) }">
 				<ion-input type="text" placeholder="Email" formControlName="email"></ion-input>
 			</ion-item>
 
+            <!-- Email validation -->
 			<div ngxErrors="email" #emailErrors="ngxErrors">
 				<div [ngxError]="['email', 'required']" [when]="['touched', 'dirty']">É necessário um e-mail válido</div>
 			</div>
 
+            <!-- Password -->
 			<ion-item [ngClass]="{ invalid: passwordErrors.hasError('*', ['touched']) }">
 				<ion-input type="password" placeholder="Senha" formControlName="password"></ion-input>
 			</ion-item>
 
+            <!-- Password validation -->
 			<div ngxErrors="password" #passwordErrors="ngxErrors">
 				<div [ngxError]="['minlength', 'required']" [when]="['touched']">Precisa ter ao menos 6 caracteres</div>
-			</div>
+            </div>
+            
 		</ion-list>
 
 		<div padding-horizontal>
 			<div class="form-error">{{loginError}}</div>
 
+            <!-- Login button -->
 			<button ion-button full type="submit" [disabled]="!loginForm.valid">Entrar <ion-icon name="log-in"></ion-icon></button>
 			<!-- <div class="login-footer">
 				<p>
@@ -46,7 +52,7 @@
 					Log in com Google
 				</button> -->
 
-				<p class="c-login-footer__p">Não tem uma conta? <a (click)="signup()" class="c-login-footer__link">cadastre-se</a></p>
+				<p class="c-login-footer__p">Não tem uma conta? <a (click)="signUp()" class="c-login-footer__link">cadastre-se</a></p>
 				<p class="c-login-footer__p"><a href="#" class="c-login-footer__link">Esqueci minha senha</a></p>
 				
 			</ion-list>

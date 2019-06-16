@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Observable } from 'rxjs';
 import { FirestoneService } from '../../services/firestone.service';
-import { Campanha } from '../../services/firestone.service';
+import { Campaign } from '../../services/firestone.service';
 
 /**
 * Generated class for the VisualizarCampanhasPage page.
@@ -18,22 +18,19 @@ import { Campanha } from '../../services/firestone.service';
 })
 export class VisualizarCampanhasPage {
     
-    campanhas: Observable<Campanha[]>;
-    estado:any = false;
+    private campaigns: Observable<Campaign[]>;
+    private state: string = '';
     
     constructor(public navCtrl: NavController, public navParams: NavParams, public firestone: FirestoneService) {
-        this.campanhas = this.firestone.getCampanhas();
+        this.campaigns = this.firestone.getCampaign();
     }
     
-    ionViewDidLoad() {
+    public ionViewDidLoad() {
         console.log('ionViewDidLoad VisualizarCampanhasPage');
     }
     
-    public buttonClicked: boolean = false; 
-    
-    public onButtonClick(event) {
+    public viewMore(event) {
         let card = this.getClosest(event.target, "js-item-doacao");
-        this.estado = !this.estado;
         let cardBoxInfo = card.querySelectorAll(".doacao-info")[0];
 
         if (cardBoxInfo.classList.contains("doacao-info--is-active")) {
@@ -43,13 +40,12 @@ export class VisualizarCampanhasPage {
         }
     }
     
-    public filtrarCampanha(event) {
-        this.campanhas = this.firestone.filterCampanha(this.estado, event.target.cidade.value);
+    public filterCampaign(event) {
+        this.campaigns = this.firestone.filterCampaign(this.state, event.target.cidade.value);
     }
 
-    getClosest (elem, clazz) {    
+    public getClosest (elem, clazz) {    
         for ( ; elem && elem !== document; elem = elem.parentNode ) {
-            console.log(elem.classList);
             if ( elem.classList.contains( clazz ) ) return elem;
         }
         return null;

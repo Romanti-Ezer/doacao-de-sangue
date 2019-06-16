@@ -1,167 +1,195 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
-
 import { AngularFirestore } from 'angularfire2/firestore';
 import { AngularFirestoreCollection } from 'angularfire2/firestore';
 import { Observable } from 'rxjs/Observable';
-import { map } from 'rxjs-compat/operator/map';
-import { pipe } from 'rxjs';
 
 export interface User {
     userID: string,
-    userNome: string,
+    userName: string,
     userEmail: string,
-    userTel: string,
+    userPhone: string,
     userCEP: string,
-    userEnd: string,
-    userEndNum: string,
-    userCidade: string,
-    userUF: string,
-    userSangue: string
+    userAddress: string,
+    userAddressNum: string,
+    userCity: string,
+    userState: string,
+    userBlood: string
 }
 
-export interface Campanha {
-    tipoSangue: string,
-    tipoDoacao: string,
-    dataLimite: Date,
-
-    nomeHemocentro: string,
-    endHemocentroCEP: string,
-    endHemocentro: string,
-    endHemocentroNro: string,
-    endHemocentroCidade: string,
-    endHemocentroUF: string,
-
-    nomeDivulgador: string,
-    emailDivulgador: string,
-    telDivulgador: string,
-    endDivulgadorCEP: string,
-    endDivulgador: string,
-    endDivulgadorNum: string,
-    endDivulgadorCidade: string,
-    endDivulgadorUF: string,
-
-    divulgadorPaciente: boolean,
-    pacienteIndicado: string,
-    
-    observacoes: string
+export interface Campaign {
+    campBloodType: string,
+    campDonateType: string,
+    campLimitDate: Date,
+    campBloodCenter: string,
+    campBloodCenterCEP: string,
+    campBloodCenterAddress: string,
+    campBloodCenterAddressNum: string,
+    campBloodCenterCity: string,
+    campBloodCenterState: string,
+    campPromoterName: string,
+    campPromoterEmail: string,
+    campPromoterPhone: string,
+    campPromoterCEP: string,
+    campPromoterAddress: string,
+    campPromoterAddressNum: string,
+    campPromoterCity: string,
+    campPromoterState: string,
+    campPromoterIsPatient: boolean,
+    campIndicatedPatient: string,
+    campObservations: string
 }
 
-export interface Doacao {
-    userID: string,
-    nomeHemocentro: string,
-    dataDoacao: Date,
-    tipoDoacao: string
+export interface Donation {
+    donatUserID: string,
+    donatBloodCenter: string,
+    donatDate: Date,
+    donatType: string
 }
 
 @Injectable()
 export class FirestoneService {
-    auth: any;
-    usuarios: Observable<User[]>;
 
-    // Dizendo que usuario é um Observable da Interface User
-    private usuario: Observable<User[]>;
-    // usuariosCollectionRef é uma collection de Users
-    private usuariosCollectionRef: AngularFirestoreCollection<User>;
+    // user is an observable of ther User
+    private user: Observable<User[]>;
 
-    // Dizendo que campanhas é um Observable da Interface Campanha
-    campanhas: Observable<Campanha[]>;
-    // campanhasCollectionRef é uma collection de Campanhas -> Coleção de campanhas
-    campanhasCollectionRef: AngularFirestoreCollection<Campanha>;
+    // usersCollectionRef is a collection of User
+    private usersCollectionRef: AngularFirestoreCollection<User>;
 
-    // Dizendo que campanhas é um Observable da Interface Doacao
-    doacoes: Observable<Doacao[]>;
-    // campanhasCollectionRef é uma collection de Campanhas -> Coleção de campanhas
-    doacoesCollectionRef: AngularFirestoreCollection<Doacao>;
+    // campaigns is an observable of Campanha
+    private campaigns: Observable<Campaign[]>;
+
+    // campaignsCollectionRef is a collection of Campaign
+    private campaignsCollectionRef: AngularFirestoreCollection<Campaign>;
+
+    // donations is an observable of Donation
+    private donations: Observable<Donation[]>;
+
+    // donationsCollectionRef is a collection of Donation
+    private donationsCollectionRef: AngularFirestoreCollection<Donation>;
     
-    docUserId;
-
 	constructor(public afAuth: AngularFireAuth, public angularFirestore: AngularFirestore) {
         
-        // Assim que o serviço é instânciado, os dados são sincronizados
-        // Dados da collection usuarios - trazendo apenas 1, referente ao ID do usuário atual
+        // When the service is instantiated, data is synchronized
+        
+        // If we already have a logged user
         if (this.afAuth.auth.currentUser) {
-            this.usuariosCollectionRef = angularFirestore.collection<User>('usuarios', ref => ref.where('userID', '==', this.afAuth.auth.currentUser.uid).limit(1));
-            this.usuario = this.usuariosCollectionRef.snapshotChanges().map(actions => {
+
+            // Constructs a query for Firestone: logged user in users collection
+            this.usersCollectionRef = angularFirestore.collection<User>('users', ref => ref.where('userID', '==', this.afAuth.auth.currentUser.uid).limit(1));
+
+            // Runs the query constructed and stores in user
+            this.user = this.usersCollectionRef.snapshotChanges().map(actions => {
                 return actions.map(a => {
                     const data = a.payload.doc.data() as User;
                     const id = a.payload.doc.id;
-                    this.docUserId = a.payload.doc.id;
                     return { id, ...data };
                 });
             });
+
+            // Constructs a query: donations of logged user
+            this.donationsCollectionRef = angularFirestore.collection('donations', ref => ref.where('userID', '==', this.afAuth.auth.currentUser.uid));
+
+            // Observes changes in donations collection
+            this.donations = this.donationsCollectionRef.valueChanges();
+
         } else {
-            this.usuariosCollectionRef = angularFirestore.collection<User>('usuarios');
+
+            // Constructs a query for Firestone: all users in users collection
+            this.usersCollectionRef = angularFirestore.collection<User>('users');
+
         }
 
-        // Dados da collection de campanhas
-        this.campanhasCollectionRef = this.angularFirestore.collection('campanhas'); 
-        this.campanhas = this.campanhasCollectionRef.valueChanges();
+        // Constructs a query: all campaigns in campaigns collection
+        this.campaignsCollectionRef = this.angularFirestore.collection('campaigns');
+        
+        // Observes changes in campaigns collection
+        this.campaigns = this.campaignsCollectionRef.valueChanges();
 
-        // Doações        
-        this.doacoesCollectionRef = angularFirestore.collection('doacoes', ref => ref.where('userID', '==', this.afAuth.auth.currentUser.uid));
-        this.doacoes = this.doacoesCollectionRef.valueChanges();
     }
     
     //---------------------- User
 
-    // Pegar os dados do usuário
-    public getUserData() {
-        return this.usuario;
+    // Returns logged user data
+    public getUser() {
+        return this.user;
     }
 
-    // Registrar um usuário na collection 'usuarios' no Firestone
-    public setUser(id: string, nome: string, email: string, tel: string = '', cep: string = '', end: string = '', nro: string = '', cidade: string = '', uf: string = '', sangue: string = '') {
-        this.usuariosCollectionRef.add({ userID: id, userNome: nome, userEmail: email, userTel: tel, userCEP: cep, userEnd: end, userEndNum: nro, userCidade: cidade, userUF: uf, userSangue: sangue });
+    // Creates new user on users collection
+    public setUser(userID: string, userName: string, userEmail: string, userPhone: string = '', userCEP: string = '', userAddress: string = '', userAddressNum: string = '', userCity: string = '', userState: string = '', userBlood: string = '') {
+        this.usersCollectionRef.add({ userID: userID, userName: userName, userEmail: userEmail, userPhone: userPhone, userCEP: userCEP, userAddress: userAddress, userAddressNum: userAddressNum, userCity: userCity, userState: userState, userBlood: userBlood });
     }
 
-    // Atualizar os dados do usuário
-    public updateUserData(docId, nome, tel, cep, end, nro, cidade, uf, sangue) {
-        this.usuariosCollectionRef.doc(docId).update({ userNome: nome, userTel: tel, userCEP: cep, userEnd: end, userEndNum: nro, userCidade: cidade, userUF: uf, userSangue: sangue });
+    // Updates user data on users collection
+    public updateUser(docId, userName, userPhone, userCEP, userAddress, userAddressNum, userCity, userState, userBlood) {
+        if (this.usersCollectionRef.doc(docId).update({ userName: userName, userPhone: userPhone, userCEP: userCEP, userAddress: userAddress, userAddressNum: userAddressNum, userCity: userCity, userState: userState, userBlood: userBlood })) {
+            return true;
+        }
+        return false;
     }
 
-    //---------------------- Doações
-    public getDoacoes() {
-        return this.doacoes;
+    //---------------------- Donation
+    // Returns logged user donations
+    public getDonation() {
+        return this.donations;
     }
 
-    //---------------------- Campanhas
+    //---------------------- Campaign
 
-    // Pegar campanhas
-    public getCampanhas() {
-        return this.campanhas;
+    // Returns all campaigns
+    public getCampaign() {
+        return this.campaigns;
     }
 
-    // Registrar um usuário na collection 'usuarios' no Firestone
-    public setCampanha(tipoSangue = '', tipoDoacao = '', dataLimite = null, nomeHemocentro = '', endHemocentroCEP = '', endHemocentro = '', endHemocentroNro = '', endHemocentroCidade = '', endHemocentroUF = '', nomeDivulgador = '', emailDivulgador = '', telDivulgador = '', endDivulgadorCEP = '', endDivulgador = '', endDivulgadorNum = '', endDivulgadorCidade = '', endDivulgadorUF = '', divulgadorPaciente = false, pacienteIndicado = '', observacoes = '') {
-        if (this.campanhasCollectionRef.add({
-            tipoSangue: tipoSangue,
-            tipoDoacao: tipoDoacao,
-            dataLimite: new Date(dataLimite),
-            nomeHemocentro: nomeHemocentro,
-            endHemocentroCEP: endHemocentroCEP,
-            endHemocentro: endHemocentro,
-            endHemocentroNro: endHemocentroNro,
-            endHemocentroCidade: endHemocentroCidade,
-            endHemocentroUF: endHemocentroUF,
-            nomeDivulgador: nomeDivulgador,
-            emailDivulgador: emailDivulgador,
-            telDivulgador: telDivulgador,
-            endDivulgadorCEP: endDivulgadorCEP,
-            endDivulgador: endDivulgador,
-            endDivulgadorNum: endDivulgadorNum,
-            endDivulgadorCidade: endDivulgadorCidade,
-            endDivulgadorUF: endDivulgadorUF,
-            divulgadorPaciente: divulgadorPaciente,
-            pacienteIndicado: pacienteIndicado,
-            observacoes: observacoes
+    // Creates new campaign on campaigns collection
+    public setCampaign(campBloodType = '', campDonateType = '', campLimitDate = null, campBloodCenter = '', campBloodCenterCEP = '', campBloodCenterAddress = '', campBloodCenterAddressNum = '', campBloodCenterCity = '', campBloodCenterState = '', campPromoterName = '', campPromoterEmail = '', campPromoterPhone = '', campPromoterCEP = '', campPromoterAddress = '', campPromoterAddressNum = '', campPromoterCity = '', campPromoterState = '', campPromoterIsPatient = false, campIndicatedPatient = '', campObservations = '') {
+        if (this.campaignsCollectionRef.add({
+            campBloodType: campBloodType,
+            campDonateType: campDonateType,
+            campLimitDate: new Date(campLimitDate),
+            campBloodCenter: campBloodCenter,
+            campBloodCenterCEP: campBloodCenterCEP,
+            campBloodCenterAddress: campBloodCenterAddress,
+            campBloodCenterAddressNum: campBloodCenterAddressNum,
+            campBloodCenterCity: campBloodCenterCity,
+            campBloodCenterState: campBloodCenterState,
+            campPromoterName: campPromoterName,
+            campPromoterEmail: campPromoterEmail,
+            campPromoterPhone: campPromoterPhone,
+            campPromoterCEP: campPromoterCEP,
+            campPromoterAddress: campPromoterAddress,
+            campPromoterAddressNum: campPromoterAddressNum,
+            campPromoterCity: campPromoterCity,
+            campPromoterState: campPromoterState.toUpperCase(),
+            campPromoterIsPatient: campPromoterIsPatient,
+            campIndicatedPatient: campIndicatedPatient,
+            campObservations: campObservations
         })) {
             return true;
         }
         return false;
     }
 
-    public filterCampanha(estado = '', cidade = '') {
-        return this.angularFirestore.collection<Campanha>('campanhas', ref => ref.where('endHemocentroUF', '==', estado).where('endHemocentroCidade', '==', cidade)).valueChanges();
+    // Filters campaigns by state and city
+    public filterCampaign(campBloodCenterState = '', campBloodCenterCity = '') {
+        // If we state and city is provided
+        if (campBloodCenterState && campBloodCenterCity) {
+            return this.angularFirestore.collection<Campaign>('campaigns', ref => ref.where('campBloodCenterState', '==', campBloodCenterState).where('campBloodCenterCity', '==', campBloodCenterCity)).valueChanges();
+        }
+        
+        // If only state is provided
+        else if(campBloodCenterState) {
+            return this.angularFirestore.collection<Campaign>('campaigns', ref => ref.where('campBloodCenterState', '==', campBloodCenterState)).valueChanges();
+        }
+
+        // If only city is provided
+        else if(campBloodCenterCity) {
+            return this.angularFirestore.collection<Campaign>('campaigns', ref => ref.where('campBloodCenterCity', '==', campBloodCenterCity)).valueChanges();
+        }
+        
+        // If no data is passed
+        else {
+            return this.angularFirestore.collection<Campaign>('campaigns').valueChanges();
+        }
     }
 }

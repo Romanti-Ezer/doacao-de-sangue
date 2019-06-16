@@ -30,48 +30,48 @@ import { MinhaContaPage } from '../pages/minha-conta/minha-conta';
 import { FirestoneService } from '../services/firestone.service';
 
 @NgModule({
-  declarations: [
-    MyApp,
-    HomePage,
-    LoginPage,
-    SignupPage,
-    PublicarCampanhaPage,
-    VisualizarCampanhasPage,
-    MinhasDoacoesPage,
-    GuiaInformativoPage,
-    MinhaContaPage
-  ],
-  imports: [
-    BrowserModule,
-    FormsModule,    
-    NgxErrorsModule,
-    IonicModule.forRoot(MyApp, {
-      backButtonText: '',
-    }),
-    AngularFireModule.initializeApp(credentials.firebase),
-    AngularFirestoreModule.enablePersistence(),
-    AngularFireDatabaseModule
-  ],
-  bootstrap: [IonicApp],
-  entryComponents: [
-    MyApp,
-    HomePage,
-    LoginPage,
-    SignupPage,
-    PublicarCampanhaPage,
-    VisualizarCampanhasPage,
-    MinhasDoacoesPage,
-    GuiaInformativoPage,
-    MinhaContaPage
-  ],
-  providers: [
-    StatusBar,
-    SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler},
-    AngularFireAuth,
-    AuthService,
-    FirestoneService
-  ]
+    declarations: [
+        MyApp,
+        HomePage,
+        LoginPage,
+        SignupPage,
+        PublicarCampanhaPage,
+        VisualizarCampanhasPage,
+        MinhasDoacoesPage,
+        GuiaInformativoPage,
+        MinhaContaPage
+    ],
+    imports: [
+        BrowserModule,
+        FormsModule,    
+        NgxErrorsModule,
+        IonicModule.forRoot(MyApp, {
+            backButtonText: '',
+        }),
+        AngularFireModule.initializeApp(credentials.firebase),
+        AngularFirestoreModule.enablePersistence(),
+        AngularFireDatabaseModule
+    ],
+    bootstrap: [IonicApp],
+    entryComponents: [
+        MyApp,
+        HomePage,
+        LoginPage,
+        SignupPage,
+        PublicarCampanhaPage,
+        VisualizarCampanhasPage,
+        MinhasDoacoesPage,
+        GuiaInformativoPage,
+        MinhaContaPage
+    ],
+    providers: [
+        StatusBar,
+        SplashScreen,
+        {provide: ErrorHandler, useClass: IonicErrorHandler},
+        AngularFireAuth,
+        AuthService,
+        FirestoneService
+    ]
 })
 
 export class AppModule {}

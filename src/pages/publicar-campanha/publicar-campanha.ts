@@ -20,22 +20,21 @@ import { HomePage } from '../home/home';
 })
 export class PublicarCampanhaPage {
     
-    // Validação do Formulário
-    validaFormulario: FormGroup;
+    private validaFormulario: FormGroup;
     
-    // Dados do usuário
-    dados:any;
+    // User data
+    public userData:any;
 
-    // Chaves - Mostrar ou não dados do divulgador
-    mostrarNomeDivulgador : boolean = false;
-    mostrarEmailDivulgador : boolean = false;
-    mostrarTelDivulgador : boolean = false;
-    mostrarEndDivulgador : boolean = false;
+    // Keys - show or don't data about promoter
+    private mostrarcampPromoterName : boolean = false;
+    private mostrarcampPromoterEmail : boolean = false;
+    private mostrarcampPromoterPhone : boolean = false;
+    private mostrarcampPromoterAddress : boolean = false;
 
-    // Data Limite
-    dataLimite : Date = null;
+    // Limit date
+    private campLimitDate : Date = null;
 
-    ionViewWillLeave() {
+    public ionViewWillLeave() {
         this.appCtrl.getRootNav().setRoot(HomePage);
     }
 
@@ -49,94 +48,99 @@ export class PublicarCampanhaPage {
         public fb: FormBuilder,
         ) {
             this.validaFormulario = fb.group({
-                tipoSangue: ['AB+'],
-                tipoDoacao: ['sangue'],
-                nome: ['', Validators.compose([Validators.required, Validators.maxLength(15)])],
+                campBloodType: ['AB+'],
+                campDonateType: ['sangue'],
+                nome: ['', Validators.compose([Validators.required, Validators.maxLength(60)])],
                 cep: ['', Validators.compose([Validators.required, Validators.minLength(8), Validators.maxLength(8)])],      
                 endereco: ['', Validators.compose( [Validators.required])],
                 numero: ['', Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(5)])],
                 cidade: ['', Validators.compose([Validators.required,])],
                 uf: ['', Validators.compose([Validators.required, Validators.minLength(2), Validators.maxLength(2)])],
                 obs: ['', Validators.compose([Validators.maxLength(200)])],
-                divulgadorPaciente: [''],
+                campPromoterIsPatient: [''],
 
             })
 
-            this.dados = this.firestone.getUserData();
+            this.userData = this.firestone.getUser();
             
-        }
-    
+    }
 
-    ionViewDidLoad() {
+    public ionViewDidLoad() {
         console.log('ionViewDidLoad PublicarCampanhaPage');
     }
     
-    
-    rHabilitar(){ //se nao for o paciente
+    // If promoter isn't the patient
+    public rHabilitar() {  
         document.getElementById('divHidden').hidden=false;
     };
     
-    rDesabilitar(){ //se for o paciente
+    // If promoter is the patient
+    public rDesabilitar() {
         document.getElementById('divHidden').hidden = true;
-        document.getElementById('nomePacienteIndicado').hidden=true;
+        document.getElementById('campIndicatedPatient').hidden=true;
     };
     
-    iHabilitar(){ //input habilitar nome do paciente indicado
-        document.getElementById('nomePacienteIndicado').hidden=false;
+    // Shows indicated patient name input
+    public iHabilitar() {
+        document.getElementById('campIndicatedPatient').hidden=false;
     };
     
-    iDesabilitar(){ //input desabilitar nome do paciente indicado
-        document.getElementById('nomePacienteIndicado').hidden = true;
-        this.showAlert("Publicação Anonima", "Essa opção é indicada para publicações anonimas");
+    // Hides indicated patient name input
+    public iDesabilitar(){ 
+        document.getElementById('campIndicatedPatient').hidden = true;
+        this.showAlert("Publicação Anônima", "Essa opção é indicada para publicações anônimas");
     };
     
-    showAlert(titulo, subtitulo) { // coloquei os 2 parametros para reaproveitar esse alert caso precise
+    public showAlert(title, subtitle) {
         const alert = this.alertCtrl.create({
-            title: titulo,
-            subTitle: subtitulo,
+            title: title,
+            subTitle: subtitle,
             buttons: ['OK']
         });
         alert.present();
     }
 
-    public publicarCampanha(event) {
-        let nomeDivulgador = this.mostrarNomeDivulgador ? event.target.nomeDivulgador.value ? event.target.nomeDivulgador.value : '' : '';
-        let emailDivulgador = this.mostrarEmailDivulgador ? event.target.emailDivulgador.value ? event.target.emailDivulgador.value : '' : '';
-        let telDivulgador = this.mostrarTelDivulgador ? event.target.telDivulgador.value ? event.target.telDivulgador.value : '' : '';
-        let endDivulgadorCEP = this.mostrarEndDivulgador ? event.target.endDivulgadorCEP.value ? event.target.endDivulgadorCEP.value : '' : '';
-        let endDivulgador = this.mostrarEndDivulgador ? event.target.endDivulgador.value ? event.target.endDivulgador.value : '' : '';
-        let endDivulgadorNum = this.mostrarEndDivulgador ? event.target.endDivulgadorNum.value ? event.target.endDivulgadorNum.value : '' : '';
-        let endDivulgadorCidade = this.mostrarEndDivulgador ? event.target.endDivulgadorCidade.value ? event.target.endDivulgadorCidade.value : '' : '';
-        let endDivulgadorUF = this.mostrarEndDivulgador ? event.target.endDivulgadorUF.value ? event.target.endDivulgadorUF.value : '' : '';
+    public setCampaign(event) {
 
-        if(this.firestone.setCampanha(
-            this.validaFormulario.value.tipoSangue,
-            this.validaFormulario.value.tipoDoacao,
-            this.dataLimite,
-            event.target.nomeHemocentro.value,
-            event.target.endHemocentroCEP.value,
-            event.target.endHemocentro.value,
-            event.target.endHemocentroNro.value,
-            event.target.endHemocentroCidade.value,
-            event.target.endHemocentroUF.value,
-            nomeDivulgador,
-            emailDivulgador,
-            telDivulgador,
-            endDivulgadorCEP,
-            endDivulgador,
-            endDivulgadorNum,
-            endDivulgadorCidade,
-            endDivulgadorUF,
-            this.validaFormulario.value.divulgadorPaciente,
-            event.target.pacienteIndicado.value,
-            event.target.observacoes.value
+        // Verifies if promoter data will be shown
+        let campPromoterName = this.mostrarcampPromoterName ? event.target.campPromoterName.value ? event.target.campPromoterName.value : '' : '';
+        let campPromoterEmail = this.mostrarcampPromoterEmail ? event.target.campPromoterEmail.value ? event.target.campPromoterEmail.value : '' : '';
+        let campPromoterPhone = this.mostrarcampPromoterPhone ? event.target.campPromoterPhone.value ? event.target.campPromoterPhone.value : '' : '';
+        let campPromoterCEP = this.mostrarcampPromoterAddress ? event.target.campPromoterCEP.value ? event.target.campPromoterCEP.value : '' : '';
+        let campPromoterAddress = this.mostrarcampPromoterAddress ? event.target.campPromoterAddress.value ? event.target.campPromoterAddress.value : '' : '';
+        let campPromoterAddressNum = this.mostrarcampPromoterAddress ? event.target.campPromoterAddressNum.value ? event.target.campPromoterAddressNum.value : '' : '';
+        let campPromoterCity = this.mostrarcampPromoterAddress ? event.target.campPromoterCity.value ? event.target.campPromoterCity.value : '' : '';
+        let campPromoterState = this.mostrarcampPromoterAddress ? event.target.campPromoterState.value ? event.target.campPromoterState.value : '' : '';
+
+        // Uses firestone service to create new campaign
+        if(this.firestone.setCampaign(
+            this.validaFormulario.value.campBloodType,
+            this.validaFormulario.value.campDonateType,
+            this.campLimitDate,
+            event.target.campBloodCenter.value,
+            event.target.campBloodCenterCEP.value,
+            event.target.campBloodCenterAddress.value,
+            event.target.campBloodCenterAddressNum.value,
+            event.target.campBloodCenterCity.value,
+            event.target.campBloodCenterState.value,
+            campPromoterName,
+            campPromoterEmail,
+            campPromoterPhone,
+            campPromoterCEP,
+            campPromoterAddress,
+            campPromoterAddressNum,
+            campPromoterCity,
+            campPromoterState,
+            this.validaFormulario.value.campPromoterIsPatient,
+            event.target.campIndicatedPatient.value,
+            event.target.campObservations.value
         )) {
-            // Se der certo
+            // If campaign is created successfully
             this.showAlert("Sucesso", "Campanha publicada com sucesso!");
             event.target.reset();
             this.navCtrl.setRoot(HomePage);
         } else {
-            // Se não der certo
+            // If an error occurs
             this.showAlert("Erro", "Erro ao publicar campanha :/");
         }
     }

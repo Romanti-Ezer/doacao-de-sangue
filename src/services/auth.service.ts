@@ -12,19 +12,22 @@ export class AuthService {
 		});
 	}
 
+    // Login with e-mail and password
 	public signInWithEmail(credentials) {
-		console.log('Sign in with email');
-		return this.afAuth.auth.signInWithEmailAndPassword(credentials.email, credentials.password);
+        return this.afAuth.auth.signInWithEmailAndPassword(credentials.email, credentials.password);
 	}
-
+    
+    // Create an account with e-mail and password
 	public signUp(credentials) {
 		return this.afAuth.auth.createUserWithEmailAndPassword(credentials.email, credentials.password);
 	}
-	
+    
+    // Sign out of the user
 	public signOut(): Promise<void> {
 		return this.afAuth.auth.signOut();
 	}
-	
+    
+    // Return data about the logged user
 	public getUserData() {
 		return this.user;
 	}
