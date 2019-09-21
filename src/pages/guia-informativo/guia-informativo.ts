@@ -3,6 +3,7 @@ import { IonicPage, Content, Platform} from 'ionic-angular';
 import { Message } from './models/message';
 import { ApiAiClient } from 'api-ai-javascript';
 import { FormControl, FormBuilder } from '@angular/forms';
+import { credentials } from '../../app/config';
 
 /**
 * Generated class for the GuiaInformativoPage page.
@@ -19,7 +20,7 @@ import { FormControl, FormBuilder } from '@angular/forms';
 export class GuiaInformativoPage {
     
     @ViewChild(Content) content: Content;
-    protected accessToken: string = '18eff182e4034006a9796ff28f34f6f4';
+    protected accessToken: string = credentials.dialogflow.accessToken;
     protected client;
     protected messages: Message[] = [];
     protected messageForm: any;
