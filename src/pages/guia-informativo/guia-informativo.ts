@@ -19,12 +19,12 @@ import { FormControl, FormBuilder } from '@angular/forms';
 export class GuiaInformativoPage {
     
     @ViewChild(Content) content: Content;
-    private accessToken: string = '18eff182e4034006a9796ff28f34f6f4';
-    private client;
-    private messages: Message[] = [];
-    private messageForm: any;
-    private chatBox: any;
-    private isLoading: boolean;
+    protected accessToken: string = '18eff182e4034006a9796ff28f34f6f4';
+    protected client;
+    protected messages: Message[] = [];
+    protected messageForm: any;
+    protected chatBox: any;
+    protected isLoading: boolean;
     
     constructor(public platform: Platform, public formBuilder: FormBuilder) {
         this.chatBox = '';

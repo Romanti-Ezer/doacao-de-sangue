@@ -19,20 +19,20 @@ import { EsqueciMinhaSenhaPage } from '../esqueci-minha-senha/esqueci-minha-senh
 })
 export class LoginPage {
     
-    private loginForm: FormGroup;
-    private loginError: string;
+    protected loginForm: FormGroup;
+    protected loginError: string;
     
     constructor(
-        private navCtrl: NavController,
-        private auth: AuthService,
-        private fb: FormBuilder,
+        protected navCtrl: NavController,
+        protected auth: AuthService,
+        protected fb: FormBuilder,
         public menuCtrl:MenuController
         ) {
             // Disables menu
             this.menuCtrl.enable(false)
 
             // Creates a FormBuilder group for validation
-            this.loginForm = fb.group({
+            this.loginForm = this.fb.group({
                 email: ['', Validators.compose([Validators.required, Validators.email])],
                 password: ['', Validators.compose([Validators.required, Validators.minLength(6)])]
             });

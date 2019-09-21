@@ -20,10 +20,10 @@ import { LoginPage } from '../login/login';
     templateUrl: 'signup.html',
 })
 export class SignupPage {
-    private signupError: string;
-    private form: FormGroup;
+    protected signupError: string;
+    protected form: FormGroup;
     
-    constructor(public navCtrl: NavController, public navParams: NavParams, fb: FormBuilder, private auth: AuthService, public firestone: FirestoneService) {
+    constructor(public navCtrl: NavController, public navParams: NavParams, fb: FormBuilder, protected auth: AuthService, public firestone: FirestoneService) {
         // Creates a FormBuilder group for validation
         this.form = fb.group({
             email: ['', Validators.compose([Validators.required, Validators.email])],

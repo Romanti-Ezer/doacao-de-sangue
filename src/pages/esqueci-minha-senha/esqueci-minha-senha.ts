@@ -20,13 +20,13 @@ import { UtilsService } from '../../services/utils.service';
 })
 export class EsqueciMinhaSenhaPage {
     
-    private resetForm: FormGroup;
-    private resetError: string;
+    protected resetForm: FormGroup;
+    protected resetError: string;
     
     constructor(
-        private navCtrl: NavController,
-        private auth: AuthService,
-        private fb: FormBuilder,
+        protected navCtrl: NavController,
+        protected auth: AuthService,
+        protected fb: FormBuilder,
         public menuCtrl:MenuController,
         public utils: UtilsService
         ) {
@@ -34,7 +34,7 @@ export class EsqueciMinhaSenhaPage {
             this.menuCtrl.enable(false)
 
             // Creates a FormBuilder group for validation
-            this.resetForm = fb.group({
+            this.resetForm = this.fb.group({
                 email: ['', Validators.compose([Validators.required, Validators.email])]
             });
     }

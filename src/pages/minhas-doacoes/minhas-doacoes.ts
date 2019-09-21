@@ -19,13 +19,13 @@ import { Observable } from 'rxjs';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MinhasDoacoesPage {
-    private donations: Observable<Donation[]>;
-    private daysToDonate =  0;
-    private mostRecentDate = 0;
-    private numOfDonations: number = 0;
-    private canDonate = false;
+    protected donations: Observable<Donation[]>;
+    protected daysToDonate =  0;
+    protected mostRecentDate = 0;
+    protected numOfDonations: number = 0;
+    protected canDonate = false;
     
-    constructor(public navCtrl: NavController, public navParams: NavParams, public firestone: FirestoneService, private cd: ChangeDetectorRef) {
+    constructor(public navCtrl: NavController, public navParams: NavParams, public firestone: FirestoneService, protected cd: ChangeDetectorRef) {
         this.donations = this.firestone.getDonation();
         this.numOfDonations = 0;
     }

@@ -18,8 +18,8 @@ import { Campaign } from '../../services/firestone.service';
 })
 export class VisualizarCampanhasPage {
     
-    private campaigns: Observable<Campaign[]>;
-    private state: string = '';
+    protected campaigns: Observable<Campaign[]>;
+    protected state: string = '';
     
     constructor(public navCtrl: NavController, public navParams: NavParams, public firestone: FirestoneService) {
         this.campaigns = this.firestone.getCampaign();

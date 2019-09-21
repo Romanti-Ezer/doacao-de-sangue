@@ -19,19 +19,19 @@ import { HomePage } from '../home/home';
 })
 export class PublicarCampanhaPage {
     
-    private validaFormulario: FormGroup;
+    protected validaFormulario: FormGroup;
     
     // User data
     public userData:any;
 
     // Keys - show or don't data about promoter
-    private mostrarcampPromoterName : boolean = false;
-    private mostrarcampPromoterEmail : boolean = false;
-    private mostrarcampPromoterPhone : boolean = false;
-    private mostrarcampPromoterAddress : boolean = false;
+    protected mostrarcampPromoterName : boolean = false;
+    protected mostrarcampPromoterEmail : boolean = false;
+    protected mostrarcampPromoterPhone : boolean = false;
+    protected mostrarcampPromoterAddress : boolean = false;
 
     // Limit date
-    private campLimitDate : Date = null;
+    protected campLimitDate : Date = null;
 
     public ionViewWillLeave() {
         this.appCtrl.getRootNav().setRoot(HomePage);

@@ -21,15 +21,15 @@ import { AlertController } from 'ionic-angular';
 })
 export class MinhaContaPage {
     
-    private userBlood: string;
-    private data: any;
-    private contaForm: FormGroup;
+    protected userBlood: string;
+    protected data: any;
+    protected contaForm: FormGroup;
     
     constructor(public navCtrl: NavController,
         public navParams: NavParams,
         public fb: FormBuilder,
         public alertCtrl: AlertController,
-        private firestone: FirestoneService) {
+        protected firestone: FirestoneService) {
             
             // Get logged user data
             this.data = this.firestone.getUser()
