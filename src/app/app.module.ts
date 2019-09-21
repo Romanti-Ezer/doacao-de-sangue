@@ -6,10 +6,11 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 
-// Firebase Auth
+// Firebase Auth and Services
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AuthService } from '../services/auth.service';
+import { UtilsService } from '../services/utils.service';
 
 // Firestone
 import { AngularFirestoreModule } from 'angularfire2/firestore';
@@ -20,6 +21,7 @@ import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { LoginPage } from '../pages/login/login';
 import { SignupPage } from '../pages/signup/signup';
+import { EsqueciMinhaSenhaPage } from '../pages/esqueci-minha-senha/esqueci-minha-senha';
 import { PublicarCampanhaPage } from '../pages/publicar-campanha/publicar-campanha';
 import { VisualizarCampanhasPage } from '../pages/visualizar-campanhas/visualizar-campanhas';
 import { MinhasDoacoesPage } from '../pages/minhas-doacoes/minhas-doacoes';
@@ -35,6 +37,7 @@ import { FirestoneService } from '../services/firestone.service';
         HomePage,
         LoginPage,
         SignupPage,
+        EsqueciMinhaSenhaPage,
         PublicarCampanhaPage,
         VisualizarCampanhasPage,
         MinhasDoacoesPage,
@@ -58,6 +61,7 @@ import { FirestoneService } from '../services/firestone.service';
         HomePage,
         LoginPage,
         SignupPage,
+        EsqueciMinhaSenhaPage,
         PublicarCampanhaPage,
         VisualizarCampanhasPage,
         MinhasDoacoesPage,
@@ -70,6 +74,7 @@ import { FirestoneService } from '../services/firestone.service';
         {provide: ErrorHandler, useClass: IonicErrorHandler},
         AngularFireAuth,
         AuthService,
+        UtilsService,
         FirestoneService
     ]
 })

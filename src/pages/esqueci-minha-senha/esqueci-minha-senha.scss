@@ -1,0 +1,46 @@
+page-esqueci-minha-senha {
+    .logo {
+        display: block;
+        width: auto;
+        max-width: 40%;
+        margin: 2em auto;
+        @media screen and (min-width: 769px) {
+            max-width: 160px;
+        }
+    }
+
+    form {
+        max-width: 550px;
+        display: block;
+        margin: 0 auto;
+    }
+
+    ion-item.item {
+        margin-bottom: 1.5em;
+    }
+
+    .button {
+        background-color: #FB3332;
+        width: 140px;
+        max-width: 100%;
+        text-transform: uppercase;
+        text-align: center;
+        border-radius: 3px;
+        display: block;
+        padding: 1.5em 1em;
+        margin: 1.5em auto 1.5em;
+    }
+
+    .c-login-footer {
+        &__p {
+            text-align: center;
+            color: #5B5B5B;
+        }
+        &__link {
+            text-decoration: none;
+            color: #000000;
+        }
+    }
+
+    ion-icon { margin-left: 5px; }
+}

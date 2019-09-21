@@ -20,7 +20,12 @@ export class AuthService {
     // Create an account with e-mail and password
 	public signUp(credentials) {
 		return this.afAuth.auth.createUserWithEmailAndPassword(credentials.email, credentials.password);
-	}
+    }
+    
+    // Create an account with e-mail and password
+	public resetPassword(email) {
+		return this.afAuth.auth.sendPasswordResetEmail(email);
+    }
     
     // Sign out of the user
 	public signOut(): Promise<void> {

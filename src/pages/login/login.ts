@@ -4,6 +4,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { HomePage } from '../home/home';
 import { SignupPage } from '../signup/signup';
+import { EsqueciMinhaSenhaPage } from '../esqueci-minha-senha/esqueci-minha-senha';
 /**
 * Generated class for the LoginPage page.
 *
@@ -61,5 +62,10 @@ export class LoginPage {
     public signUp(){
         // Change screen to sign up
         this.navCtrl.setRoot(SignupPage);
+    }
+
+    public forgotPassword(){
+        // Change screen to sign up
+        this.navCtrl.setRoot(EsqueciMinhaSenhaPage);
     }
 }

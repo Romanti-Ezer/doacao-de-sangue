@@ -2,8 +2,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component } from '@angular/core';
 import { App, IonicPage, NavController, NavParams } from 'ionic-angular';
 import { FirestoneService } from '../../services/firestone.service';
-
-import { AlertController } from 'ionic-angular';
+import { UtilsService } from '../../services/utils.service';
 import { HomePage } from '../home/home';
 
 /**
@@ -41,7 +40,7 @@ export class PublicarCampanhaPage {
 
     constructor(
         public appCtrl: App,
-        public alertCtrl: AlertController, 
+        public utils: UtilsService, 
         public navCtrl: NavController, 
         public navParams: NavParams, 
         public firestone: FirestoneService,
@@ -88,17 +87,8 @@ export class PublicarCampanhaPage {
     // Hides indicated patient name input
     public iDesabilitar(){ 
         document.getElementById('campIndicatedPatient').hidden = true;
-        this.showAlert("Publicação Anônima", "Essa opção é indicada para publicações anônimas");
+        this.utils.showAlert("Publicação Anônima", "Essa opção é indicada para publicações anônimas");
     };
-    
-    public showAlert(title, subtitle) {
-        const alert = this.alertCtrl.create({
-            title: title,
-            subTitle: subtitle,
-            buttons: ['OK']
-        });
-        alert.present();
-    }
 
     public setCampaign(event) {
 
@@ -136,12 +126,12 @@ export class PublicarCampanhaPage {
             event.target.campObservations.value
         )) {
             // If campaign is created successfully
-            this.showAlert("Sucesso", "Campanha publicada com sucesso!");
+            this.utils.showAlert("Sucesso", "Campanha publicada com sucesso!");
             event.target.reset();
             this.navCtrl.setRoot(HomePage);
         } else {
             // If an error occurs
-            this.showAlert("Erro", "Erro ao publicar campanha :/");
+            this.utils.showAlert("Erro", "Erro ao publicar campanha :/");
         }
     }
 }
