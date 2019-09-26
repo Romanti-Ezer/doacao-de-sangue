@@ -3,6 +3,8 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { AngularFirestoreCollection } from 'angularfire2/firestore';
 import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/map';
 
 export interface User {
     userID: string,
@@ -40,11 +42,14 @@ export interface Campaign {
     campObservations: string
 }
 
-export interface Donation {
-    donatUserID: string,
-    donatBloodCenter: string,
-    donatDate: Date,
-    donatType: string
+export class Donation {
+    donatUserID: string;
+    donatBloodCenter: string;
+    donatDate: any;
+    donatType: string;
+    constructor(values: Object = {}) {
+        Object.assign(this, values);
+    }
 }
 
 @Injectable()
@@ -88,7 +93,7 @@ export class FirestoneService {
             });
 
             // Constructs a query: donations of logged user
-            this.donationsCollectionRef = angularFirestore.collection('donations', ref => ref.where('userID', '==', this.afAuth.auth.currentUser.uid));
+            this.donationsCollectionRef = angularFirestore.collection('donations', ref => ref.where('donatUserID', '==', this.afAuth.auth.currentUser.uid));
 
             // Observes changes in donations collection
             this.donations = this.donationsCollectionRef.valueChanges();
@@ -129,9 +134,12 @@ export class FirestoneService {
     }
 
     //---------------------- Donation
-    // Returns logged user donations
-    public getDonation() {
-        return this.donations;
+    // Returns logged user donations    
+    public getDonation(): Observable<Donation[]> {
+        return this.donations
+            .map(donations => {
+                return donations.map((donation) => new Donation(donation));
+            })
     }
 
     //---------------------- Campaign

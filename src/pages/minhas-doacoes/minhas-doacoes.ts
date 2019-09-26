@@ -3,7 +3,6 @@ import { ChangeDetectorRef } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { FirestoneService } from '../../services/firestone.service';
 import { Donation } from '../../services/firestone.service';
-import { Observable } from 'rxjs';
 
 /**
 * Generated class for the MinhasDoacoesPage page.
@@ -19,15 +18,30 @@ import { Observable } from 'rxjs';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MinhasDoacoesPage {
-    protected donations: Observable<Donation[]>;
-    protected daysToDonate =  0;
-    protected mostRecentDate = 0;
+    protected donations: Donation[] = [];
+    protected daysToDonate = 0;
+    protected mostRecentDate: Date;
     protected numOfDonations: number = 0;
     protected canDonate = false;
     
     constructor(public navCtrl: NavController, public navParams: NavParams, public firestone: FirestoneService, protected cd: ChangeDetectorRef) {
-        this.donations = this.firestone.getDonation();
-        this.numOfDonations = 0;
+        this.firestone.getDonation().subscribe((donations : Donation[])=>{
+            this.donations = donations;
+            this.donations.sort(function(a, b){
+                var keyA = new Date(a.donatDate),
+                    keyB = new Date(b.donatDate);
+                // Compare the 2 dates
+                if(keyA < keyB) return -1;
+                if(keyA > keyB) return 1;
+                return 0;
+            });
+            this.donations.reverse();
+
+            this.numOfDonations = donations.length;
+            this.mostRecentDate = new Date(this.donations[0].donatDate.seconds * 1000);
+            this.DifferenceFromToday(this.donations[0].donatDate);
+            this.cd.detectChanges();
+        });
     }
     
     public ionViewDidLoad() {
@@ -40,10 +54,10 @@ export class MinhasDoacoesPage {
     public DifferenceFromToday(last) {
         if (last) {
             let now = new Date();
+            let temp = this.mostRecentDate;
+
             // Considerando que é homem
-            let temp = new Date(this.mostRecentDate*1000);
             this.daysToDonate = 60 - Math.round(( now.getTime() - temp.getTime())/(1000*60*60*24));
-            console.log("Dias para doar: ", this.daysToDonate);
             if (this.daysToDonate > 0) {
                 this.canDonate = false;
             } else {
@@ -53,15 +67,6 @@ export class MinhasDoacoesPage {
     }
     public getMS(s) {
         if (!this.mostRecentDate || s > this.mostRecentDate) this.mostRecentDate = s;
-        console.log("s: ", s);
-        console.log("this.mostRecentDate: ", this.mostRecentDate)
         return s*1000;
-    }
-    public increaseDonationNumber() {
-        this.numOfDonations = this.numOfDonations + 1;
-        return '';
-    }
-    public resetDonationNumber() {
-        this.numOfDonations = 0;
     }
 }
