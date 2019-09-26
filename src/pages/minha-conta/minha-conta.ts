@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { FirestoneService } from '../../services/firestone.service';
 import { AlertController } from 'ionic-angular';
+import { HomePage } from '../home/home';
 
 /**
 * Generated class for the MinhaContaPage page.
@@ -69,6 +70,7 @@ export class MinhaContaPage {
         )) {
             // If user data is updated successfully
             this.showAlert("Sucesso", "Dados atualizados com sucesso!");
+            this.navCtrl.setRoot(HomePage);
         } else {
             // If an error occurs
             this.showAlert("Erro", "Erro ao atualizar dados :/");
