@@ -54,28 +54,41 @@ export class VisualizarCampanhasPage implements AfterViewInit {
     ngAfterViewInit() {
         setTimeout(() => {
             let elements = this.elem.nativeElement.querySelectorAll('.card-map');
-            console.log("elements: ", elements);
             elements.forEach(element => {
-                console.log("element: ", element)
-                this.showMap(element);
+                this.showMap(element, element.getAttribute("data-address"));
             });
-        }, 1000);
+        }, 500);
     }
     
-    showMap(element) {
+    showMap(element, address) {
         const position = new google.maps.LatLng(-23.5505, -46.6333);
         
         const options = {
             center: position,
-            zoom: 10,
-            mapTypeId: 'hybrid'
+            zoom: 13,
+            mapTypeId: 'roadmap'
         };
-        
+
         const map = new google.maps.Map(element, options);
         
-        var marker = new google.maps.Marker({
-            position: position,
-            map: map
+        var geocoder = new google.maps.Geocoder();
+        setTimeout(() => {
+            this.geocodeAddress(geocoder, map, address);
+        }, 350);
+    }
+
+    geocodeAddress(geocoder, resultsMap, address) {
+        geocoder.geocode({'address': address}, function(results, status) {
+            if (status === 'OK') {
+                resultsMap.setCenter(results[0].geometry.location);
+                /* tslint:disable:no-unused-variable */
+                var marker = new google.maps.Marker({
+                    map: resultsMap,
+                    position: results[0].geometry.location
+                });
+            } else {
+                console.log('Geocode was not successful for the following reason: ' + status);
+            }
         });
     }
 }
