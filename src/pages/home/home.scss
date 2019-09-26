@@ -1,7 +1,10 @@
 page-home {
     
-}
-
-.fundocard{
-    background: rgb(255, 255, 255);
+    .fundocard{
+        background: rgb(255, 255, 255);
+    }
+    
+    .back-button.show-back-button {
+        display: none;
+    }
 }
