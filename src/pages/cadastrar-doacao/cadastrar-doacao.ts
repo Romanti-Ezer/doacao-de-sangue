@@ -27,7 +27,7 @@ export class CadastrarDoacaoPage {
             donatDate: [ '', Validators.required ],
             donatBloodCenter: ['', Validators.compose([Validators.required, Validators.maxLength(60)])]
         });
-        this.firestone.getUserr().subscribe((user:User[]) => {
+        this.firestone.getUser().subscribe((user:User[]) => {
             this.userData = user;
         });
     }
