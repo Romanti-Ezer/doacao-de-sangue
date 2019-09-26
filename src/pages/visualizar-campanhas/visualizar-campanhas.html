@@ -6,6 +6,8 @@
 
 <ion-content padding>
     
+    <div #map id="map"></div> <!--precisa ser trabalhado -->
+
     <ion-list>
         <ion-list-header>
             <h2>Filtro</h2>
@@ -60,9 +62,15 @@
         
         <h1 class="main-title">Campanhas</h1>
         
+
         <ion-card *ngFor="let campaign of campaigns | async" class="js-item-doacao">
             
+            
+
             <img src="../../assets/imgs/mapaplaceholder.jpg" class="card-image">
+
+
+            
             
             <ion-item>
                 <ion-icon name="contact" item-start large></ion-icon>
