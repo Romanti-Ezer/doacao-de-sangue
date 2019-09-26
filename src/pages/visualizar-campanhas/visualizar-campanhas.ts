@@ -54,8 +54,13 @@ export class VisualizarCampanhasPage implements AfterViewInit {
     ngAfterViewInit() {
         setTimeout(() => {
             let elements = this.elem.nativeElement.querySelectorAll('.card-map');
+            let time = 0;
             elements.forEach(element => {
-                this.showMap(element, element.getAttribute("data-address"));
+                var thisScope = this;
+                time += 300
+                setTimeout(function() {
+                    thisScope.showMap(element, element.getAttribute("data-address"));
+                }, time);
             });
         }, 500);
     }
@@ -72,9 +77,9 @@ export class VisualizarCampanhasPage implements AfterViewInit {
         const map = new google.maps.Map(element, options);
         
         var geocoder = new google.maps.Geocoder();
-        setTimeout(() => {
-            this.geocodeAddress(geocoder, map, address);
-        }, 350);
+        
+        this.geocodeAddress(geocoder, map, address);
+        console.log("rodou um mapa: ", new Date());
     }
 
     geocodeAddress(geocoder, resultsMap, address) {
