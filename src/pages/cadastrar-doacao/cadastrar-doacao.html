@@ -1,0 +1,59 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>Cadastrar Doação</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding>    
+    <img src="../../assets/imgs/logoApp.png" alt="My Blood" class="imagemLogo">
+
+    <form (ngSubmit)="setDonation($event)" [formGroup]="registerForm">
+    
+        <h2 ion-text color="dark" class="h2">Doação</h2>
+        
+        <section> <!-- Donation Type -->
+            <h3 class="descricoes">Tipo de doação</h3>
+            <ion-list radio-group formControlName="donatType" name="donatType">
+                <ion-item>
+                    <ion-label>Sangue</ion-label>
+                    <ion-radio value="sangue"></ion-radio>
+                </ion-item>
+                <ion-item>
+                    <ion-label>Plaquetas</ion-label>
+                    <ion-radio value="plaquetas"></ion-radio>
+                </ion-item>
+            </ion-list>
+        </section>
+        
+        
+        <section> <!-- Donation Date -->
+            <h3 class="descricoes">Data da doação</h3>
+            <ion-item>
+                <ion-label>Data</ion-label>
+                <ion-datetime displayFormat="DD/MM/YYYY" formControlName="donatDate" name="donatDate"></ion-datetime>
+            </ion-item>
+        </section>
+        
+        <h2 ion-text color="dark" class="h2">Hemocentro</h2>
+        
+        <!-- Hemocenter data -->
+        <section>
+            <ion-list inset>
+                <!-- Name -->
+                <ion-item [ngClass]="{ invalid: donatBloodCenterErrors.hasError('*', ['touched']) }">
+                    <ion-input name="donatBloodCenter" type="text" placeholder="Nome"
+                    formControlName="donatBloodCenter"></ion-input>
+                </ion-item>
+        
+                <div ngxErrors="donatBloodCenter" #donatBloodCenterErrors="ngxErrors">
+                    <div [ngxError]="['maxlength', 'required']" [when]="['touched']">Digite um nome de até 60 caracteres
+                    </div>
+                </div>
+            </ion-list>
+        </section>
+        
+        <!-- Publish button -->
+        <button ion-button full type="submit" [disabled]="!registerForm.valid">Cadastrar <ion-icon class="icon" name="add-circle"></ion-icon></button>
+        
+    </form>
+</ion-content>

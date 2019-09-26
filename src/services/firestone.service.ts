@@ -19,6 +19,22 @@ export interface User {
     userBlood: string
 }
 
+export class User {
+    userID: string;
+    userName: string;
+    userEmail: string;
+    userPhone: string;
+    userCEP: string;
+    userAddress: string;
+    userAddressNum: string;
+    userCity: string;
+    userState: string;
+    userBlood: string;
+    constructor(values: Object = {}) {
+        Object.assign(this, values);
+    }
+}
+
 export interface Campaign {
     campBloodType: string,
     campDonateType: string,
@@ -117,18 +133,31 @@ export class FirestoneService {
 
     // Returns logged user data
     public getUser() {
-        return this.user;
+        if (this.afAuth.auth.currentUser)
+            return this.user;
+    }
+    public getUserr() {
+        if (this.afAuth.auth.currentUser)
+            return this.user
+                .map(user => {
+                    return user.map(user => new User(user))
+                });
     }
 
     // Creates new user on users collection
     public setUser(userID: string, userName: string, userEmail: string, userPhone: string = '', userCEP: string = '', userAddress: string = '', userAddressNum: string = '', userCity: string = '', userState: string = '', userBlood: string = '') {
-        this.usersCollectionRef.add({ userID: userID, userName: userName, userEmail: userEmail, userPhone: userPhone, userCEP: userCEP, userAddress: userAddress, userAddressNum: userAddressNum, userCity: userCity, userState: userState, userBlood: userBlood });
+        if (this.afAuth.auth.currentUser) {
+            this.usersCollectionRef.add({ userID: userID, userName: userName, userEmail: userEmail, userPhone: userPhone, userCEP: userCEP, userAddress: userAddress, userAddressNum: userAddressNum, userCity: userCity, userState: userState, userBlood: userBlood });
+        }
     }
 
     // Updates user data on users collection
     public updateUser(docId, userName, userPhone, userCEP, userAddress, userAddressNum, userCity, userState, userBlood) {
-        if (this.usersCollectionRef.doc(docId).update({ userName: userName, userPhone: userPhone, userCEP: userCEP, userAddress: userAddress, userAddressNum: userAddressNum, userCity: userCity, userState: userState, userBlood: userBlood })) {
-            return true;
+        if (this.afAuth.auth.currentUser) {
+            if (this.usersCollectionRef.doc(docId).update({ userName: userName, userPhone: userPhone, userCEP: userCEP, userAddress: userAddress, userAddressNum: userAddressNum, userCity: userCity, userState: userState, userBlood: userBlood })) {
+                return true;
+            }
+            return false;
         }
         return false;
     }
@@ -136,68 +165,88 @@ export class FirestoneService {
     //---------------------- Donation
     // Returns logged user donations    
     public getDonation(): Observable<Donation[]> {
-        return this.donations
-            .map(donations => {
-                return donations.map((donation) => new Donation(donation));
-            })
+        if (this.afAuth.auth.currentUser) {
+            return this.donations
+                .map(donations => {
+                    return donations.map((donation) => new Donation(donation));
+                });
+        }
+    }
+
+    // Creates new donation
+    public setDonation(donatUserID, donatBloodCenter, donatDate, donatType) : boolean {
+        if (this.afAuth.auth.currentUser) {
+            if (this.donationsCollectionRef.add({ donatUserID: donatUserID, donatBloodCenter: donatBloodCenter, donatDate: new Date(donatDate), donatType: donatType })) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+        return false;
     }
 
     //---------------------- Campaign
 
     // Returns all campaigns
     public getCampaign() {
-        return this.campaigns;
+        if (this.afAuth.auth.currentUser)
+            return this.campaigns;
     }
 
     // Creates new campaign on campaigns collection
     public setCampaign(campBloodType = '', campDonateType = '', campLimitDate = null, campBloodCenter = '', campBloodCenterCEP = '', campBloodCenterAddress = '', campBloodCenterAddressNum = '', campBloodCenterCity = '', campBloodCenterState = '', campPromoterName = '', campPromoterEmail = '', campPromoterPhone = '', campPromoterCEP = '', campPromoterAddress = '', campPromoterAddressNum = '', campPromoterCity = '', campPromoterState = '', campPromoterIsPatient = false, campIndicatedPatient = '', campObservations = '') {
-        if (this.campaignsCollectionRef.add({
-            campBloodType: campBloodType,
-            campDonateType: campDonateType,
-            campLimitDate: new Date(campLimitDate),
-            campBloodCenter: campBloodCenter,
-            campBloodCenterCEP: campBloodCenterCEP,
-            campBloodCenterAddress: campBloodCenterAddress,
-            campBloodCenterAddressNum: campBloodCenterAddressNum,
-            campBloodCenterCity: campBloodCenterCity,
-            campBloodCenterState: campBloodCenterState,
-            campPromoterName: campPromoterName,
-            campPromoterEmail: campPromoterEmail,
-            campPromoterPhone: campPromoterPhone,
-            campPromoterCEP: campPromoterCEP,
-            campPromoterAddress: campPromoterAddress,
-            campPromoterAddressNum: campPromoterAddressNum,
-            campPromoterCity: campPromoterCity,
-            campPromoterState: campPromoterState.toUpperCase(),
-            campPromoterIsPatient: campPromoterIsPatient,
-            campIndicatedPatient: campIndicatedPatient,
-            campObservations: campObservations
-        })) {
-            return true;
+        if (this.afAuth.auth.currentUser) {
+            if (this.campaignsCollectionRef.add({
+                campBloodType: campBloodType,
+                campDonateType: campDonateType,
+                campLimitDate: new Date(campLimitDate),
+                campBloodCenter: campBloodCenter,
+                campBloodCenterCEP: campBloodCenterCEP,
+                campBloodCenterAddress: campBloodCenterAddress,
+                campBloodCenterAddressNum: campBloodCenterAddressNum,
+                campBloodCenterCity: campBloodCenterCity,
+                campBloodCenterState: campBloodCenterState,
+                campPromoterName: campPromoterName,
+                campPromoterEmail: campPromoterEmail,
+                campPromoterPhone: campPromoterPhone,
+                campPromoterCEP: campPromoterCEP,
+                campPromoterAddress: campPromoterAddress,
+                campPromoterAddressNum: campPromoterAddressNum,
+                campPromoterCity: campPromoterCity,
+                campPromoterState: campPromoterState.toUpperCase(),
+                campPromoterIsPatient: campPromoterIsPatient,
+                campIndicatedPatient: campIndicatedPatient,
+                campObservations: campObservations
+            })) {
+                return true;
+            }
+            return false;
         }
         return false;
     }
 
     // Filters campaigns by state and city
     public filterCampaign(campBloodCenterState = '', campBloodCenterCity = '') {
-        // If we state and city is provided
-        if (campBloodCenterState && campBloodCenterCity) {
-            return this.angularFirestore.collection<Campaign>('campaigns', ref => ref.where('campBloodCenterState', '==', campBloodCenterState).where('campBloodCenterCity', '==', campBloodCenterCity)).valueChanges();
-        }
-        
-        // If only state is provided
-        else if(campBloodCenterState) {
-            return this.angularFirestore.collection<Campaign>('campaigns', ref => ref.where('campBloodCenterState', '==', campBloodCenterState)).valueChanges();
-        }
+        if (this.afAuth.auth.currentUser) {
+            // If we state and city is provided
+            if (campBloodCenterState && campBloodCenterCity) {
+                return this.angularFirestore.collection<Campaign>('campaigns', ref => ref.where('campBloodCenterState', '==', campBloodCenterState).where('campBloodCenterCity', '==', campBloodCenterCity)).valueChanges();
+            }
+            
+            // If only state is provided
+            else if(campBloodCenterState) {
+                return this.angularFirestore.collection<Campaign>('campaigns', ref => ref.where('campBloodCenterState', '==', campBloodCenterState)).valueChanges();
+            }
 
-        // If only city is provided
-        else if(campBloodCenterCity) {
-            return this.angularFirestore.collection<Campaign>('campaigns', ref => ref.where('campBloodCenterCity', '==', campBloodCenterCity)).valueChanges();
-        }
-        
-        // If no data is passed
-        else {
-            return this.angularFirestore.collection<Campaign>('campaigns').valueChanges();
+            // If only city is provided
+            else if(campBloodCenterCity) {
+                return this.angularFirestore.collection<Campaign>('campaigns', ref => ref.where('campBloodCenterCity', '==', campBloodCenterCity)).valueChanges();
+            }
+            
+            // If no data is passed
+            else {
+                return this.angularFirestore.collection<Campaign>('campaigns').valueChanges();
+            }
         }
     }
 }

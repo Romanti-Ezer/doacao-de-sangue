@@ -3,6 +3,9 @@ import { ChangeDetectorRef } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { FirestoneService } from '../../services/firestone.service';
 import { Donation } from '../../services/firestone.service';
+import { CadastrarDoacaoPage } from '../cadastrar-doacao/cadastrar-doacao';
+import { OnDestroy } from "@angular/core";
+import { ISubscription } from "rxjs/Subscription";
 
 /**
 * Generated class for the MinhasDoacoesPage page.
@@ -17,15 +20,17 @@ import { Donation } from '../../services/firestone.service';
     templateUrl: 'minhas-doacoes.html',
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class MinhasDoacoesPage {
-    protected donations: Donation[] = [];
-    protected daysToDonate = 0;
+export class MinhasDoacoesPage implements OnDestroy  {
+    private subscription: ISubscription;
+
+    protected donations: Donation[];
+    protected daysToDonate: number;
     protected mostRecentDate: Date;
-    protected numOfDonations: number = 0;
+    protected numOfDonations: number;
     protected canDonate = false;
     
     constructor(public navCtrl: NavController, public navParams: NavParams, public firestone: FirestoneService, protected cd: ChangeDetectorRef) {
-        this.firestone.getDonation().subscribe((donations : Donation[])=>{
+        this.subscription = this.firestone.getDonation().subscribe((donations : Donation[])=>{
             this.donations = donations;
             this.donations.sort(function(a, b){
                 var keyA = new Date(a.donatDate),
@@ -44,9 +49,14 @@ export class MinhasDoacoesPage {
         });
     }
     
+    ngOnDestroy() {
+        this.subscription.unsubscribe();
+    }
+
     public ionViewDidLoad() {
         console.log('ionViewDidLoad MinhasDoacoesPage');
     }
+
     public ngAfterViewInit() {
         this.cd.detectChanges();
     }
@@ -68,5 +78,9 @@ export class MinhasDoacoesPage {
     public getMS(s) {
         if (!this.mostRecentDate || s > this.mostRecentDate) this.mostRecentDate = s;
         return s*1000;
+    }
+
+    public cadastrarDoacao() {
+        this.navCtrl.push(CadastrarDoacaoPage);
     }
 }

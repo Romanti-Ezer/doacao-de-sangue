@@ -1,0 +1,41 @@
+page-cadastrar-doacao {
+    .imagemLogo {
+        display: block;
+        width: auto;
+        max-width: 20%;
+        margin: 2em auto;
+        @media screen and (min-width: 769px) {
+            max-width: 220px;
+        }}
+    ion-item.item {
+        margin-bottom: 0.1em;
+    }
+    .h1 {
+        text-align: center;
+        font-family: Roboto, Helvetica, sans-serif;
+    }
+    .h2 {
+        text-align: center;
+        font-family: Roboto, Helvetica, sans-serif;
+    }
+    .descricoes {
+        text-align: center;
+        color: grey;
+        font-family: Roboto, Helvetica, sans-serif;
+        margin-block-end: 2.5%;
+        margin-top: 2.5%;
+        font-size: 1.2em;
+    }
+    .button {
+        background-color: #FB3332;
+        width: 140px;
+        max-width: 100%;
+        text-transform: uppercase;
+        text-align: center;
+        border-radius: 3px;
+        display: block;
+        padding: 1.5em 1em;
+        margin: 2.5em auto 1.5em;
+    }
+    .icon { margin-left: 5px }
+}

@@ -39,7 +39,11 @@ export class MyApp {
     }
     
     goToPage(component) {
-        this.nav.push(component);
+        if (component === HomePage) {
+            this.nav.setRoot(component);
+        } else {
+            this.nav.push(component);
+        }
     }
     
     logout() {

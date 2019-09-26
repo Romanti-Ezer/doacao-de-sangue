@@ -30,6 +30,7 @@ import { GuiaInformativoPage } from '../pages/guia-informativo/guia-informativo'
 import { credentials } from './config';
 import { MinhaContaPage } from '../pages/minha-conta/minha-conta';
 import { FirestoneService } from '../services/firestone.service';
+import { CadastrarDoacaoPage } from '../pages/cadastrar-doacao/cadastrar-doacao';
 
 @NgModule({
     declarations: [
@@ -42,7 +43,8 @@ import { FirestoneService } from '../services/firestone.service';
         VisualizarCampanhasPage,
         MinhasDoacoesPage,
         GuiaInformativoPage,
-        MinhaContaPage
+        MinhaContaPage,
+        CadastrarDoacaoPage
     ],
     imports: [
         BrowserModule,
@@ -66,7 +68,8 @@ import { FirestoneService } from '../services/firestone.service';
         VisualizarCampanhasPage,
         MinhasDoacoesPage,
         GuiaInformativoPage,
-        MinhaContaPage
+        MinhaContaPage,
+        CadastrarDoacaoPage
     ],
     providers: [
         StatusBar,
