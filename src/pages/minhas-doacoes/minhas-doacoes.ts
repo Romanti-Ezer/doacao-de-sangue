@@ -43,8 +43,10 @@ export class MinhasDoacoesPage implements OnDestroy  {
             this.donations.reverse();
 
             this.numOfDonations = donations.length;
-            this.mostRecentDate = new Date(this.donations[0].donatDate.seconds * 1000);
-            this.DifferenceFromToday(this.donations[0].donatDate);
+            if (donations.length > 0) {
+                this.mostRecentDate = new Date(this.donations[0].donatDate.seconds * 1000);
+                this.DifferenceFromToday(this.donations[0].donatDate);
+            }
             this.cd.detectChanges();
         });
     }
