@@ -6,6 +6,12 @@ page-visualizar-campanhas {
         justify-content: center;
         align-items: center;
         text-align: center;
+        background-image: linear-gradient(rgba(255,255,255,.5), rgba(255,255,255,.5)), url("../../assets/imgs/mapaplaceholder.jpg");
+        background-size: cover;
+        background-position: center;
+        font-weight: bold;
+        font-size: 1.1em;
+        padding-top: 1em;
     }
     .cidade-estado {
         display: inline-block;

@@ -54,7 +54,9 @@ export class VisualizarCampanhasPage implements AfterViewInit {
     ngAfterViewInit() { }
 
     initMap(event) {
-        this.showMap(event.target, event.target.getAttribute("data-address"));
+        if (event.target.innerText == "Clique para visualizar a localização no mapa") {
+            this.showMap(event.target, event.target.getAttribute("data-address"));
+        }
     }
     
     showMap(element, address) {

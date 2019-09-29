@@ -62,7 +62,7 @@
         
 
         <ion-card *ngFor="let campaign of campaigns | async" class="js-item-doacao">
-            <div class="card-map" attr.data-address="{{ campaign.campBloodCenterAddress }}, {{ campaign.campBloodCenterAddressNum }} - {{ campaign.campBloodCenterCity }} - {{ campaign.campBloodCenterState }}" (click)="initMap($event)">Clique para carregar o mapa.</div>
+            <div class="card-map" attr.data-address="{{ campaign.campBloodCenterAddress }}, {{ campaign.campBloodCenterAddressNum }} - {{ campaign.campBloodCenterCity }} - {{ campaign.campBloodCenterState }}" (click)="initMap($event)">Clique para visualizar a localização no mapa</div>
             
             <ion-item>
                 <ion-icon name="contact" item-start large></ion-icon>
