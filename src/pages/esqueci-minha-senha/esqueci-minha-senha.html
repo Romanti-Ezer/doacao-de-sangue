@@ -19,7 +19,7 @@
 
             <!-- Email -->
 			<ion-item [ngClass]="{ invalid: emailErrors.hasError('*', ['touched', 'dirty']) }">
-				<ion-input type="text" placeholder="Email" formControlName="email"></ion-input>
+				<ion-input type="text" name="email" placeholder="Email" autocapitalize="none" formControlName="email"></ion-input>
 			</ion-item>
 
             <!-- Email validation -->
