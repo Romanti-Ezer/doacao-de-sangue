@@ -25,6 +25,7 @@ export class VisualizarCampanhasPage implements AfterViewInit {
     protected campaigns: Observable<Campaign[]>;
     protected state: string = '';
     
+    
     constructor(public navCtrl: NavController, public navParams: NavParams, public firestone: FirestoneService, private elem: ElementRef) {
         this.campaigns = this.firestone.getCampaign();
     }
@@ -76,14 +77,28 @@ export class VisualizarCampanhasPage implements AfterViewInit {
         console.log("rodou um mapa: ", new Date());
     }
 
+  
+
+
     geocodeAddress(geocoder, resultsMap, address) {
+
+      
+
         geocoder.geocode({'address': address}, function(results, status) {
+
+            var icon = {
+                url: "../../assets/imgs/logoApp.png",
+                scaledSize: new google.maps.Size(25,25),
+                
+            };
+            
             if (status === 'OK') {
                 resultsMap.setCenter(results[0].geometry.location);
                 /* tslint:disable:no-unused-variable */
                 var marker = new google.maps.Marker({
                     map: resultsMap,
-                    position: results[0].geometry.location
+                    position: results[0].geometry.location,
+                    icon: icon
                 });
             } else {
                 console.log('Geocode was not successful for the following reason: ' + status);
