@@ -2,6 +2,10 @@ page-visualizar-campanhas {
 
     .card-map {
         height: 240px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
     }
     .cidade-estado {
         display: inline-block;

@@ -51,18 +51,10 @@ export class VisualizarCampanhasPage implements AfterViewInit {
         return null;
     };
     
-    ngAfterViewInit() {
-        setTimeout(() => {
-            let elements = this.elem.nativeElement.querySelectorAll('.card-map');
-            let time = 0;
-            elements.forEach(element => {
-                var thisScope = this;
-                time += 300
-                setTimeout(function() {
-                    thisScope.showMap(element, element.getAttribute("data-address"));
-                }, time);
-            });
-        }, 500);
+    ngAfterViewInit() { }
+
+    initMap(event) {
+        this.showMap(event.target, event.target.getAttribute("data-address"));
     }
     
     showMap(element, address) {
