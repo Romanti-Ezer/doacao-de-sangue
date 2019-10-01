@@ -1,9 +1,11 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, OnDestroy, OnInit } from '@angular/core';
 import { IonicPage, Content, Platform} from 'ionic-angular';
 import { Message } from './models/message';
 import { ApiAiClient } from 'api-ai-javascript';
 import { FormControl, FormBuilder } from '@angular/forms';
 import { credentials } from '../../app/config';
+import { FirestoneService, User } from '../../services/firestone.service';
+import { ISubscription } from "rxjs/Subscription";
 
 /**
 * Generated class for the GuiaInformativoPage page.
@@ -17,7 +19,7 @@ import { credentials } from '../../app/config';
     selector: 'page-guia-informativo',
     templateUrl: 'guia-informativo.html',
 })
-export class GuiaInformativoPage {
+export class GuiaInformativoPage implements OnDestroy, OnInit {
     
     @ViewChild(Content) content: Content;
     protected accessToken: string = credentials.dialogflow.accessToken;
@@ -26,8 +28,11 @@ export class GuiaInformativoPage {
     protected messageForm: any;
     protected chatBox: any;
     protected isLoading: boolean;
+    protected data: any;
+    protected userName: any;
+    protected subscription: ISubscription;
     
-    constructor(public platform: Platform, public formBuilder: FormBuilder) {
+    constructor(public platform: Platform, public formBuilder: FormBuilder, public firestone: FirestoneService) {
         this.chatBox = '';
         
         this.messageForm = formBuilder.group({
@@ -38,12 +43,23 @@ export class GuiaInformativoPage {
             accessToken: this.accessToken
         });
     }
+
+    ngOnInit() {
+        this.userName = "Usuário";
+        this.subscription = this.firestone.getUser().subscribe((user:User[]) => {
+            this.userName = user[0].userName;
+        });
+    }
+
+    ngOnDestroy() {
+        this.subscription.unsubscribe();
+    }
     
     public sendMessage(req: string) {
         if (!req || req === '') {
             return;
         }
-        this.messages.push({ from: 'Eu', text: req });
+        this.messages.push({ from: 'Usuário', text: req });
         this.isLoading = true;
         
         this.client
@@ -54,7 +70,6 @@ export class GuiaInformativoPage {
             
             //mais uma gambiarra para trocar todo - por <br>
             var textResponse = response.result.fulfillment.speech;
-            textResponse = textResponse.replace(/-/g, '<br><br>');
             
             console.log(textResponse);
             
@@ -80,21 +95,30 @@ export class GuiaInformativoPage {
         }, 100);
     }
     
-    onload =  this.funcaodoguil(); // quando pagina carregar faz a funcao
+    onload =  this.funcaodoguil();
     
-    public funcaodoguil() // gambiarra feito por Guilbert kkk
+    public funcaodoguil()
     {
-        this.messages.push({
-            from: 'Sanguinho',
-            text: 'Bem vindo sou o Sanguinho caso tenha alguma duvida você pode retirá-las aqui é facil apenas escreva no campo abaixo, sinta-se à vontade para perguntar :). '
-        })
-        
-        this.messages.push({
-            from: 'Sanguinho',
-            text: 'Utilizamos a Portaria 158/ 04 de fevereiro 2016 como amparo de nossas respostas.'
-        })
-    }
+        this.isLoading = true;
+        setTimeout(() => {
+            this.messages.push({
+                from: 'Sanguinho',
+                text: 'Bem vindo sou o Sanguinho caso tenha alguma duvida você pode retirá-las aqui é facil apenas escreva no campo abaixo, sinta-se à vontade para perguntar :). '
+            });
+            this.isLoading = false;
 
+            setTimeout(() => {
+                this.isLoading = true;
+                setTimeout(() => {
+                    this.messages.push({
+                        from: 'Sanguinho',
+                        text: 'Utilizamos a Portaria 158/ 04 de fevereiro 2016 como amparo de nossas respostas.'
+                    })
+                    this.isLoading = false;
+                }, 1500);
+            }, 500);
+        }, 1200)
+    }
 }
 
 

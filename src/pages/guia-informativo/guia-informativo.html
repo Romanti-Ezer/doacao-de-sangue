@@ -19,16 +19,16 @@
     <div *ngFor="let message of messages" class="message-wrapper">
         <div>
             
-            <img class="profile-pic" [ngClass]="{'left':message.from==='Sanguinho', 'right':message.from==='Eu'}" src="../../assets/imgs/foto{{message.from}}.png"
+            <img class="profile-pic" [ngClass]="{'left':message.from==='Sanguinho', 'right':message.from==='Usuário'}" [src]="message.from === 'Sanguinho' ? '../../assets/imgs/fotoSanguinho.png' : '../../assets/imgs/fotoEu.png'"
             />
             <!--  wave-->
-            <div class="chat-bubble" [ngClass]="{'left':message.from==='Sanguinho', 'right':message.from==='Eu', 'slide-left': message.from==='Sanguinho', 'slide-right':message.from==='Eu'}">
+            <div class="chat-bubble" [ngClass]="{'left':message.from==='Sanguinho', 'right':message.from==='Usuário', 'slide-left': message.from==='Sanguinho', 'slide-right':message.from==='Usuário'}">
                 
                 <div class="message" [innerHTML]="message.text" autolinker>
                 </div>
                 
                 <div class="message-detail">
-                    <span class="bold">{{ message.from }} </span>
+                    <span class="bold">{{ message.from }}</span>
                     <span class="time">{{ message.created | date:'dd.MM hh:MM' }}</span>
                     <!-- <span>{{message.created | date:'dd/MM hh:MM'}}</span> -->
                 </div>

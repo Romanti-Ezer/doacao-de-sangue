@@ -50,7 +50,12 @@ page-guia-informativo{
     left: 10px;
   }
     
-  
+  .text-input {
+    border: 1px solid #ddd;
+    border-radius: 50px;
+    color: #000;
+    padding: 10px;
+  }
 
   img.profile-pic.right 
   {
@@ -218,9 +223,7 @@ page-guia-informativo{
   
   .testedoinput { //podera mudar
     padding: .0em;
-    border: 1px solid #ddd;
-    border-radius: 50px;
-    color: #000;}
+  }
 
 
   
