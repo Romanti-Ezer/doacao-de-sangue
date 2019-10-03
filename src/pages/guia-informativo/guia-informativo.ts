@@ -1,11 +1,9 @@
-import { Component, ViewChild, OnDestroy, OnInit } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { IonicPage, Content, Platform} from 'ionic-angular';
 import { Message } from './models/message';
 import { ApiAiClient } from 'api-ai-javascript';
 import { FormControl, FormBuilder } from '@angular/forms';
 import { credentials } from '../../app/config';
-import { FirestoneService, User } from '../../services/firestone.service';
-import { ISubscription } from "rxjs/Subscription";
 
 /**
 * Generated class for the GuiaInformativoPage page.
@@ -19,7 +17,7 @@ import { ISubscription } from "rxjs/Subscription";
     selector: 'page-guia-informativo',
     templateUrl: 'guia-informativo.html',
 })
-export class GuiaInformativoPage implements OnDestroy, OnInit {
+export class GuiaInformativoPage {
     
     @ViewChild(Content) content: Content;
     protected accessToken: string = credentials.dialogflow.accessToken;
@@ -28,11 +26,8 @@ export class GuiaInformativoPage implements OnDestroy, OnInit {
     protected messageForm: any;
     protected chatBox: any;
     protected isLoading: boolean;
-    protected data: any;
-    protected userName: any;
-    protected subscription: ISubscription;
     
-    constructor(public platform: Platform, public formBuilder: FormBuilder, public firestone: FirestoneService) {
+    constructor(public platform: Platform, public formBuilder: FormBuilder) {
         this.chatBox = '';
         
         this.messageForm = formBuilder.group({
@@ -43,23 +38,12 @@ export class GuiaInformativoPage implements OnDestroy, OnInit {
             accessToken: this.accessToken
         });
     }
-
-    ngOnInit() {
-        this.userName = "Usuário";
-        this.subscription = this.firestone.getUser().subscribe((user:User[]) => {
-            this.userName = user[0].userName;
-        });
-    }
-
-    ngOnDestroy() {
-        this.subscription.unsubscribe();
-    }
     
     public sendMessage(req: string) {
         if (!req || req === '') {
             return;
         }
-        this.messages.push({ from: 'Usuário', text: req });
+        this.messages.push({ from: 'Eu', text: req });
         this.isLoading = true;
         
         this.client
@@ -70,6 +54,7 @@ export class GuiaInformativoPage implements OnDestroy, OnInit {
             
             //mais uma gambiarra para trocar todo - por <br>
             var textResponse = response.result.fulfillment.speech;
+            textResponse = textResponse.replace(/-/g, '<br><br>');
             
             console.log(textResponse);
             
@@ -95,30 +80,21 @@ export class GuiaInformativoPage implements OnDestroy, OnInit {
         }, 100);
     }
     
-    onload =  this.funcaodoguil();
+    onload =  this.funcaodoguil(); // quando pagina carregar faz a funcao
     
-    public funcaodoguil()
+    public funcaodoguil() // gambiarra feito por Guilbert kkk
     {
-        this.isLoading = true;
-        setTimeout(() => {
-            this.messages.push({
-                from: 'Sanguinho',
-                text: 'Bem vindo sou o Sanguinho caso tenha alguma duvida você pode retirá-las aqui é facil apenas escreva no campo abaixo, sinta-se à vontade para perguntar :). '
-            });
-            this.isLoading = false;
-
-            setTimeout(() => {
-                this.isLoading = true;
-                setTimeout(() => {
-                    this.messages.push({
-                        from: 'Sanguinho',
-                        text: 'Utilizamos a Portaria 158/ 04 de fevereiro 2016 como amparo de nossas respostas.'
-                    })
-                    this.isLoading = false;
-                }, 1500);
-            }, 500);
-        }, 1200)
+        this.messages.push({
+            from: 'Sanguinho',
+            text: 'Bem vindo sou o Sanguinho caso tenha alguma duvida você pode retirá-las aqui é facil apenas escreva no campo abaixo, sinta-se à vontade para perguntar :). '
+        })
+        
+        this.messages.push({
+            from: 'Sanguinho',
+            text: 'Utilizamos a Portaria 158/ 04 de fevereiro 2016 como amparo de nossas respostas.'
+        })
     }
+
 }
 
 

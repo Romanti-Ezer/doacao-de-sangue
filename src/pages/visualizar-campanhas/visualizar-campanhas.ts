@@ -1,4 +1,4 @@
-import { Component, AfterViewInit } from '@angular/core';
+import { Component, ElementRef, AfterViewInit } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Observable } from 'rxjs';
 import { FirestoneService } from '../../services/firestone.service';
@@ -26,7 +26,7 @@ export class VisualizarCampanhasPage implements AfterViewInit {
     protected state: string = '';
     
     
-    constructor(public navCtrl: NavController, public navParams: NavParams, public firestone: FirestoneService) {
+    constructor(public navCtrl: NavController, public navParams: NavParams, public firestone: FirestoneService, private elem: ElementRef) {
         this.campaigns = this.firestone.getCampaign();
     }
     
@@ -74,14 +74,21 @@ export class VisualizarCampanhasPage implements AfterViewInit {
         var geocoder = new google.maps.Geocoder();
         
         this.geocodeAddress(geocoder, map, address);
+        console.log("rodou um mapa: ", new Date());
     }
 
+  
+
+
     geocodeAddress(geocoder, resultsMap, address) {
+
+      
+
         geocoder.geocode({'address': address}, function(results, status) {
 
             var icon = {
-                url: "../../assets/imgs/myblood-marker.png",
-                scaledSize: new google.maps.Size(27,40),
+                url: "../../assets/imgs/logoApp.png",
+                scaledSize: new google.maps.Size(25,25),
                 
             };
             
