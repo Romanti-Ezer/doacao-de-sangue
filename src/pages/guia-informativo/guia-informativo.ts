@@ -84,15 +84,26 @@ export class GuiaInformativoPage {
     
     public funcaodoguil() // gambiarra feito por Guilbert kkk
     {
-        this.messages.push({
-            from: 'Sanguinho',
-            text: 'Bem vindo sou o Sanguinho caso tenha alguma duvida você pode retirá-las aqui é facil apenas escreva no campo abaixo, sinta-se à vontade para perguntar :). '
-        })
+        this.isLoading = true;
+        setTimeout(() => {
+            this.messages.push({
+                from: 'Sanguinho',
+                text: 'Bem vindo sou o Sanguinho caso tenha alguma duvida você pode retirá-las aqui é facil apenas escreva no campo abaixo, sinta-se à vontade para perguntar :). '
+            });
+            this.isLoading = false;
+
         
-        this.messages.push({
-            from: 'Sanguinho',
-            text: 'Utilizamos a Portaria 158/ 04 de fevereiro 2016 como amparo de nossas respostas.'
-        })
+            setTimeout(() => {
+                this.isLoading = true;
+                setTimeout(() => {
+                    this.messages.push({
+                        from: 'Sanguinho',
+                        text: 'Utilizamos a Portaria 158/ 04 de fevereiro 2016 como amparo de nossas respostas.'
+                    })
+                    this.isLoading = false;
+                }, 1500);
+            }, 500);
+        }, 1200)
     }
 
 }

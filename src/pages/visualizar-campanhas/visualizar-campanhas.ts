@@ -87,8 +87,8 @@ export class VisualizarCampanhasPage implements AfterViewInit {
         geocoder.geocode({'address': address}, function(results, status) {
 
             var icon = {
-                url: "../../assets/imgs/logoApp.png",
-                scaledSize: new google.maps.Size(25,25),
+                url: "../../assets/imgs/myblood-marker.png",
+                scaledSize: new google.maps.Size(27,40),
                 
             };
             
