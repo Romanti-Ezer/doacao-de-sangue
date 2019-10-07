@@ -4,7 +4,7 @@ import { PublicarCampanhaPage } from './publicar-campanha';
 
 @NgModule({
   declarations: [
-    PublicarCampanhaPage,
+    PublicarCampanhaPage
   ],
   imports: [
     IonicPageModule.forChild(PublicarCampanhaPage),

@@ -54,7 +54,7 @@ export class PublicarCampanhaPage {
                 endereco: ['', Validators.compose( [Validators.required])],
                 numero: ['', Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(5)])],
                 cidade: ['', Validators.compose([Validators.required,])],
-                uf: ['', Validators.compose([Validators.required, Validators.minLength(2), Validators.maxLength(2)])],
+                uf: ['', Validators.compose([Validators.required, Validators.pattern('^(?=.*[A-Z]).{2,}$'),Validators.minLength(2), Validators.maxLength(2)])],
                 obs: ['', Validators.compose([Validators.maxLength(200)])],
                 campPromoterIsPatient: [''],
 
@@ -134,6 +134,7 @@ export class PublicarCampanhaPage {
             this.utils.showAlert("Erro", "Erro ao publicar campanha :/");
         }
     }
+
 }
 
 

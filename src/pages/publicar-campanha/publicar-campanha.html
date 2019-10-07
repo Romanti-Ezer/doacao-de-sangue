@@ -118,13 +118,15 @@
             
                 
                 <!-- State -->
-                <ion-item [ngClass]="{ invalid: ufErrors.hasError('*', ['touched']) }">
-                    <ion-input name="campBloodCenterState" minlength="2" maxlength="2" type="text" placeholder="UF"
-                    formControlName="uf"></ion-input>
+                <ion-item [ngClass]="{ invalid: ufErrors.hasError('*', ['touched']) }" >
+                    
+                        <ion-input name="campBloodCenterState" minlength="2" maxlength="2" type="text" placeholder="UF"
+                        formControlName="uf"></ion-input>
+                     
                 </ion-item>
         
                 <div ngxErrors="uf" #ufErrors="ngxErrors">
-                    <div [ngxError]="['required']" [when]="['touched']">Digite a sigla do seu estado
+                    <div [ngxError]="['required']" [when]="['touched']">Digite a sigla do seu estado em letras maiúscula
                     </div>
                 </div>
             </ion-list>
@@ -173,10 +175,9 @@
                     <ion-input class="hidden"name="end" type="text" placeholder="Endereço" [ngModelOptions]="{standalone: true}" [(ngModel)]="user.userAddress" name="campPromoterAddress"></ion-input>
                     <ion-input class="hidden" type="number" placeholder="Numero" [ngModelOptions]="{standalone: true}" [(ngModel)]="user.userAddressNum" name="campPromoterAddressNum"></ion-input>
                     <ion-input class="hidden" name="endCidade" type="text" placeholder="Cidade" [ngModelOptions]="{standalone: true}" [(ngModel)]="user.userCity" name="campPromoterCity"></ion-input>
-                    <ion-input class="hidden" type="text" placeholder="UF" [ngModelOptions]="{standalone: true}" [(ngModel)]="user.userState" name="campPromoterState"></ion-input>
+                    <ion-input class="hidden" type="text" placeholder="UF" [ngModelOptions]="{standalone: true}" [(ngModel)]="user.userState"  name="campPromoterState"></ion-input>
                     
                 </ion-item>
-
             </div>
         </section>
         
@@ -234,6 +235,8 @@
                 </div>
             </div>
         </div>
+        
+
         
         <!-- Publish button -->
         <button ion-button full type="submit" [disabled]="!validaFormulario.valid">Publicar <ion-icon class="icon" name="heart"></ion-icon></button>
