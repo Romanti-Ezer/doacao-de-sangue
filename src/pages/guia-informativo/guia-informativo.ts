@@ -53,14 +53,14 @@ export class GuiaInformativoPage {
             console.log('res');
             
             //mais uma gambiarra para trocar todo - por <br>
-            var textResponse = response.result.fulfillment.speech;
-            textResponse = textResponse.replace(/-/g, '<br><br>');
+            //var textResponse = response.result.fulfillment.speech;
+            //textResponse = textResponse.replace(/-/g, '<br><br>');
             
-            console.log(textResponse);
+            //console.log(textResponse);
             
             this.messages.push({
                 from: 'Sanguinho',
-                text: textResponse
+                text: response.result.fulfillment.speech
             });
             this.scrollToBottom();
             this.isLoading = false;
