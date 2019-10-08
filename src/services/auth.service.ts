@@ -35,5 +35,13 @@ export class AuthService {
     // Return data about the logged user
 	public getUserData() {
 		return this.user;
-	}
+    }
+    
+    public setPersistence() {
+        return this.afAuth.auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL)
+    }
+
+    public getCurrentUser() {
+        return this.afAuth.auth.currentUser
+    }
 }

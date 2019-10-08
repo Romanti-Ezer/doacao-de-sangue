@@ -36,6 +36,11 @@ export class LoginPage {
                 email: ['', Validators.compose([Validators.required, Validators.email])],
                 password: ['', Validators.compose([Validators.required, Validators.minLength(6)])]
             });
+
+            console.log("current user: ", this.auth.getCurrentUser());
+            if(this.auth.getCurrentUser()) {
+                this.navCtrl.setRoot(HomePage)
+            }
     }
         
     public login() {
@@ -54,7 +59,14 @@ export class LoginPage {
         // Uses Auth service to login
         this.auth.signInWithEmail(credentials)
         .then(
-            () => this.navCtrl.setRoot(HomePage),
+            () => {
+                console.log("current user: ", this.auth.getCurrentUser());
+                var lthis = this;
+                this.auth.setPersistence()
+                    .then(function() {
+                        lthis.navCtrl.setRoot(HomePage)
+                    })
+            },
             error => this.loginError = error.message
         );
     }
