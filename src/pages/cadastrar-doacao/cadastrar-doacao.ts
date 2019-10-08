@@ -3,7 +3,6 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FirestoneService, User } from '../../services/firestone.service';
 import { UtilsService } from '../../services/utils.service';
-import { MinhasDoacoesPage } from '../minhas-doacoes/minhas-doacoes'
 
 /**
 * Generated class for the CadastrarDoacaoPage page.

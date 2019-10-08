@@ -1,4 +1,4 @@
-import { Component, ElementRef, AfterViewInit } from '@angular/core';
+import { Component, AfterViewInit } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Observable } from 'rxjs';
 import { FirestoneService } from '../../services/firestone.service';
@@ -26,7 +26,7 @@ export class VisualizarCampanhasPage implements AfterViewInit {
     protected state: string = '';
     
     
-    constructor(public navCtrl: NavController, public navParams: NavParams, public firestone: FirestoneService, private elem: ElementRef) {
+    constructor(public navCtrl: NavController, public navParams: NavParams, public firestone: FirestoneService) {
         this.campaigns = this.firestone.getCampaign();
     }
     
