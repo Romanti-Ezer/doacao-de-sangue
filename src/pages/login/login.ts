@@ -5,6 +5,7 @@ import { AuthService } from '../../services/auth.service';
 import { HomePage } from '../home/home';
 import { SignupPage } from '../signup/signup';
 import { EsqueciMinhaSenhaPage } from '../esqueci-minha-senha/esqueci-minha-senha';
+import * as firebase from 'firebase/app';
 /**
 * Generated class for the LoginPage page.
 *
@@ -28,6 +29,13 @@ export class LoginPage {
         protected fb: FormBuilder,
         public menuCtrl:MenuController
         ) {
+            firebase.auth().onAuthStateChanged(user => {
+                if (user) {
+                    this.navCtrl.setRoot(HomePage);
+                } else {
+                    console.log("no user")
+                }
+            })
             // Disables menu
             this.menuCtrl.enable(false)
 
@@ -36,13 +44,8 @@ export class LoginPage {
                 email: ['', Validators.compose([Validators.required, Validators.email])],
                 password: ['', Validators.compose([Validators.required, Validators.minLength(6)])]
             });
-
-            console.log("current user: ", this.auth.getCurrentUser());
-            if(this.auth.getCurrentUser()) {
-                this.navCtrl.setRoot(HomePage)
-            }
     }
-        
+
     public login() {
         // Prepares data for use Auth service for login
         let data = this.loginForm.value;
@@ -57,18 +60,18 @@ export class LoginPage {
         };
 
         // Uses Auth service to login
-        this.auth.signInWithEmail(credentials)
-        .then(
-            () => {
-                console.log("current user: ", this.auth.getCurrentUser());
-                var lthis = this;
-                this.auth.setPersistence()
-                    .then(function() {
-                        lthis.navCtrl.setRoot(HomePage)
-                    })
-            },
-            error => this.loginError = error.message
-        );
+        var fthis = this;
+        this.auth.setPersistence()
+            .then(function() {
+                var lthis = fthis;
+                fthis.auth.signInWithEmail(credentials)
+                    .then(
+                        () => {
+                            lthis.navCtrl.setRoot(HomePage);
+                        },
+                        error => lthis.loginError = error.message
+                    );
+            })
     }
         
     public signUp(){

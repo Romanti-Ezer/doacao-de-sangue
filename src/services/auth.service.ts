@@ -40,8 +40,4 @@ export class AuthService {
     public setPersistence() {
         return this.afAuth.auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL)
     }
-
-    public getCurrentUser() {
-        return this.afAuth.auth.currentUser
-    }
 }
