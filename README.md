@@ -1,6 +1,6 @@
 <div align="center">
 	<img width="150" height="139" src="https://raw.githubusercontent.com/Romanti-Ezer/doacao-de-sangue/master/src/assets/imgs/logo.png"><br/>
-	<h1>MyBlood</h1>
+	<h1 style="border:none">MyBlood</h1>
 </div>
 
 ## Introdução 
