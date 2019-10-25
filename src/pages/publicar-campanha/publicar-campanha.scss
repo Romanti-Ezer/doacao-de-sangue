@@ -54,5 +54,5 @@ page-publicar-campanha {
 
     .hidden { opacity: 0; font-size: 0; height: 0; max-height: 0;  }
 
-  
+    input[placeholder='UF'] { text-transform: uppercase; }
 }
