@@ -1,7 +1,9 @@
-
+<p align="center">
+<img width="150" height="150" src="https://raw.githubusercontent.com/Romanti-Ezer/doacao-de-sangue/master/src/assets/imgs/logo.png"><br/>
 # MyBlood
+</p>
 
-##Introdução 
+## Introdução 
 
 MyBlood é um aplicativo híbrido destinado para toda sociedade com intuito de auxilar cidadãos que necessitam de doações de sangue, em nosso projeto utilizamos alguns serviços e tecnologias que listaremos abaixo:
 
@@ -19,11 +21,6 @@ MyBlood é um aplicativo híbrido destinado para toda sociedade com intuito de a
 5. Está pronto para o `ionic serve --lab`;
 6. Aplicação rodando
 
-<p align="center">
-  <b>Some Links:</b><br>
-  <a href="#">Link 1</a> |
-  <a href="#">Link 2</a> |
-  <a href="#">Link 3</a>
-  <br><br>
-  <img src="http://s.4cdn.org/image/title/105.gif">
-</p>
+
+
+
