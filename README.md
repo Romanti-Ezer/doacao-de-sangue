@@ -10,7 +10,7 @@ MyBlood é um aplicativo híbrido destinado para toda sociedade com intuito de a
 * Ionic 3
 * Firebase 
 * Dialogflow
-* Maps JavScript API
+* Maps JavaScript API
 * Geocoding API
 
 ## Instalação
