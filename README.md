@@ -5,7 +5,7 @@
 
 ## Introdução 
 
-MyBlood é um aplicativo híbrido destinado para toda sociedade com intuito de auxilar cidadãos que necessitam de doações de sangue, em nosso projeto utilizamos alguns serviços e tecnologias que listaremos abaixo:
+MyBlood é um aplicativo híbrido destinado para toda sociedade com intuito de auxiliar cidadãos que necessitam de doações de sangue, em nosso projeto utilizamos alguns serviços e tecnologias que listaremos abaixo:
 
 * Ionic 3
 * Firebase 
