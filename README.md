@@ -23,13 +23,6 @@ MyBlood é um aplicativo híbrido destinado para toda sociedade com intuito de a
 
 
 
-## Apresentação
-
-
-
-
-
-[![IMAGE ALT TEXT HERE](https:/img.youtube.com/vi/HxL0MLg-a7U&t=2s/0.jpg)](https://www.youtube.com/watch?v=HxL0MLg-a7U&t=2s)
 
 
 
