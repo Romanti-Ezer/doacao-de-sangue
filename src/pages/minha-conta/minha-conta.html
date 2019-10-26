@@ -14,7 +14,7 @@
     
     <img src="../../assets/imgs/logoApp.png" alt="My Blood" class="logo">
     
-    <form (ngSubmit)="updateUser($event)" *ngFor="let user of data | async">
+    <form (ngSubmit)="updateUser($event)" *ngFor="let user of users | async">
         <ion-list inset>
             
             <!-- Doc ID -->
@@ -28,8 +28,7 @@
             </ion-item>
 
             <ion-item> <!-- nome dos estados-->
-                <ion-label>Escolha o gênero</ion-label>
-                <ion-select [(ngModel)]="genero" [ngModelOptions]="{standalone: true}">
+                <ion-select [(ngModel)]="user.userGender" [ngModelOptions]="{standalone: true}" placeholder="Escolha o gênero" name="userGender" (ionChange)="setGender($event)">
                     <ion-option value="M">Masculino</ion-option>
                     <ion-option value="F">Feminino</ion-option>
                     <ion-option value="O">Outros</ion-option>

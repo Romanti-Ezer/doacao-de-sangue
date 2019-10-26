@@ -16,7 +16,8 @@ export interface User {
     userAddressNum: string,
     userCity: string,
     userState: string,
-    userBlood: string
+    userBlood: string,
+    userGender: string
 }
 
 export class User {
@@ -30,6 +31,7 @@ export class User {
     userCity: string;
     userState: string;
     userBlood: string;
+    userGender: string;
     constructor(values: Object = {}) {
         Object.assign(this, values);
     }
@@ -145,16 +147,16 @@ export class FirestoneService {
     }
 
     // Creates new user on users collection
-    public setUser(userID: string, userName: string, userEmail: string, userPhone: string = '', userCEP: string = '', userAddress: string = '', userAddressNum: string = '', userCity: string = '', userState: string = '', userBlood: string = '') {
+    public setUser(userID: string, userName: string, userEmail: string, userPhone: string = '', userCEP: string = '', userAddress: string = '', userAddressNum: string = '', userCity: string = '', userState: string = '', userBlood: string = '', userGender: string = '') {
         if (this.afAuth.auth.currentUser) {
-            this.usersCollectionRef.add({ userID: userID, userName: userName, userEmail: userEmail, userPhone: userPhone, userCEP: userCEP, userAddress: userAddress, userAddressNum: userAddressNum, userCity: userCity, userState: userState, userBlood: userBlood });
+            this.usersCollectionRef.add({ userID: userID, userName: userName, userEmail: userEmail, userPhone: userPhone, userCEP: userCEP, userAddress: userAddress, userAddressNum: userAddressNum, userCity: userCity, userState: userState, userBlood: userBlood, userGender: userGender });
         }
     }
 
     // Updates user data on users collection
-    public updateUser(docId, userName, userPhone, userCEP, userAddress, userAddressNum, userCity, userState, userBlood) {
+    public updateUser(docId, userName, userPhone, userCEP, userAddress, userAddressNum, userCity, userState, userBlood, userGender) {
         if (this.afAuth.auth.currentUser) {
-            if (this.usersCollectionRef.doc(docId).update({ userName: userName, userPhone: userPhone, userCEP: userCEP, userAddress: userAddress, userAddressNum: userAddressNum, userCity: userCity, userState: userState, userBlood: userBlood })) {
+            if (this.usersCollectionRef.doc(docId).update({ userName: userName, userPhone: userPhone, userCEP: userCEP, userAddress: userAddress, userAddressNum: userAddressNum, userCity: userCity, userState: userState, userBlood: userBlood, userGender: userGender })) {
                 return true;
             }
             return false;

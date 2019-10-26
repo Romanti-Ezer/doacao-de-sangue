@@ -23,7 +23,8 @@ import { HomePage } from '../home/home';
 export class MinhaContaPage {
     
     protected userBlood: string;
-    protected data: any;
+    protected userGender: string;
+    protected users: any;
     protected contaForm: FormGroup;
     
     constructor(public navCtrl: NavController,
@@ -33,7 +34,7 @@ export class MinhaContaPage {
         protected firestone: FirestoneService) {
             
             // Get logged user data
-            this.data = this.firestone.getUser()
+            this.users = this.firestone.getUser()
     }
         
     ionViewDidLoad() {
@@ -45,6 +46,11 @@ export class MinhaContaPage {
         this.userBlood = value;
     }
 
+    // Store user gender
+    public setGender(value) {
+        this.userGender = value;
+    }
+
     public showAlert(title, subtitle) {
         const alert = this.alertCtrl.create({
             title: title,
@@ -53,7 +59,7 @@ export class MinhaContaPage {
         });
         alert.present();
     }
-    
+    Blood
     // Uses firestone service to update user and shows a message
     public updateUser(event) {
         // Uses Firestone service for update logged user data
@@ -66,7 +72,8 @@ export class MinhaContaPage {
             event.target.userAddressNum.value,
             event.target.userCity.value,
             event.target.userState.value,
-            this.userBlood
+            this.userBlood,
+            this.userGender
         )) {
             // If user data is updated successfully
             this.showAlert("Sucesso", "Dados atualizados com sucesso!");
