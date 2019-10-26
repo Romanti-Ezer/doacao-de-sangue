@@ -36,6 +36,8 @@ export class MyApp {
             statusBar.styleDefault();
             splashScreen.hide();
         });
+
+        statusBar.styleLightContent();
     }
     
     goToPage(component) {
@@ -52,6 +54,8 @@ export class MyApp {
             this.nav.setRoot(LoginPage);
         }
     }
+
+   
     
 }
 
