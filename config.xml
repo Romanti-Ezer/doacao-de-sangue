@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="io.ionic.starter" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>My Blood</name>
-    <description>Aplicativo com recursos úteis para a comunidade que doa e que precisa de sangue.</description>
-    <author email="hi@ionicframework" href="http://ionicframework.com/">Ionic Framework Team</author>
+    <name>MyBlood</name>
+    <description>Aplicativo híbrido voltado para a sociedade, com o principal objetivo de aumentar o número de doadores de sangue no Brazil, possibilitando a publicação e busca de campanhas de doações de sangue por qualquer pessoa.</description>
+    <author email="appmyblood@gmail.com" href="https://github.com/Romanti-Ezer/doacao-de-sangue">MyBlood Team</author>
     <content src="index.html" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
