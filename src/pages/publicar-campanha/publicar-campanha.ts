@@ -47,14 +47,14 @@ export class PublicarCampanhaPage {
         public fb: FormBuilder,
         ) {
             this.validaFormulario = fb.group({
-                campBloodType: ['AB+'],
+                campBloodType: [''],
                 campDonateType: ['sangue'],
                 nome: ['', Validators.compose([Validators.required, Validators.maxLength(60)])],
                 cep: ['', Validators.compose([Validators.required, Validators.minLength(8), Validators.maxLength(8)])],      
                 endereco: ['', Validators.compose( [Validators.required])],
                 numero: ['', Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(5)])],
                 cidade: ['', Validators.compose([Validators.required,])],
-                uf: ['', Validators.compose([Validators.required, Validators.pattern('^(?=.*[A-Z]).{2,}$'),Validators.minLength(2), Validators.maxLength(2)])],
+                uf: ['', Validators.compose([Validators.required,Validators.minLength(2), Validators.maxLength(2)])],
                 obs: ['', Validators.compose([Validators.maxLength(200)])],
                 campPromoterIsPatient: [''],
 

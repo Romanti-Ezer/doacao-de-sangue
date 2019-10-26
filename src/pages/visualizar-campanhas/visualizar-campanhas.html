@@ -51,10 +51,14 @@
                     <ion-item> <!-- nome dos estados-->
                         <ion-label>Tipo de Sangue</ion-label>
                         <ion-select [(ngModel)]="typeblood" [ngModelOptions]="{standalone: true}">
+                            <ion-option value="A+">A+</ion-option>
+                            <ion-option value="A-">A-</ion-option>
+                            <ion-option value="B+">B+</ion-option>
+                            <ion-option value="B-">B-</ion-option>
                             <ion-option value="AB+">AB+</ion-option>
                             <ion-option value="AB-">AB-</ion-option>
                             <ion-option value="O+">O+</ion-option>
-                            <ion-option value="O-">O_</ion-option>
+                            <ion-option value="O-">O-</ion-option>
                         </ion-select>
                     </ion-item>  
 

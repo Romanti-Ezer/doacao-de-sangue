@@ -10,6 +10,11 @@ page-publicar-campanha {
     ion-item.item {
         margin-bottom: 0.1em;
     }
+
+    ion-item.tiposangue{
+        margin-bottom: 2.0em;
+    }
+
     ion-textarea {
         margin-block-end: -40px; /* Tava torto o campo de observações */
     }

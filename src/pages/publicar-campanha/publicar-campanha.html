@@ -11,27 +11,10 @@
     
         <h2 ion-text color="dark" class="h2">Campanha</h2>
         
-        <section> <!-- Blood Type -->
-            <h3 class="descricoes">Tipo de sangue</h3>
-            <ion-list radio-group formControlName="campBloodType" inset>
-                <ion-item>
-                    <ion-label>AB+</ion-label>
-                    <ion-radio value="AB+"></ion-radio>
-                </ion-item>
-                <ion-item>
-                    <ion-label>AB-</ion-label>
-                    <ion-radio value="AB-"></ion-radio>
-                </ion-item>
-                <ion-item>
-                    <ion-label>O+</ion-label>
-                    <ion-radio value="O+"></ion-radio>
-                </ion-item>
-                <ion-item>
-                    <ion-label>O-</ion-label>
-                    <ion-radio value="O-"></ion-radio>  
-                </ion-item>
-            </ion-list>
-        </section>
+
+
+        
+        
         
         <section> <!-- Donation Type -->
             <h3 class="descricoes">Tipo de doação</h3>
@@ -47,7 +30,22 @@
             </ion-list>
         </section>
         
-        
+        <section>
+        <ion-item class="tiposangue"> <!-- tipo de sangue-->
+            <ion-label>Tipo de Sangue</ion-label>
+            <ion-select [(ngModel)]="typeblood" formControlName="campBloodType">
+                <ion-option value="A+">A+</ion-option>
+                <ion-option value="A-">A-</ion-option>
+                <ion-option value="B+">B+</ion-option>
+                <ion-option value="B-">B-</ion-option>
+                <ion-option value="AB+">AB+</ion-option>
+                <ion-option value="AB-">AB-</ion-option>
+                <ion-option value="O+">O+</ion-option>
+                <ion-option value="O-">O-</ion-option>
+            </ion-select>
+        </ion-item>  
+    </section>
+
         <section> <!-- Limit Date -->
             <h3 class="descricoes">Data limite</h3>
             <ion-item>
