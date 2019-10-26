@@ -226,16 +226,22 @@ export class FirestoneService {
     }
 
     // Filters campaigns by state and city
-    public filterCampaign(campBloodCenterState = '', campBloodCenterCity = '') {
+    public filterCampaign(campBloodCenterState = '', campBloodCenterCity = '', campBloodType = '') {
         if (this.afAuth.auth.currentUser) {
+            
             // If we state and city is provided
-            if (campBloodCenterState && campBloodCenterCity) {
-                return this.angularFirestore.collection<Campaign>('campaigns', ref => ref.where('campBloodCenterState', '==', campBloodCenterState).where('campBloodCenterCity', '==', campBloodCenterCity)).valueChanges();
+            if (campBloodCenterState && campBloodCenterCity && campBloodType) {
+                return this.angularFirestore.collection<Campaign>('campaigns', ref => ref.where('campBloodCenterState', '==', campBloodCenterState).where('campBloodCenterCity', '==', campBloodCenterCity).where('campBloodType', '==', campBloodType)).valueChanges();
             }
             
             // If only state is provided
             else if(campBloodCenterState) {
                 return this.angularFirestore.collection<Campaign>('campaigns', ref => ref.where('campBloodCenterState', '==', campBloodCenterState)).valueChanges();
+            }
+            
+            //if only state is provided
+            else if(campBloodType) {
+                return this.angularFirestore.collection<Campaign>('campaigns', ref => ref.where('campBloodType', '==', campBloodType)).valueChanges();
             }
 
             // If only city is provided
