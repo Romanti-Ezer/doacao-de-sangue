@@ -72,7 +72,7 @@
                 
                 <!-- CEP -->
                 <ion-item [ngClass]="{ invalid: cepErrors.hasError('*', ['touched']) }"> 
-                    <ion-input name="campBloodCenterCEP" type="number" placeholder="CEP"
+                    <ion-input name="campBloodCenterCEP" type="number" (ionBlur)="getAddress($event)" [(ngModel)]="cep" placeholder="CEP"
                     formControlName="cep"></ion-input>
                 </ion-item>
         
@@ -83,7 +83,7 @@
                 
                 <!-- Address -->
                 <ion-item [ngClass]="{ invalid: enderecoErrors.hasError('*', ['touched']) }">
-                    <ion-input class="umcampo"name="campBloodCenterAddress" type="text" placeholder="Endereço"
+                    <ion-input class="umcampo"name="campBloodCenterAddress" type="text" placeholder="Endereço" [(ngModel)]="logradouro"
                     formControlName="endereco"></ion-input>
                 </ion-item>
         
@@ -105,7 +105,7 @@
                 
                 <!-- City -->
                 <ion-item [ngClass]="{ invalid: cidadeErrors.hasError('*', ['touched']) }">
-                    <ion-input class="umcampo"  name="campBloodCenterCity" type="text" placeholder="Cidade"
+                    <ion-input class="umcampo"  name="campBloodCenterCity" type="text" placeholder="Cidade" [(ngModel)]="cidade"
                     formControlName="cidade"></ion-input>
                 </ion-item>
         
@@ -118,7 +118,7 @@
                 <!-- State -->
                 <ion-item [ngClass]="{ invalid: ufErrors.hasError('*', ['touched']) }" >
                     
-                        <ion-input name="campBloodCenterState" minlength="2" maxlength="2" type="text" placeholder="UF"
+                        <ion-input name="campBloodCenterState" minlength="2" maxlength="2" type="text" placeholder="UF" [(ngModel)]="uf"
                         formControlName="uf"></ion-input>
                      
                 </ion-item>

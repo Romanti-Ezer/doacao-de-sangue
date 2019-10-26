@@ -31,7 +31,10 @@ import { GuiaInformativoPage } from '../pages/guia-informativo/guia-informativo'
 import { credentials } from './config';
 import { MinhaContaPage } from '../pages/minha-conta/minha-conta';
 import { FirestoneService } from '../services/firestone.service';
+import { CepService } from '../services/cep.service';
 import { CadastrarDoacaoPage } from '../pages/cadastrar-doacao/cadastrar-doacao';
+
+import { HttpClientModule } from '@angular/common/http'; 
 
 @NgModule({
     declarations: [
@@ -56,7 +59,8 @@ import { CadastrarDoacaoPage } from '../pages/cadastrar-doacao/cadastrar-doacao'
         }),
         AngularFireModule.initializeApp(credentials.firebase),
         AngularFirestoreModule.enablePersistence(),
-        AngularFireDatabaseModule
+        AngularFireDatabaseModule,
+        HttpClientModule
     ],
     bootstrap: [IonicApp],
     entryComponents: [
@@ -79,7 +83,8 @@ import { CadastrarDoacaoPage } from '../pages/cadastrar-doacao/cadastrar-doacao'
         AngularFireAuth,
         AuthService,
         UtilsService,
-        FirestoneService
+        FirestoneService,
+        CepService
     ]
 })
 

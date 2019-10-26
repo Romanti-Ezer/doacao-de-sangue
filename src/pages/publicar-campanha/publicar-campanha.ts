@@ -4,6 +4,7 @@ import { App, IonicPage, NavController, NavParams } from 'ionic-angular';
 import { FirestoneService } from '../../services/firestone.service';
 import { UtilsService } from '../../services/utils.service';
 import { HomePage } from '../home/home';
+import { CepService } from '../../services/cep.service';
 
 /**
 * Generated class for the PublicarCampanhaPage page.
@@ -32,6 +33,10 @@ export class PublicarCampanhaPage {
 
     // Limit date
     protected campLimitDate : Date = null;
+    protected logradouro = '';
+    protected cidade = '';
+    protected uf = '';
+    protected cep = '';
 
     public ionViewWillLeave() {
         this.appCtrl.getRootNav().setRoot(HomePage);
@@ -45,6 +50,7 @@ export class PublicarCampanhaPage {
         public navParams: NavParams, 
         public firestone: FirestoneService,
         public fb: FormBuilder,
+        public cepService: CepService
         ) {
             this.validaFormulario = fb.group({
                 campBloodType: [''],
@@ -59,9 +65,7 @@ export class PublicarCampanhaPage {
                 campPromoterIsPatient: [''],
 
             })
-
             this.userData = this.firestone.getUser();
-            
     }
 
     public ionViewDidLoad() {
@@ -85,10 +89,22 @@ export class PublicarCampanhaPage {
     };
     
     // Hides indicated patient name input
-    public iDesabilitar(){ 
+    public iDesabilitar() {
         document.getElementById('campIndicatedPatient').hidden = true;
         this.utils.showAlert("Publicação Anônima", "Essa opção é indicada para publicações anônimas");
     };
+
+    public getAddress(event){
+        if (this.cep.length < 8)
+            return false;
+        let lthis = this;
+        this.cepService.getAddress(this.cep)
+            .subscribe(data => {
+                lthis.logradouro = data.logradouro;
+                lthis.cidade = data.localidade;
+                lthis.uf = data.uf;
+            })
+    }
 
     public setCampaign(event) {
 
@@ -108,11 +124,11 @@ export class PublicarCampanhaPage {
             this.validaFormulario.value.campDonateType,
             this.campLimitDate,
             event.target.campBloodCenter.value,
-            event.target.campBloodCenterCEP.value,
-            event.target.campBloodCenterAddress.value,
+            this.cep,
+            this.logradouro,
             event.target.campBloodCenterAddressNum.value,
-            event.target.campBloodCenterCity.value,
-            event.target.campBloodCenterState.value,
+            this.cidade,
+            this.uf,
             campPromoterName,
             campPromoterEmail,
             campPromoterPhone,
