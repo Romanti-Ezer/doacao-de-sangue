@@ -8,6 +8,6 @@ import { PublicarCampanhaPage } from './publicar-campanha';
   ],
   imports: [
     IonicPageModule.forChild(PublicarCampanhaPage),
-  ],
+  ]
 })
 export class PublicarCampanhaPageModule {}

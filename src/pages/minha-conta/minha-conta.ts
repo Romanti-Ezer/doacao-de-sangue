@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { FirestoneService } from '../../services/firestone.service';
 import { AlertController } from 'ionic-angular';
 import { HomePage } from '../home/home';
+import { CepService } from '../../services/cep.service';
 
 /**
 * Generated class for the MinhaContaPage page.
@@ -26,11 +27,13 @@ export class MinhaContaPage {
     protected userGender: string;
     protected users: any;
     protected contaForm: FormGroup;
-    
+    protected cep = '';
+
     constructor(public navCtrl: NavController,
         public navParams: NavParams,
         public fb: FormBuilder,
         public alertCtrl: AlertController,
+        public cepService: CepService,
         protected firestone: FirestoneService) {
             
             // Get logged user data
@@ -49,6 +52,16 @@ export class MinhaContaPage {
     // Store user gender
     public setGender(value) {
         this.userGender = value;
+    }
+
+    public getAddress(event){
+        if (this.cep.length < 8)
+            return false;
+        // let lthis = this;
+        this.cepService.getAddress(this.cep)
+            .subscribe(data => {
+                // Todo
+            })
     }
 
     public showAlert(title, subtitle) {
