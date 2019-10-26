@@ -38,7 +38,7 @@
     "firebase": "^5.8.6",
     "ionic-angular": "3.9.3",
     "ionicons": "3.0.0",
-    "rxjs": "^6.0.0",
+    "rxjs": "6.0.0",
     "rxjs-compat": "^6.4.0",
     "sw-toolbox": "3.6.0",
     "tar": "^4.4.8",
@@ -46,6 +46,7 @@
   },
   "devDependencies": {
     "@ionic/app-scripts": "^3.2.3",
+    "@ionic/lab": "2.0.13",
     "typescript": "~2.6.2"
   },
   "description": "An Ionic project",
