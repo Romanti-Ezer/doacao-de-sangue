@@ -24,6 +24,7 @@ declare var google: any;
 export class VisualizarCampanhasPage implements AfterViewInit {
     protected campaigns: Observable<Campaign[]>;
     protected state: string = '';
+    protected typeblood: string = '';
     
     
     constructor(public navCtrl: NavController, public navParams: NavParams, public firestone: FirestoneService) {
@@ -42,7 +43,7 @@ export class VisualizarCampanhasPage implements AfterViewInit {
     }
     
     public filterCampaign(event) {
-        this.campaigns = this.firestone.filterCampaign(this.state, event.target.cidade.value);
+        this.campaigns = this.firestone.filterCampaign(this.state, event.target.cidade.value, this.typeblood);
     }
     
     public getClosest (elem, clazz) {    
