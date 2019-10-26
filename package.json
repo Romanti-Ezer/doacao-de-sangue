@@ -1,8 +1,8 @@
 {
-  "name": "doacao-sangue",
+  "name": "MyBlood",
   "version": "0.0.1",
-  "author": "Ionic Framework",
-  "homepage": "http://ionicframework.com/",
+  "author": "MyBlood Team",
+  "homepage": "https://github.com/Romanti-Ezer/doacao-de-sangue",
   "private": true,
   "scripts": {
     "start": "ionic-app-scripts serve",
