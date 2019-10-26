@@ -6,6 +6,8 @@ import { HomePage } from '../home/home';
 import { SignupPage } from '../signup/signup';
 import { EsqueciMinhaSenhaPage } from '../esqueci-minha-senha/esqueci-minha-senha';
 import * as firebase from 'firebase/app';
+import { StatusBar } from '@ionic-native/status-bar/';
+
 /**
 * Generated class for the LoginPage page.
 *
@@ -24,6 +26,7 @@ export class LoginPage {
     protected loginError: string;
     
     constructor(
+        private statusBar: StatusBar,
         protected navCtrl: NavController,
         protected auth: AuthService,
         protected fb: FormBuilder,
@@ -83,4 +86,9 @@ export class LoginPage {
         // Change screen to sign up
         this.navCtrl.setRoot(EsqueciMinhaSenhaPage);
     }
+
+        
+    
+
+    
 }
