@@ -48,6 +48,18 @@
                         </ion-select>
                     </ion-item>    
 
+                    <ion-item> <!-- nome dos estados-->
+                        <ion-label>Tipo de Sangue</ion-label>
+                        <ion-select [(ngModel)]="typeblood" [ngModelOptions]="{standalone: true}">
+                            <ion-option value="AB+">AB+</ion-option>
+                            <ion-option value="AB-">AB-</ion-option>
+                            <ion-option value="O+">O+</ion-option>
+                            <ion-option value="O-">O_</ion-option>
+                        </ion-select>
+                    </ion-item>  
+
+
+                    
                     <ion-item> <!-- nome da cidade-->
                         <ion-label fixed>Cidade</ion-label>
                         <ion-input type="text" value="" name="cidade"></ion-input>
