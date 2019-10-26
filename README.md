@@ -21,9 +21,3 @@ Em nosso projeto utilizamos as seguintes tecnologias e serviços:
 3. Após a finalização coloque o`config.ts` mais atualizado no `src\app`;
 4. Crie um arquivo vazio chamado `index.js.map` dentro do `node_modules/api-ai-javascript` para corrigir um bug da dependência;
 5. Execute `ionic serve --lab` para buildar o aplicativo e abrir no navegador.
-
-
-
-
-
-
