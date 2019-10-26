@@ -25,7 +25,7 @@
     <preference name="ShowSplashScreenSpinner" value="false" />
     <platform name="android">
          <preference name="StatusBarOverlaysWebView" value="false" />
-        <preference name="StatusBarBackgroundColor" value="##dc0504" />
+        <preference name="StatusBarBackgroundColor" value="#dc0504" />
         <preference name="StatusBarStyle" value="#FFFFFF" />
         <allow-intent href="market:*" />
         <icon density="ldpi" src="resources/android/icon/drawable-ldpi-icon.png" />
