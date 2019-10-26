@@ -47,7 +47,7 @@
             
             <!-- CEP -->
             <ion-item> 
-                <ion-input type="number" placeholder="CEP" [(ngModel)]="user.userCEP" name="userCEP"></ion-input>
+                <ion-input type="number" placeholder="CEP" [(ngModel)]="user.userCEP" (ionBlur)="getAddress($event)" name="userCEP"></ion-input>
             </ion-item>
             
             <!-- Endereço -->
