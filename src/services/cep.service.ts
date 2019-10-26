@@ -6,7 +6,7 @@ import 'rxjs/add/operator/toPromise';
 export class CepService {
     constructor(private http:HttpClient) { }
 
-    public getAddress(cep:string){
+    public getAddress(cep:string):any {
         return this.http
             .get(`https://viacep.com.br/ws/${cep}/json/`)
     }
