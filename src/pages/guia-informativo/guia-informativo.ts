@@ -49,14 +49,10 @@ export class GuiaInformativoPage {
         this.client
         .textRequest(req)
         .then(response => {
-            /* do something */
-            console.log('res');
+           
             
-            //mais uma gambiarra para trocar todo - por <br>
-            //var textResponse = response.result.fulfillment.speech;
-            //textResponse = textResponse.replace(/-/g, '<br><br>');
             
-            //console.log(textResponse);
+            
             
             this.messages.push({
                 from: 'Sanguinho',
@@ -66,9 +62,7 @@ export class GuiaInformativoPage {
             this.isLoading = false;
         })
         .catch(error => {
-            /* do something here too */
             console.log('error');
-            console.log(error);
         });
         
         this.chatBox = '';
