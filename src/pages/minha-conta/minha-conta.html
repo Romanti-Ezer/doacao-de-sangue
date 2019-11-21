@@ -65,20 +65,38 @@
                 <ion-input type="text" placeholder="UF" [(ngModel)]="user.userState" name="userState"></ion-input>
             </ion-item>
             
+
+            
             <!-- Tipo de Sangue -->
             <ion-list radio-group [(ngModel)]="user.userBlood" name="userBlood" (ionChange)="setBlood($event)">
                 <h3 class="subtitle">Tipo de sangue</h3>
                 <ion-item>
+                    <ion-label>A+</ion-label>
+                    <ion-radio value="A+"></ion-radio>
+                </ion-item>
+                <ion-item>
+                    <ion-label>A-</ion-label>
+                    <ion-radio value="A-"></ion-radio>
+                </ion-item>
+                <ion-item>
+                    <ion-label>B+</ion-label>
+                    <ion-radio value="B+"></ion-radio>
+                </ion-item>
+                <ion-item>
+                    <ion-label>B-</ion-label>
+                    <ion-radio value="B-"></ion-radio>  
+                </ion-item>
+                <ion-item>
                     <ion-label>AB+</ion-label>
-                    <ion-radio value="AB+"></ion-radio>
+                    <ion-radio value="AB-"></ion-radio>  
                 </ion-item>
                 <ion-item>
                     <ion-label>AB-</ion-label>
-                    <ion-radio value="AB-"></ion-radio>
+                    <ion-radio value="AB-"></ion-radio>  
                 </ion-item>
                 <ion-item>
-                    <ion-label>O+</ion-label>
-                    <ion-radio value="O+"></ion-radio>
+                    <ion-label>O-</ion-label>
+                    <ion-radio value="O+"></ion-radio>  
                 </ion-item>
                 <ion-item>
                     <ion-label>O-</ion-label>
