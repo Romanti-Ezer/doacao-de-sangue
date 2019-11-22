@@ -21,11 +21,11 @@ export class GuiaInformativoPage {
     
     @ViewChild(Content) content: Content;
     protected accessToken: string = credentials.dialogflow.accessToken;
-    protected client;
     protected messages: Message[] = [];
     protected messageForm: any;
     protected chatBox: any;
-    protected isLoading: boolean;
+    protected loading: boolean;
+    protected user;
     
     constructor(public platform: Platform, public formBuilder: FormBuilder) {
         this.chatBox = '';
@@ -34,7 +34,7 @@ export class GuiaInformativoPage {
             message: new FormControl('')
         });
         
-        this.client = new ApiAiClient({
+        this.user = new ApiAiClient({
             accessToken: this.accessToken
         });
     }
@@ -44,9 +44,9 @@ export class GuiaInformativoPage {
             return;
         }
         this.messages.push({ from: 'Eu', text: req });
-        this.isLoading = true;
+        this.loading = true;
         
-        this.client
+        this.user
         .textRequest(req)
         .then(response => {
            
@@ -59,10 +59,10 @@ export class GuiaInformativoPage {
                 text: response.result.fulfillment.speech
             });
             this.scrollToBottom();
-            this.isLoading = false;
+            this.loading = false;
         })
         .catch(error => {
-            console.log('error');
+            console.log('Erro foi diagnosticado');
         });
         
         this.chatBox = '';
@@ -76,25 +76,25 @@ export class GuiaInformativoPage {
     
     onload =  this.funcaodoguil(); // quando pagina carregar faz a funcao
     
-    public funcaodoguil() // gambiarra feito por Guilbert kkk
+    public funcaodoguil() 
     {
-        this.isLoading = true;
+        this.loading = true;
         setTimeout(() => {
             this.messages.push({
                 from: 'Sanguinho',
-                text: 'Bem vindo sou o Sanguinho caso tenha alguma duvida você pode retirá-las aqui é facil apenas escreva no campo abaixo, sinta-se à vontade para perguntar :). '
+                text: 'Bem-vindo sou o Sanguinho caso tenha alguma dúvida você pode retirá-las aqui é fácil apenas escreva no campo abaixo, sinta-se à vontade para perguntar. :). '
             });
-            this.isLoading = false;
+            this.loading = false;
 
         
             setTimeout(() => {
-                this.isLoading = true;
+                this.loading = true;
                 setTimeout(() => {
                     this.messages.push({
                         from: 'Sanguinho',
-                        text: 'Utilizamos a Portaria 158/ 04 de fevereiro 2016 como amparo de nossas respostas.'
+                        text: 'Utilizamos a Portaria 158/04 de Fevereiro 2016 como amparo de nossas respostas.'
                     })
-                    this.isLoading = false;
+                    this.loading = false;
                 }, 1500);
             }, 500);
         }, 1200)
