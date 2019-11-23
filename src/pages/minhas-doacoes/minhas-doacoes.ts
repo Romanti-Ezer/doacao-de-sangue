@@ -1,8 +1,8 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { ChangeDetectorRef } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { FirestoneService } from '../../services/firestone.service';
-import { Donation } from '../../services/firestone.service';
+import { FirestoreService } from '../../services/firestore.service';
+import { Donation } from '../../services/firestore.service';
 import { CadastrarDoacaoPage } from '../cadastrar-doacao/cadastrar-doacao';
 import { OnDestroy } from "@angular/core";
 import { ISubscription } from "rxjs/Subscription";
@@ -29,7 +29,7 @@ export class MinhasDoacoesPage implements OnDestroy  {
     protected numOfDonations: number;
     protected canDonate = false;
     
-    constructor(public navCtrl: NavController, public navParams: NavParams, public firestone: FirestoneService, protected cd: ChangeDetectorRef) {
+    constructor(public navCtrl: NavController, public navParams: NavParams, public firestone: FirestoreService, protected cd: ChangeDetectorRef) {
         this.subscription = this.firestone.getDonation().subscribe((donations : Donation[])=>{
             this.donations = donations;
             this.donations.sort(function(a, b){

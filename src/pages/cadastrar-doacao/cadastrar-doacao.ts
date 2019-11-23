@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { FirestoneService, User } from '../../services/firestone.service';
+import { FirestoreService, User } from '../../services/firestore.service';
 import { UtilsService } from '../../services/utils.service';
 
 /**
@@ -20,7 +20,7 @@ export class CadastrarDoacaoPage {
     protected userData : any;
     protected registerForm : FormGroup;
     
-    constructor(public navCtrl: NavController, public navParams: NavParams, public fb: FormBuilder, public firestone: FirestoneService, public utils: UtilsService) {
+    constructor(public navCtrl: NavController, public navParams: NavParams, public fb: FormBuilder, public firestone: FirestoreService, public utils: UtilsService) {
         this.registerForm = fb.group({
             donatType: [['sangue', 'plaquetas'], Validators.required],
             donatDate: [ '', Validators.required ],

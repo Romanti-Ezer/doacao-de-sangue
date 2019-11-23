@@ -1,8 +1,8 @@
 import { Component, AfterViewInit } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Observable } from 'rxjs';
-import { FirestoneService } from '../../services/firestone.service';
-import { Campaign } from '../../services/firestone.service';
+import { FirestoreService } from '../../services/firestore.service';
+import { Campaign } from '../../services/firestore.service';
 declare var google: any;
 
 
@@ -27,7 +27,7 @@ export class VisualizarCampanhasPage implements AfterViewInit {
     protected typeblood: string = '';
     
     
-    constructor(public navCtrl: NavController, public navParams: NavParams, public firestone: FirestoneService) {
+    constructor(public navCtrl: NavController, public navParams: NavParams, public firestone: FirestoreService) {
         this.campaigns = this.firestone.getCampaign();
     }
     

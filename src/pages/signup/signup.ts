@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HomePage } from '../home/home';
 
 import { AuthService } from '../../services/auth.service';
-import { FirestoneService } from '../../services/firestone.service';
+import { FirestoreService } from '../../services/firestore.service';
 import { LoginPage } from '../login/login';
 import { AlertController } from 'ionic-angular';
 import { MinhaContaPage } from '../minha-conta/minha-conta';
@@ -25,7 +25,7 @@ export class SignupPage {
     private signupError: string;
     private form: FormGroup;
     
-    constructor(public navCtrl: NavController, public navParams: NavParams, fb: FormBuilder, private auth: AuthService, public firestone: FirestoneService,
+    constructor(public navCtrl: NavController, public navParams: NavParams, fb: FormBuilder, private auth: AuthService, public firestone: FirestoreService,
         private alert: AlertController, public menuCtrl:MenuController) {
 
 

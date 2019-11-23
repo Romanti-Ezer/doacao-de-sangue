@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { FirestoneService } from '../../services/firestone.service';
+import { FirestoreService } from '../../services/firestore.service';
 import { AlertController } from 'ionic-angular';
 import { HomePage } from '../home/home';
 import { CepService } from '../../services/cep.service';
@@ -19,7 +19,7 @@ import { CepService } from '../../services/cep.service';
 @Component({
     selector: 'page-minha-conta',
     templateUrl: 'minha-conta.html',
-    providers: [ FirestoneService ]
+    providers: [ FirestoreService ]
 })
 export class MinhaContaPage {
     
@@ -34,7 +34,7 @@ export class MinhaContaPage {
         public fb: FormBuilder,
         public alertCtrl: AlertController,
         public cepService: CepService,
-        protected firestone: FirestoneService) {
+        protected firestone: FirestoreService) {
             
             // Get logged user data
             this.users = this.firestone.getUser()

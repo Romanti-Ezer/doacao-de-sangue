@@ -71,7 +71,7 @@ export class Donation {
 }
 
 @Injectable()
-export class FirestoneService {
+export class FirestoreService {
 
     // user is an observable of ther User
     private user: Observable<User[]>;

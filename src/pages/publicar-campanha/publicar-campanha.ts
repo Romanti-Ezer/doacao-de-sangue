@@ -1,7 +1,7 @@
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component } from '@angular/core';
 import { App, IonicPage, NavController, NavParams } from 'ionic-angular';
-import { FirestoneService } from '../../services/firestone.service';
+import { FirestoreService } from '../../services/firestore.service';
 import { UtilsService } from '../../services/utils.service';
 import { HomePage } from '../home/home';
 import { CepService } from '../../services/cep.service';
@@ -48,7 +48,7 @@ export class PublicarCampanhaPage {
         public utils: UtilsService, 
         public navCtrl: NavController, 
         public navParams: NavParams, 
-        public firestone: FirestoneService,
+        public firestone: FirestoreService,
         public fb: FormBuilder,
         public cepService: CepService
         ) {

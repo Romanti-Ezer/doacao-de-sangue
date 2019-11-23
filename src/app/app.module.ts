@@ -30,7 +30,7 @@ import { GuiaInformativoPage } from '../pages/guia-informativo/guia-informativo'
 
 import { credentials } from './config';
 import { MinhaContaPage } from '../pages/minha-conta/minha-conta';
-import { FirestoneService } from '../services/firestone.service';
+import { FirestoreService } from '../services/firestore.service';
 import { CepService } from '../services/cep.service';
 import { CadastrarDoacaoPage } from '../pages/cadastrar-doacao/cadastrar-doacao';
 
@@ -83,7 +83,7 @@ import { HttpClientModule } from '@angular/common/http';
         AngularFireAuth,
         AuthService,
         UtilsService,
-        FirestoneService,
+        FirestoreService,
         CepService
     ]
 })
