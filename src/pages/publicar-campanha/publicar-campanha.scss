@@ -57,6 +57,18 @@ page-publicar-campanha {
         border:1px solid #eeeeee;
     }
 
+    .c-invalidfields {
+        padding: 1.5em 0 0;
+        &__title {
+            text-align: center;
+            font-size: 1.2em;
+        }
+        &__text {
+            line-height: 1.5;
+            text-align: center;
+        }
+    }
+
     .hidden { opacity: 0; font-size: 0; height: 0; max-height: 0;  }
 
     input[placeholder='UF'] { text-transform: uppercase; }

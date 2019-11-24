@@ -1,4 +1,4 @@
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { Component } from '@angular/core';
 import { App, IonicPage, NavController, NavParams } from 'ionic-angular';
 import { FirestoreService } from '../../services/firestore.service';
@@ -37,6 +37,19 @@ export class PublicarCampanhaPage {
     protected cidade = '';
     protected uf = '';
     protected cep = '';
+    protected invalidFields = '';
+    protected fieldsNames = {
+        "campDonateType": "Tipo de doação",
+        "campBloodType": "Tipo de sangue",
+        "nome": "Nome do hemocentro",
+        "cep": "CEP do hemocentro",
+        "endereco": "Endereço do hemocentro",
+        "numero": "Número do hemocentro",
+        "cidade": "Cidade do hemocentro",
+        "uf": "Estado do hemocentro",
+        "campPromoterIsPatient": "Eu sou paciente",
+        "campPromoterWantsToIndicatePatient": "Quero indicar um paciente"
+    }
 
     public ionViewWillLeave() {
         this.appCtrl.getRootNav().setRoot(HomePage);
@@ -53,8 +66,8 @@ export class PublicarCampanhaPage {
         public cepService: CepService
         ) {
             this.validaFormulario = fb.group({
-                campBloodType: [''],
-                campDonateType: ['sangue'],
+                campDonateType: ['', Validators.required],
+                campBloodType: ['', Validators.required],
                 nome: ['', Validators.compose([Validators.required, Validators.maxLength(60)])],
                 cep: ['', Validators.compose([Validators.required, Validators.minLength(8), Validators.maxLength(8)])],      
                 endereco: ['', Validators.compose( [Validators.required])],
@@ -62,7 +75,8 @@ export class PublicarCampanhaPage {
                 cidade: ['', Validators.compose([Validators.required,])],
                 uf: ['', Validators.compose([Validators.required,Validators.minLength(2), Validators.maxLength(2)])],
                 obs: ['', Validators.compose([Validators.maxLength(200)])],
-                campPromoterIsPatient: [''],
+                campPromoterIsPatient: ['', Validators.required],
+                campPromoterWantsToIndicatePatient: [''],
 
             })
             this.userData = this.firestone.getUser();
@@ -151,6 +165,45 @@ export class PublicarCampanhaPage {
         }
     }
 
+    
+    // Returns an array of invalid control/group names, or a zero-length array if 
+    // no invalid controls/groups where found 
+    public findInvalidFields() {
+        let formToInvestigate = this.validaFormulario;
+        var invalidControls:string[] = [];
+        let recursiveFunc = (form:FormGroup) => {
+            Object.keys(form.controls).forEach(field => { 
+                const control = form.get(field);
+                if (control.invalid) invalidControls.push(field);
+                if (control instanceof FormGroup) {
+                    recursiveFunc(control);
+                }      
+            });
+        }
+        recursiveFunc(formToInvestigate);
+        this.setInvalidFields(invalidControls);
+    }
+
+    public setInvalidFields(invalidControls:string[]) {
+        let message = '';
+        invalidControls.forEach((field, index) => {
+            if (index > 0) { 
+                message += ("<br/>" + this.fieldsNames[field]);
+            } else {
+                message += this.fieldsNames[field];
+            }
+        });
+        this.invalidFields = message;
+    }
+    public checkIfIndicatePatientIsRequired() {
+        if (this.validaFormulario.value.campPromoterIsPatient == "false") {
+            this.validaFormulario.controls["campPromoterWantsToIndicatePatient"].setValidators([Validators.required]);
+        } else {
+            this.validaFormulario.get("campPromoterWantsToIndicatePatient").clearValidators();
+        }
+        this.validaFormulario.controls["campPromoterWantsToIndicatePatient"].updateValueAndValidity();
+        this.findInvalidFields();
+    }
 }
 
 

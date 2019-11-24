@@ -49,11 +49,6 @@ export class GuiaInformativoPage {
         this.user
         .textRequest(req)
         .then(response => {
-           
-            
-            
-            
-            
             this.messages.push({
                 from: 'Sanguinho',
                 text: response.result.fulfillment.speech
@@ -76,8 +71,7 @@ export class GuiaInformativoPage {
     
     onload =  this.funcaodoguil(); // quando pagina carregar faz a funcao
     
-    public funcaodoguil() 
-    {
+    public funcaodoguil() {
         this.loading = true;
         setTimeout(() => {
             this.messages.push({
@@ -99,7 +93,6 @@ export class GuiaInformativoPage {
             }, 500);
         }, 1200)
     }
-
 }
 
 

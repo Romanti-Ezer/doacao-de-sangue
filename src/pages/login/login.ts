@@ -72,7 +72,18 @@ export class LoginPage {
                         () => {
                             lthis.navCtrl.setRoot(HomePage);
                         },
-                        error => lthis.loginError = error.message
+                        error => {
+                            var errorCode = error.code;
+                            var errorMessage = "";
+                            if (errorCode === 'auth/invalid-email' || errorCode === 'auth/user-not-found' || errorCode === 'auth/wrong-password') {
+                                errorMessage = "A senha é inválida ou o usuário não tem uma senha.";
+                            } else if (errorCode === 'auth/user-disabled') {
+                                errorMessage = "Usuário desabilitado. Contate os administradores para mais detalhes.";
+                            } else {
+                                errorMessage = "Ocorreu um erro na sua solicitação. Tente novamente mais tarde";
+                            }
+                            return lthis.loginError = errorMessage
+                        }
                     );
             })
     }

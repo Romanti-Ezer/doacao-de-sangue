@@ -5,9 +5,6 @@ import { FirestoreService } from '../../services/firestore.service';
 import { Campaign } from '../../services/firestore.service';
 declare var google: any;
 
-
-
-
 /**
 * Generated class for the VisualizarCampanhasPage page.
 *
@@ -25,6 +22,7 @@ export class VisualizarCampanhasPage implements AfterViewInit {
     protected campaigns: Observable<Campaign[]>;
     protected state: string = '';
     protected typeblood: string = '';
+    protected city: string = '';
     
     
     constructor(public navCtrl: NavController, public navParams: NavParams, public firestone: FirestoreService) {
@@ -75,16 +73,9 @@ export class VisualizarCampanhasPage implements AfterViewInit {
         var geocoder = new google.maps.Geocoder();
         
         this.geocodeAddress(geocoder, map, address);
-        console.log("rodou um mapa: ", new Date());
     }
 
-  
-
-
     geocodeAddress(geocoder, resultsMap, address) {
-
-      
-
         geocoder.geocode({'address': address}, function(results, status) {
 
             var icon = {

@@ -10,15 +10,10 @@
     <form (ngSubmit)="setCampaign($event)" [formGroup]="validaFormulario">
     
         <h2 ion-text color="dark" class="h2">Campanha</h2>
-        
 
-
-        
-        
-        
         <section> <!-- Donation Type -->
             <h3 class="descricoes">Tipo de doação</h3>
-            <ion-list radio-group formControlName="campDonateType">
+            <ion-list radio-group formControlName="campDonateType" (ionChange)="findInvalidFields()">
                 <ion-item>
                     <ion-label>Sangue</ion-label>
                     <ion-radio value="sangue"></ion-radio>
@@ -28,29 +23,37 @@
                     <ion-radio value="plaquetas"></ion-radio>
                 </ion-item>
             </ion-list>
+            <div ngxErrors="campDonateType" #nomeErrors="ngxErrors">
+                <div [ngxError]="['required']" [when]="['touched', 'dirty']">Escolha um tipo de doação
+                </div>
+            </div>
         </section>
         
         <section>
-        <ion-item class="tiposangue"> <!-- tipo de sangue-->
-            <ion-label>Tipo de Sangue</ion-label>
-            <ion-select [(ngModel)]="typeblood" formControlName="campBloodType">
-                <ion-option value="A+">A+</ion-option>
-                <ion-option value="A-">A-</ion-option>
-                <ion-option value="B+">B+</ion-option>
-                <ion-option value="B-">B-</ion-option>
-                <ion-option value="AB+">AB+</ion-option>
-                <ion-option value="AB-">AB-</ion-option>
-                <ion-option value="O+">O+</ion-option>
-                <ion-option value="O-">O-</ion-option>
-            </ion-select>
-        </ion-item>  
-    </section>
+            <ion-item class="tiposangue"> <!-- tipo de sangue-->
+                <ion-label>Tipo de Sangue</ion-label>
+                <ion-select [(ngModel)]="typeblood" formControlName="campBloodType" (ionChange)="findInvalidFields()">
+                    <ion-option value="A+">A+</ion-option>
+                    <ion-option value="A-">A-</ion-option>
+                    <ion-option value="B+">B+</ion-option>
+                    <ion-option value="B-">B-</ion-option>
+                    <ion-option value="AB+">AB+</ion-option>
+                    <ion-option value="AB-">AB-</ion-option>
+                    <ion-option value="O+">O+</ion-option>
+                    <ion-option value="O-">O-</ion-option>
+                </ion-select>
+            </ion-item>  
+            <div ngxErrors="campBloodType" #nomeErrors="ngxErrors">
+                <div [ngxError]="['required']" [when]="['touched', 'dirty']">Escolha um tipo de sangue
+                </div>
+            </div>
+        </section>
 
         <section> <!-- Limit Date -->
             <h3 class="descricoes">Data limite</h3>
             <ion-item>
                 <ion-label>Data</ion-label>
-                <ion-datetime displayFormat="DD/MM/YYYY"[(ngModel)]="campLimitDate" [ngModelOptions]="{standalone: true}" min="2019" max="2040-10-31"></ion-datetime>
+                <ion-datetime displayFormat="DD/MM/YYYY"[(ngModel)]="campLimitDate" [ngModelOptions]="{standalone: true}" min="2019" max="2040-10-31" (input)="findInvalidFields()"></ion-datetime>
             </ion-item>
         </section>
         
@@ -62,55 +65,55 @@
                 <!-- Name -->
                 <ion-item [ngClass]="{ invalid: nomeErrors.hasError('*', ['touched']) }">
                     <ion-input name="campBloodCenter" type="text" placeholder="Nome"
-                    formControlName="nome"></ion-input>
+                    formControlName="nome" (input)="findInvalidFields()"></ion-input>
                 </ion-item>
         
                 <div ngxErrors="nome" #nomeErrors="ngxErrors">
-                    <div [ngxError]="['maxlength', 'required']" [when]="['touched']">Digite o nome até 15 caracteres
+                    <div [ngxError]="['maxlength', 'required']" [when]="['touched']">Digite um nome de até 60 caracteres
                     </div>
                 </div>
                 
                 <!-- CEP -->
                 <ion-item [ngClass]="{ invalid: cepErrors.hasError('*', ['touched']) }"> 
                     <ion-input name="campBloodCenterCEP" type="number" (ionBlur)="getAddress($event)" [(ngModel)]="cep" placeholder="CEP"
-                    formControlName="cep"></ion-input>
+                    formControlName="cep" (input)="findInvalidFields()"></ion-input>
                 </ion-item>
         
                 <div ngxErrors="cep" #cepErrors="ngxErrors">
-                    <div [ngxError]="['minlength', 'required']" [when]="['touched']">CEP precisa ter 8 caracteres
+                    <div [ngxError]="['minlength', 'required']" [when]="['touched']">Informe um CEP válido, com 8 caracteres
                     </div>
                 </div>
                 
                 <!-- Address -->
                 <ion-item [ngClass]="{ invalid: enderecoErrors.hasError('*', ['touched']) }">
                     <ion-input class="umcampo"name="campBloodCenterAddress" type="text" placeholder="Endereço" [(ngModel)]="logradouro"
-                    formControlName="endereco"></ion-input>
+                    formControlName="endereco" (input)="findInvalidFields()"></ion-input>
                 </ion-item>
         
                 <div ngxErrors="endereco" #enderecoErrors="ngxErrors">
-                    <div [ngxError]="['required']" [when]="['touched']">Preencha com seu endereço
+                    <div [ngxError]="['required']" [when]="['touched']">É necessário informar o endereço
                     </div>
                 </div>
                 
                 <!-- Number -->
                 <ion-item [ngClass]="{ invalid: numeroErrors.hasError('*', ['touched']) }">
                     <ion-input type="number" name="campBloodCenterAddressNum" placeholder="Numero"
-                    formControlName="numero"></ion-input>
+                    formControlName="numero" (input)="findInvalidFields()"></ion-input>
                 </ion-item>
         
                 <div ngxErrors="numero" #numeroErrors="ngxErrors">
-                    <div [ngxError]="['required']" [when]="['touched']">Preencha com seu número
+                    <div [ngxError]="['required']" [when]="['touched']">É necessário informar o número
                     </div>
                 </div>
                 
                 <!-- City -->
                 <ion-item [ngClass]="{ invalid: cidadeErrors.hasError('*', ['touched']) }">
                     <ion-input class="umcampo"  name="campBloodCenterCity" type="text" placeholder="Cidade" [(ngModel)]="cidade"
-                    formControlName="cidade"></ion-input>
+                    formControlName="cidade" (input)="findInvalidFields()"></ion-input>
                 </ion-item>
         
                 <div ngxErrors="cidade" #cidadeErrors="ngxErrors">
-                    <div [ngxError]="['required']" [when]="['touched']">Preencha com sua cidade
+                    <div [ngxError]="['required']" [when]="['touched']">É necessário informar a cidade
                     </div>
                 </div>
             
@@ -119,12 +122,12 @@
                 <ion-item [ngClass]="{ invalid: ufErrors.hasError('*', ['touched']) }" >
                     
                         <ion-input name="campBloodCenterState" minlength="2" maxlength="2" type="text" placeholder="UF" [(ngModel)]="uf"
-                        formControlName="uf"></ion-input>
+                        formControlName="uf" (input)="findInvalidFields()"></ion-input>
                      
                 </ion-item>
         
                 <div ngxErrors="uf" #ufErrors="ngxErrors">
-                    <div [ngxError]="['required']" [when]="['touched']">Digite a sigla do seu estado em letras maiúscula
+                    <div [ngxError]="['required']" [when]="['touched']">É necessário informar a sigla do estado
                     </div>
                 </div>
             </ion-list>
@@ -182,7 +185,7 @@
         <section> <!-- I'm the patient -->
             <h3 class="descricoes">Eu sou o paciente</h3>
             
-            <ion-list radio-group formControlName="campPromoterIsPatient">
+            <ion-list radio-group formControlName="campPromoterIsPatient" (ionChange)="findInvalidFields(); checkIfIndicatePatientIsRequired();">
                 <ion-item>
                     <ion-label>Sim</ion-label>
                     <ion-radio value="true" (click)="rDesabilitar()"></ion-radio>
@@ -199,7 +202,7 @@
         <section id="divHidden" hidden="false">
             <h3 class="descricoes">Quero indicar um paciente</h3>
             
-            <ion-list radio-group>
+            <ion-list radio-group formControlName="campPromoterWantsToIndicatePatient" (ionChange)="findInvalidFields()">
                 <ion-item>
                     <ion-label>Sim</ion-label>
                     <ion-radio value="true" (click)="iHabilitar()"></ion-radio>
@@ -224,7 +227,7 @@
         <div>
             <div class="descricoes">Observações</div>
             <ion-item [ngClass]="{ invalid: obsErrors.hasError('*', ['touched']) }">
-                <ion-textarea rows="2" cols="20"
+                <ion-textarea rows="3" cols="20"
                 formControlName="obs" name="campObservations"></ion-textarea>
             </ion-item>
             <div ngxErrors="obs" #obsErrors="ngxErrors">
@@ -235,9 +238,12 @@
         </div>
         
 
+        <section *ngIf="invalidFields" class="c-invalidfields">
+            <h2 class="h2 text c-invalidfields__title">Campos que ainda precisam da sua atenção</h2>
+            <p class="c-invalidfields__text" [innerHTML]="invalidFields"></p>
+        </section>
         
         <!-- Publish button -->
         <button ion-button full type="submit" [disabled]="!validaFormulario.valid">Publicar <ion-icon class="icon" name="heart"></ion-icon></button>
-        
     </form>
 </ion-content>

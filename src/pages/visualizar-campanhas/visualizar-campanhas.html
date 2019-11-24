@@ -66,12 +66,12 @@
                     
                     <ion-item> <!-- nome da cidade-->
                         <ion-label fixed>Cidade</ion-label>
-                        <ion-input type="text" value="" name="cidade"></ion-input>
+                        <ion-input type="text" [(ngModel)]="city" name="cidade"></ion-input>
                     </ion-item>  
 
                 </ion-list>
             </section>
-            <button class="btn-pesquisar" ion-button full type="submit">Pesquisar <ion-icon name="search"></ion-icon></button>
+            <button class="btn-pesquisar" [disabled]="!state && !typeblood && !city" ion-button full type="submit">Pesquisar <ion-icon name="search"></ion-icon></button>
         </form>
         
         <h1 class="main-title">Campanhas</h1>

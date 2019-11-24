@@ -27,7 +27,7 @@
                 <ion-input type="text" placeholder="Nome" [(ngModel)]="user.userName" name="userName"></ion-input>
             </ion-item>
 
-            <ion-item> <!-- nome dos estados-->
+            <ion-item class="no-pl"> <!-- nome dos estados-->
                 <ion-select [(ngModel)]="user.userGender" [ngModelOptions]="{standalone: true}" placeholder="Escolha o gênero" name="userGender" (ionChange)="setGender($event)">
                     <ion-option value="M">Masculino</ion-option>
                     <ion-option value="F">Feminino</ion-option>
@@ -65,44 +65,20 @@
                 <ion-input type="text" placeholder="UF" [(ngModel)]="user.userState" name="userState"></ion-input>
             </ion-item>
             
-
-            
             <!-- Tipo de Sangue -->
-            <ion-list radio-group [(ngModel)]="user.userBlood" name="userBlood" (ionChange)="setBlood($event)">
-                <h3 class="subtitle">Tipo de sangue</h3>
-                <ion-item>
-                    <ion-label>A+</ion-label>
-                    <ion-radio value="A+"></ion-radio>
-                </ion-item>
-                <ion-item>
-                    <ion-label>A-</ion-label>
-                    <ion-radio value="A-"></ion-radio>
-                </ion-item>
-                <ion-item>
-                    <ion-label>B+</ion-label>
-                    <ion-radio value="B+"></ion-radio>
-                </ion-item>
-                <ion-item>
-                    <ion-label>B-</ion-label>
-                    <ion-radio value="B-"></ion-radio>  
-                </ion-item>
-                <ion-item>
-                    <ion-label>AB+</ion-label>
-                    <ion-radio value="AB-"></ion-radio>  
-                </ion-item>
-                <ion-item>
-                    <ion-label>AB-</ion-label>
-                    <ion-radio value="AB-"></ion-radio>  
-                </ion-item>
-                <ion-item>
-                    <ion-label>O+</ion-label>
-                    <ion-radio value="O+"></ion-radio>  
-                </ion-item>
-                <ion-item>
-                    <ion-label>O-</ion-label>
-                    <ion-radio value="O-"></ion-radio>  
-                </ion-item>
-            </ion-list>
+            <ion-item class="tiposangue"> <!-- tipo de sangue-->
+                <ion-label>Tipo de Sangue</ion-label>
+                <ion-select [(ngModel)]="user.userBlood" name="userBlood" (ionChange)="setBlood($event)">
+                    <ion-option value="A+">A+</ion-option>
+                    <ion-option value="A-">A-</ion-option>
+                    <ion-option value="B+">B+</ion-option>
+                    <ion-option value="B-">B-</ion-option>
+                    <ion-option value="AB+">AB+</ion-option>
+                    <ion-option value="AB-">AB-</ion-option>
+                    <ion-option value="O+">O+</ion-option>
+                    <ion-option value="O-">O-</ion-option>
+                </ion-select>
+            </ion-item> 
             
         </ion-list>
         
