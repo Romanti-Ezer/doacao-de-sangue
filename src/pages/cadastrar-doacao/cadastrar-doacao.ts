@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
+import { ISubscription } from "rxjs/Subscription";
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FirestoreService, User } from '../../services/firestore.service';
@@ -16,9 +17,10 @@ import { UtilsService } from '../../services/utils.service';
     selector: 'page-cadastrar-doacao',
     templateUrl: 'cadastrar-doacao.html',
 })
-export class CadastrarDoacaoPage {
+export class CadastrarDoacaoPage implements OnDestroy {
     protected userData : any;
     protected registerForm : FormGroup;
+    private subscription: ISubscription;
     
     constructor(public navCtrl: NavController, public navParams: NavParams, public fb: FormBuilder, public firestone: FirestoreService, public utils: UtilsService) {
         this.registerForm = fb.group({
@@ -26,13 +28,17 @@ export class CadastrarDoacaoPage {
             donatDate: [ '', Validators.required ],
             donatBloodCenter: ['', Validators.compose([Validators.required, Validators.maxLength(60)])]
         });
-        this.firestone.getUser().subscribe((user:User[]) => {
+        this.subscription = this.firestone.getUserr().subscribe((user:User[]) => {
             this.userData = user;
         });
     }
     
     ionViewDidLoad() {
         console.log('ionViewDidLoad CadastrarDoacaoPage');
+    }
+
+    ngOnDestroy() {
+        this.subscription.unsubscribe();
     }
     
     public setDonation(event) {

@@ -52,12 +52,10 @@ export class MyApp {
     logout() {
         // Se retornar true (que deu certo o logout, volta para o login)
         if (this.auth.signOut()) {
+            this.nav.popToRoot();
             this.nav.setRoot(LoginPage);
         }
     }
-
-   
-    
 }
 
 

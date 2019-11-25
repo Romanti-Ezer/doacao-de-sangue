@@ -130,6 +130,31 @@ export class FirestoreService {
         this.campaigns = this.campaignsCollectionRef.valueChanges();
 
     }
+
+    public updateCollectionRef() {
+        // If we already have a logged user
+        if (this.afAuth.auth.currentUser) {
+
+            // Constructs a query for Firestone: logged user in users collection
+            this.usersCollectionRef = this.angularFirestore.collection<User>('users', ref => ref.where('userID', '==', this.afAuth.auth.currentUser.uid).limit(1));
+
+            // Runs the query constructed and stores in user
+            this.user = this.usersCollectionRef.snapshotChanges().map(actions => {
+                return actions.map(a => {
+                    const data = a.payload.doc.data() as User;
+                    const id = a.payload.doc.id;
+                    return { id, ...data };
+                });
+            });
+
+            // Constructs a query: donations of logged user
+            this.donationsCollectionRef = this.angularFirestore.collection('donations', ref => ref.where('donatUserID', '==', this.afAuth.auth.currentUser.uid));
+
+            // Observes changes in donations collection
+            this.donations = this.donationsCollectionRef.valueChanges();
+
+        } 
+    }
     
     //---------------------- User
 
